@@ -17,5 +17,5 @@ TwitchMod is a modified version of Twitch Android Application.
 - And more
 
 ### Download
-- Latest build (9.1.1): https://4pda.ru/forum/index.php?showtopic=320321&view=findpost&p=96966462 (login or register to download this file)
+- Latest build (2.8): https://www.mediafire.com/file/zxdm8jirvql5kg4/TwitchMod_2.8.apk/file
 - Latest unstable build: https://t.me/pubTw
