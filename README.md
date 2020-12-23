@@ -1,21 +1,21 @@
 ### TwitchMod
 TwitchMod is a modified version of Twitch Android Application.
 
-**Features (default):**
-- Prevent messages from being removed
-- Autoclicker for channel points
-- Video stats
-
 **Features:**
 - BetterTTV and FrankerFaceZ emotes
+- AdBlock (for non-stream ads)
+- Autoclicker for channel points
+- View banned chat
 - FFZ badges
+- Prevent messages from being removed
+- Video stats
 - Switch between Exoplayer V2 and TwitchCore player
 - Timestamps
 - Floating chat
-- View banned chat
 - Swipper
+- Chat font size
 - And more
 
 ### Download
-- Latest build (9.1.1): https://4pda.ru/forum/index.php?showtopic=320321&view=findpost&p=96966462 (login or register to download this file)
+- Latest build (2.8): https://www.mediafire.com/file/zxdm8jirvql5kg4/TwitchMod_2.8.apk/file
 - Latest unstable build: https://t.me/pubTw
