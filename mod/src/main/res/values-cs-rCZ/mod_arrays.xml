@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="msg_del_choices">
+        <item>Výchozí</item>
+        <item>Původní</item>
+        <item>Přeškrtnuté</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Vypnuto</item>
+        <item>Statické</item>
+        <item>Animované</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Malé</item>
+        <item>Střední</item>
+        <item>Velké</item>
+    </string-array>
+</resources>

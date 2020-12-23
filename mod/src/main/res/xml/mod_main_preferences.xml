@@ -1,0 +1,70 @@
+ <tv.twitch.android.mod.bridges.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_bttv_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.BttvSettingsFragment"
+        android:title="@string/mod_category_settings_chat_bttv"
+        />
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_chat_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.ChatSettingsFragment"
+        android:title="@string/mod_category_settings_chat_category"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_player_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.PlayerSettingsFragment"
+        android:title="@string/mod_category_settings_player_category"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_adblock_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.AdblockSettingsFragment"
+        android:title="@string/mod_category_settings_adblock_category"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_gesture_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.SwiperSettingsFragment"
+        android:title="@string/mod_category_settings_swipe"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_view_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.ViewSettingsFragment"
+        android:title="@string/mod_category_view"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_patches_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.PatchSettingsFragment"
+        android:title="@string/mod_category_settings_patch"
+        />
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_credits_category"
+        android:fragment="tv.twitch.android.mod.fragments.settings.CreditSettingsFragment"
+        android:title="@string/mod_category_settings_credits"
+        />
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_mod_info"
+        android:title="TwitchMod"
+        android:summary="Test build"
+        android:key="BUILD_INFO"/>
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_telegram"
+        android:title="@string/mod_info_open_telegram"
+        android:summary="@string/mod_info_open_telegram_desc" >
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://t.me/pubTw" />
+    </tv.twitch.android.mod.bridges.preference.Preference>
+
+    <tv.twitch.android.mod.bridges.preference.Preference
+        android:icon="@drawable/ic_github2"
+        android:title="@string/mod_info_open_github"
+        android:summary="@string/mod_info_open_github_desc" >
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://github.com/nopbreak/TwitchMod" />
+    </tv.twitch.android.mod.bridges.preference.Preference>
+</tv.twitch.android.mod.bridges.preference.PreferenceScreen>

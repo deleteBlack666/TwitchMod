@@ -6,21 +6,16 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 
+import tv.twitch.android.mod.bridges.LoaderLS;
 import tv.twitch.android.mod.models.Preferences;
-import tv.twitch.android.mod.models.preferences.ChatWidthScale;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
-import tv.twitch.android.mod.models.preferences.ExoPlayerSpeed;
-import tv.twitch.android.mod.models.preferences.FloatingChatRefreshDelay;
-import tv.twitch.android.mod.models.preferences.FloatingChatSize;
-import tv.twitch.android.mod.models.preferences.FontSize;
 import tv.twitch.android.mod.models.preferences.Gifs;
-import tv.twitch.android.mod.models.preferences.MiniPlayerSize;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
-import tv.twitch.android.mod.models.preferences.PlayerSeek;
-import tv.twitch.android.mod.models.preferences.RobottyLimit;
+import tv.twitch.android.mod.models.preferences.SureStreamAdBlock;
 import tv.twitch.android.mod.models.preferences.UserMessagesFiltering;
 import tv.twitch.android.mod.utils.ChatMesssageFilteringUtil;
+import tv.twitch.android.mod.utils.Helper;
 import tv.twitch.android.mod.utils.Logger;
 
 
@@ -30,8 +25,19 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     public static final PreferenceManager INSTANCE = new PreferenceManager();
 
+    private static final int DEFAULT_LANDSCAPE_CHAT_SCALE = 25;
+    private static final int DEFAULT_LANDSCAPE_CHAT_SCALE_MAX = 50;
+    private static final int DEFAULT_MINIPLAYER_SCALE = 100;
+    private static final int DEFAULT_FLOATING_CHAT_QUEUE = 3;
+    private static final int DEFAULT_ROBOTTY_LIMIT = 20;
+    private static final int DEFAULT_PLAYER_FORWARD_SEEK = 30;
+    private static final int DEFAULT_PLAYER_BACKWARD_SEEK = 10;
+    private static final int DEFAULT_CHAT_FONT_SIZE = 13;
+    private static final int DEFAULT_EXOPLAYER_SPEED = 100;
+
     private boolean showBttvEmoteInChat;
     private boolean isChatTimestampsEnabled;
+    private boolean isChatTimestampsVodEnabled;
     private boolean isPlayerAdblockOn;
     private boolean isVolumeSwiperEnabled;
     private boolean isBrightnessSwiperEnabled;
@@ -46,7 +52,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private boolean forceOldEmotePicker;
     private boolean hideSystemMessagesInChat;
     private boolean isInterceptorEnabled;
-    private boolean showCustomBadges;
     private boolean showChatForBannedUser;
     private boolean showMentionHighlightsInChat;
     private boolean disableClipfinity;
@@ -61,26 +66,35 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private boolean disableGoogleBilling;
     private boolean showSwipperLockButton;
     private boolean useAutoclicker;
+    private boolean showHypeTrain;
+    private boolean shouldHideChatHeaderContainer;
+    private boolean showStreamUptime;
 
     private boolean shouldShowBanner;
     private boolean isBannerShown;
 
     private String userFilterText;
+    private String userAgent;
 
-    private @EmoteSize int emoteSize;
-    private @ChatWidthScale int landscapeChatScale;
-    private @Gifs int gifsRenderType;
-    private @MsgDelete int msgDeleteStrategy;
-    private @ExoPlayerSpeed String exoPlayerSpeed;
-    private @MiniPlayerSize String miniPlayerScale;
-    private @PlayerImpl int playerImplemetation;
-    private @UserMessagesFiltering int filterChatMessageByLevel;
-    private @FloatingChatSize int floatingChatSize;
-    private @FloatingChatRefreshDelay int floatingChatRefreshRate;
-    private @RobottyLimit int robottyLimit;
-    private @PlayerSeek int playerForwardSeek;
-    private @PlayerSeek int playerBackwardSeek;
-    private @PlayerSeek int chatMessageFontSize;
+    private @EmoteSize String emoteSize;
+    private int landscapeChatScale;
+    private int landscapeChatScaleMax;
+    private @Gifs String gifsRenderType;
+    private @MsgDelete String msgDeleteStrategy;
+    private int miniPlayerScale;
+    private @PlayerImpl String playerImplemetation;
+    private @SureStreamAdBlock String sureStreamAdBlockVariant;
+    private @UserMessagesFiltering String filterChatMessageByLevel;
+    private int floatingChatSize;
+    private int robottyLimit;
+    private int playerForwardSeek;
+    private int playerBackwardSeek;
+    private int exoplayerSpeed;
+    private int chatMessageFontSize;
+
+    private int lastBuildNum;
+
+    private boolean isGifsAnimated;
 
     private PreferenceWrapper mWrapper;
 
@@ -104,6 +118,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private void setupPreferences() {
         showBttvEmoteInChat = getBoolean(Preferences.BTTV_EMOTES, true);
         isChatTimestampsEnabled = getBoolean(Preferences.CHAT_TIMESTAMPS, false);
+        isChatTimestampsVodEnabled = getBoolean(Preferences.CHAT_TIMESTAMPS_VOD, false);
         isPlayerAdblockOn = getBoolean(Preferences.PLAYER_ADBLOCK, true);
         isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_SWIPER, false);
         isBrightnessSwiperEnabled = getBoolean(Preferences.BRIGHTNESS_SWIPER, false);
@@ -118,7 +133,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         forceOldEmotePicker = getBoolean(Preferences.OLD_EMOTE_PICKER, false);
         hideSystemMessagesInChat = getBoolean(Preferences.CHAT_MESSAGE_FILTER_SYSTEM, false);
         isInterceptorEnabled = getBoolean(Preferences.DEV_INTERCEPTOR, false);
-        showCustomBadges = getBoolean(Preferences.CUSTOM_BADGES, false);
         showChatForBannedUser = getBoolean(Preferences.SHOW_CHAT_FOR_BANNED_USER, false);
         showMentionHighlightsInChat = getBoolean(Preferences.CHAT_MENTION_HIGHLIGHTS, true);
         disableClipfinity = getBoolean(Preferences.DISABLE_CLIPFINITY, false);
@@ -134,23 +148,30 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         disableGoogleBilling = getBoolean(Preferences.DISABLE_GOOGLE_BILLING, false);
         showSwipperLockButton = getBoolean(Preferences.SWIPPER_LOCK_BUTTON, false);
         useAutoclicker = getBoolean(Preferences.AUTOCLICKER, true);
+        showHypeTrain = getBoolean(Preferences.SHOW_HYPE_TRAIN, true);
+        shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER, false);
+        showStreamUptime = getBoolean(Preferences.STREAM_UPTIME, true);
+
+        lastBuildNum = getInt(Preferences.LAST_BUILD_NUMBER, -1);
 
         userFilterText = getString(Preferences.USER_FILTER_TEXT, null);
 
-        emoteSize = getInt(Preferences.EMOTE_SIZE, EmoteSize.MEDIUM);
-        landscapeChatScale = getInt(Preferences.LANDSCAPE_CHAT_SCALE, ChatWidthScale.DEFAULT);
-        gifsRenderType = getInt(Preferences.GIFS_RENDER_TYPE, Gifs.STATIC);
-        msgDeleteStrategy = getInt(Preferences.MSG_DELETE_STRATEGY, MsgDelete.DEFAULT);
-        exoPlayerSpeed = getString(Preferences.EXOPLAYER_SPEED, ExoPlayerSpeed.DEFAULT);
-        miniPlayerScale = getString(Preferences.MINIPLAYER_SCALE, MiniPlayerSize.DEFAULT);
-        playerImplemetation = getInt(Preferences.PLAYER_IMPELEMTATION, PlayerImpl.AUTO);
-        filterChatMessageByLevel = getInt(Preferences.CHAT_MESSAGE_FILTER_LEVEL, UserMessagesFiltering.DISABLED);
-        floatingChatSize = getInt(Preferences.FLOAT_CHAT_SIZE, FloatingChatSize.DEFAULT);
-        floatingChatRefreshRate = getInt(Preferences.FLOATING_CHAT_REFRESH_RATE, FloatingChatRefreshDelay.DEFAULT);
-        robottyLimit = getInt(Preferences.ROBOTTY_LIMIT, RobottyLimit.LIMIT1);
-        playerForwardSeek = getInt(Preferences.PLAYER_FORWARD_SEEK, PlayerSeek.THIRTY);
-        playerBackwardSeek = getInt(Preferences.PLAYER_BACKWARD_SEEK, PlayerSeek.TEN);
-        chatMessageFontSize = getInt(Preferences.CHAT_MESSAGE_FONT_SIZE, FontSize.DEFAULT);
+        emoteSize = getString(Preferences.EMOTE_SIZE, Helper.isHiDensityDevice() ? EmoteSize.LARGE : EmoteSize.MEDIUM);
+        landscapeChatScale = getInt(Preferences.LANDSCAPE_CHAT_SCALE, DEFAULT_LANDSCAPE_CHAT_SCALE);
+        landscapeChatScaleMax = getInt(Preferences.LANDSCAPE_CHAT_SCALE_MAX, DEFAULT_LANDSCAPE_CHAT_SCALE_MAX);
+        gifsRenderType = getString(Preferences.GIFS_RENDER_TYPE, Gifs.STATIC);
+        isGifsAnimated = gifsRenderType.equals(Gifs.ANIMATED);
+        msgDeleteStrategy = getString(Preferences.MSG_DELETE_STRATEGY, MsgDelete.DEFAULT);
+        miniPlayerScale = getInt(Preferences.MINIPLAYER_SCALE, DEFAULT_MINIPLAYER_SCALE);
+        playerImplemetation = getString(Preferences.PLAYER_IMPELEMTATION, PlayerImpl.AUTO);
+        sureStreamAdBlockVariant = getString(Preferences.SURESTREAM_ADBLOCK, SureStreamAdBlock.V1);
+        filterChatMessageByLevel = getString(Preferences.CHAT_MESSAGE_FILTER_LEVEL, UserMessagesFiltering.DISABLED);
+        floatingChatSize = getInt(Preferences.FLOAT_CHAT_SIZE, DEFAULT_FLOATING_CHAT_QUEUE);
+        robottyLimit = getInt(Preferences.ROBOTTY_LIMIT, DEFAULT_ROBOTTY_LIMIT);
+        playerForwardSeek = getInt(Preferences.PLAYER_FORWARD_SEEK, DEFAULT_PLAYER_FORWARD_SEEK);
+        playerBackwardSeek = getInt(Preferences.PLAYER_BACKWARD_SEEK, DEFAULT_PLAYER_BACKWARD_SEEK);
+        chatMessageFontSize = getInt(Preferences.CHAT_MESSAGE_FONT_SIZE, DEFAULT_CHAT_FONT_SIZE);
+        exoplayerSpeed = getInt(Preferences.EXOPLAYER_SPEED, DEFAULT_EXOPLAYER_SPEED);
 
         isDarkThemeEnabled = getBoolean(TWITCH_DARK_THEME_KEY, false);
 
@@ -237,16 +258,12 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return showBttvEmoteInChat;
     }
 
-    public boolean highlightMentionMessage() {
+    public boolean isHighlightingEnabled() {
         return showMentionHighlightsInChat;
     }
 
     public boolean disableClipfinity() {
         return disableClipfinity;
-    }
-
-    public boolean showCustomBadges() {
-        return showCustomBadges;
     }
 
     public boolean showChatForBannedUser() {
@@ -255,6 +272,10 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     public boolean isChatTimestampsEnabled() {
         return isChatTimestampsEnabled;
+    }
+
+    public boolean isChatTimestampsVodEnabled() {
+        return isChatTimestampsVodEnabled;
     }
 
     public boolean disableTheatreAutoplay() {
@@ -369,59 +390,87 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return useAutoclicker;
     }
 
-    public @EmoteSize int getEmoteSize() {
+    public boolean shouldShowHypeTrain() {
+        return showHypeTrain;
+    }
+
+    public boolean shouldHideChatHeaderContainer() {
+        return shouldHideChatHeaderContainer;
+    }
+
+    public boolean isSurestreamAdblockV1On() {
+        return getSureStreamAdBlockVariant().equals(SureStreamAdBlock.V1);
+    }
+
+    public boolean isSurestreamAdblockV2On() {
+        return getSureStreamAdBlockVariant().equals(SureStreamAdBlock.V2);
+    }
+
+    public boolean shouldShowStreamUptime() {
+        return showStreamUptime;
+    }
+
+    public @EmoteSize String getEmoteSize() {
         return emoteSize;
     }
 
-    public @PlayerImpl int getPlayerImplementation() {
+    public @PlayerImpl String getPlayerImplementation() {
         return playerImplemetation;
     }
 
-    public @UserMessagesFiltering int getFilterMessageLevel() {
+    public @SureStreamAdBlock String getSureStreamAdBlockVariant() {
+        return sureStreamAdBlockVariant;
+    }
+
+    public @UserMessagesFiltering String getFilterMessageLevel() {
         return filterChatMessageByLevel;
     }
 
-    public @ExoPlayerSpeed String getExoplayerSpeed() {
-        return exoPlayerSpeed;
-    }
-
-    public @ChatWidthScale int getLandscapeChatScale() {
+    public int getLandscapeChatScale() {
         return landscapeChatScale;
     }
 
-    public @MiniPlayerSize String getMiniPlayerScale() {
-        return miniPlayerScale;
+    public int getLandscapeChatScaleMax() {
+        return landscapeChatScaleMax;
     }
 
-    public @FloatingChatRefreshDelay int getFloatingChatRefreshRate() {
-        return floatingChatRefreshRate;
+    public float getMiniPlayerScale() {
+        return miniPlayerScale / 100f;
     }
 
-    public @FloatingChatSize int getFloatingChatQueueSize() {
+    public int getFloatingChatQueueSize() {
         return floatingChatSize;
     }
 
-    public @MsgDelete int getMsgDelete() {
+    public @MsgDelete String getMsgDelete() {
         return msgDeleteStrategy;
     }
 
-    public @Gifs int getGifsStrategy() {
+    public @Gifs String getGifsStrategy() {
         return gifsRenderType;
     }
 
-    public @RobottyLimit int getMessageHistoryLimit() {
+    public boolean isGifsAnimated() {
+        return isGifsAnimated;
+    }
+
+    public int getMessageHistoryLimit() {
         return robottyLimit;
     }
 
-    public @PlayerSeek int getPlayerForwardSeek() {
+    public int getPlayerForwardSeek() {
         return playerForwardSeek;
     }
 
-    public @FontSize int getChatMessageFontSize() {
+    public float getExoplayerSpeed() {
+        return exoplayerSpeed / 100F;
+    }
+
+    public int getChatMessageFontSize() {
         return chatMessageFontSize;
     }
 
-    public @PlayerSeek int getPlayerBackwardSeek() {
+    public int getPlayerBackwardSeek() {
         return playerBackwardSeek;
     }
 
@@ -445,6 +494,18 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return showSwipperLockButton;
     }
 
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public int getLastBuildNumber() {
+        return lastBuildNum;
+    }
+
+    public void updateBuildNumber() {
+        updateInt(Preferences.LAST_BUILD_NUMBER.getKey(), LoaderLS.getBuildNumber());
+    }
+
     @Override
     public void onPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
@@ -463,11 +524,13 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         }
 
         switch (preference) {
-            case CUSTOM_BADGES:
-                showCustomBadges = sharedPreferences.getBoolean(key, showCustomBadges);
-                break;
             case GIFS_RENDER_TYPE:
-                gifsRenderType = sharedPreferences.getInt(key, gifsRenderType);
+                gifsRenderType = sharedPreferences.getString(key, gifsRenderType);
+                if (gifsRenderType != null) {
+                    isGifsAnimated = gifsRenderType.equals(Gifs.ANIMATED);
+                } else {
+                    isGifsAnimated = false;
+                }
                 break;
             case PLAYER_ADBLOCK:
                 isPlayerAdblockOn = sharedPreferences.getBoolean(key, isPlayerAdblockOn);
@@ -476,7 +539,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 isDevModeOn = sharedPreferences.getBoolean(key, isDevModeOn);
                 break;
             case EMOTE_SIZE:
-                emoteSize = sharedPreferences.getInt(key, emoteSize);
+                emoteSize = sharedPreferences.getString(key, emoteSize);
                 break;
             case BTTV_EMOTES:
                 showBttvEmoteInChat = sharedPreferences.getBoolean(key, showBttvEmoteInChat);
@@ -486,7 +549,10 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 ChatMesssageFilteringUtil.INSTANCE.updateBlocklist(userFilterText);
                 break;
             case PLAYER_IMPELEMTATION:
-                playerImplemetation = sharedPreferences.getInt(key, playerImplemetation);
+                playerImplemetation = sharedPreferences.getString(key, playerImplemetation);
+                break;
+            case SURESTREAM_ADBLOCK:
+                sureStreamAdBlockVariant = sharedPreferences.getString(key, sureStreamAdBlockVariant);
                 break;
             case PLAYER_STAT_BUTTON:
                 showPlayerStatButton = sharedPreferences.getBoolean(key, showPlayerStatButton);
@@ -509,8 +575,8 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case CHAT_TIMESTAMPS:
                 isChatTimestampsEnabled = sharedPreferences.getBoolean(key, isChatTimestampsEnabled);
                 break;
-            case EXOPLAYER_SPEED:
-                exoPlayerSpeed = sharedPreferences.getString(key, exoPlayerSpeed);
+            case CHAT_TIMESTAMPS_VOD:
+                isChatTimestampsVodEnabled = sharedPreferences.getBoolean(key, isChatTimestampsVodEnabled);
                 break;
             case FLOAT_CHAT_SIZE:
                 floatingChatSize = sharedPreferences.getInt(key, floatingChatSize);
@@ -524,14 +590,14 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case LANDSCAPE_CHAT_SCALE:
                 landscapeChatScale = sharedPreferences.getInt(key, landscapeChatScale);
                 break;
-            case FLOATING_CHAT_REFRESH_RATE:
-                floatingChatRefreshRate = sharedPreferences.getInt(key, floatingChatRefreshRate);
+            case LANDSCAPE_CHAT_SCALE_MAX:
+                landscapeChatScaleMax = sharedPreferences.getInt(key, landscapeChatScaleMax);
                 break;
             case HIDE_ESPORTS_TAB:
                 hideEsportsTab = sharedPreferences.getBoolean(key, hideEsportsTab);
                 break;
             case MINIPLAYER_SCALE:
-                miniPlayerScale = sharedPreferences.getString(key, miniPlayerScale);
+                miniPlayerScale = sharedPreferences.getInt(key, miniPlayerScale);
                 break;
             case BRIGHTNESS_SWIPER:
                 isBrightnessSwiperEnabled = sharedPreferences.getBoolean(key, isBrightnessSwiperEnabled);
@@ -549,7 +615,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 isCompactPlayerFollowViewEnabled = sharedPreferences.getBoolean(key, isCompactPlayerFollowViewEnabled);
                 break;
             case MSG_DELETE_STRATEGY:
-                msgDeleteStrategy = sharedPreferences.getInt(key, msgDeleteStrategy);
+                msgDeleteStrategy = sharedPreferences.getString(key, msgDeleteStrategy);
                 break;
             case SHOW_WIDE_EMOTES:
                 showWideEmotes = sharedPreferences.getBoolean(key, showWideEmotes);
@@ -567,7 +633,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 disableTheatreAutoplay = sharedPreferences.getBoolean(key, disableTheatreAutoplay);
                 break;
             case CHAT_MESSAGE_FILTER_LEVEL:
-                filterChatMessageByLevel = sharedPreferences.getInt(key, filterChatMessageByLevel);
+                filterChatMessageByLevel = sharedPreferences.getString(key, filterChatMessageByLevel);
                 break;
             case CHAT_MESSAGE_FILTER_SYSTEM:
                 hideSystemMessagesInChat = sharedPreferences.getBoolean(key, hideSystemMessagesInChat);
@@ -593,14 +659,30 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case PLAYER_BACKWARD_SEEK:
                 playerBackwardSeek = sharedPreferences.getInt(key, playerBackwardSeek);
                 break;
+            case EXOPLAYER_SPEED:
+                exoplayerSpeed = sharedPreferences.getInt(key, exoplayerSpeed);
+                break;
             case CHAT_MESSAGE_FONT_SIZE:
                 chatMessageFontSize = sharedPreferences.getInt(key, chatMessageFontSize);
                 break;
             case AUTOCLICKER:
                 useAutoclicker = sharedPreferences.getBoolean(key, useAutoclicker);
                 break;
+            case SHOW_HYPE_TRAIN:
+                showHypeTrain = sharedPreferences.getBoolean(key, showHypeTrain);
+                break;
+            case HIDE_CHAT_HEADER:
+                shouldHideChatHeaderContainer = sharedPreferences.getBoolean(key, shouldHideChatHeaderContainer);
+                break;
+            case STREAM_UPTIME:
+                showStreamUptime = sharedPreferences.getBoolean(key, showStreamUptime);
+                break;
+            case LAST_BUILD_NUMBER:
+                lastBuildNum = sharedPreferences.getInt(key, lastBuildNum);
+                break;
             default:
                 Logger.warning("Check key: " + key);
+                break;
         }
     }
 }

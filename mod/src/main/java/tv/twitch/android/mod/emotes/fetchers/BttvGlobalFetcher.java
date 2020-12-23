@@ -9,8 +9,10 @@ import retrofit2.Call;
 import tv.twitch.android.mod.bridges.ApiCallback;
 import tv.twitch.android.mod.emotes.BaseEmoteSet;
 import tv.twitch.android.mod.models.BttvEmoteModel;
+import tv.twitch.android.mod.models.EmoteSet;
 import tv.twitch.android.mod.models.api.BttvEmoteResponse;
 import tv.twitch.android.mod.models.api.FailReason;
+import tv.twitch.android.mod.models.api.ImageType;
 import tv.twitch.android.mod.utils.Logger;
 
 import static tv.twitch.android.mod.net.ServiceFactory.getBttvApi;
@@ -20,7 +22,7 @@ public class BttvGlobalFetcher extends ApiCallback<List<BttvEmoteResponse>> {
     private final Callback mCallback;
 
     public interface Callback {
-        void onGlobalBttvEmotesParsed(BaseEmoteSet set);
+        void onGlobalBttvEmotesParsed(EmoteSet set);
     }
 
     public BttvGlobalFetcher(Callback callback) {
@@ -47,7 +49,7 @@ public class BttvGlobalFetcher extends ApiCallback<List<BttvEmoteResponse>> {
                 continue;
             }
 
-            globalSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType()));
+            globalSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType() == ImageType.GIF));
         }
 
         mCallback.onGlobalBttvEmotesParsed(globalSet);

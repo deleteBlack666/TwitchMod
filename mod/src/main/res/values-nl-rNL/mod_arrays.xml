@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="player_impl_choices">
+        <item>Automatisch</item>
+        <item>TwitchCore</item>
+        <item>ExoPlayer V2</item>
+    </string-array>
+    <string-array name="filter_level_choices">
+        <item>Uitgeschakeld</item>
+        <item>Abonnees</item>
+        <item>Moderators</item>
+        <item>Uitzender</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Standaard</item>
+        <item>Zoals Vroeger</item>
+        <item>Doorhalen</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Uitgeschakeld</item>
+        <item>Stil</item>
+        <item>Geanimeerd</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Klein</item>
+        <item>Normaal</item>
+        <item>Groot</item>
+    </string-array>
+    <string-array name="surestream_adblock_choices">
+        <item>Uitgeschakeld</item>
+        <item>Neppe OAuth Token</item>
+        <item>Neppe ingesloten speler</item>
+    </string-array>
+</resources>

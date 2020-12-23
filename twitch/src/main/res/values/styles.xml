@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TwitchBase" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+    </style>
+    <style name="Theme.Twitch" parent="@style/Theme.TwitchBase">
+    </style>
+    <style name="SettingsSwitch" parent="@style/Theme.Twitch">
+    </style>
+    <style name="AlertDialog" parent="@android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorBackground">@color/background_float</item>
+        <item name="android:textColorPrimary">@color/text_base</item>
+        <item name="android:textColor">@color/text_link</item>
+        <item name="android:textColorAlertDialogListItem">@color/text_base</item>
+    </style>
+    <style name="ButtonStyle">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/default_margin_large</item>
+        <item name="android:paddingTop">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin_large</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:maxLines">1</item>
+        <item name="fontFamily">@font/roobert_semibold</item>
+    </style>
+    <style name="ButtonStyle.Primary" parent="@style/ButtonStyle">
+    </style>
+</resources>

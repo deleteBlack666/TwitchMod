@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="player_impl_choices">
+        <item>Авто</item>
+        <item>TwitchCore</item>
+        <item>ExoPlayer V2</item>
+    </string-array>
+    <string-array name="filter_level_choices">
+        <item>Отключен</item>
+        <item>Подписчики</item>
+        <item>Модераторы</item>
+        <item>Стример</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>По умолчанию</item>
+        <item>Кликабельные</item>
+        <item>Зачеркнутые</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Отключены</item>
+        <item>Статичные</item>
+        <item>Анимированные</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Маленький</item>
+        <item>Средний</item>
+        <item>Большой</item>
+    </string-array>
+    <string-array name="surestream_adblock_choices">
+        <item>Отключен</item>
+        <item>Поддельный OAuth Token</item>
+        <item>Поддельный Embedded Player</item>
+    </string-array>
+</resources>

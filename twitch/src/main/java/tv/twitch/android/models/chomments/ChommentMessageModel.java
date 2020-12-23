@@ -2,7 +2,7 @@ package tv.twitch.android.models.chomments;
 
 
 public class ChommentMessageModel {
-    private final String body = null;
+    private String body;
 
     /* ... */
 

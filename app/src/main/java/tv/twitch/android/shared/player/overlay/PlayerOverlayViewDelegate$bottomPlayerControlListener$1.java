@@ -7,7 +7,7 @@ public class PlayerOverlayViewDelegate$bottomPlayerControlListener$1 implements 
     /* ... */
 
     @Override
-    public void onRefreshClicked() {
+    public void onRefreshClicked() { // TODO: __INJECT_METHOD
         this.this$0.getOverlayLayoutController().hideOverlay();
         this.this$0.getPlayerOverlayEventsSubject().onNext(PlayerOverlayEvents.Refresh.INSTANCE);
     }

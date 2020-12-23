@@ -1,16 +1,23 @@
 package tv.twitch.android.shared.chat.messagefactory;
 
 
+import android.content.ContextWrapper;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.SpannedString;
+
+import java.util.concurrent.TimeUnit;
 
 import tv.twitch.android.adapters.social.MessageRecyclerItem;
 import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
 import tv.twitch.android.core.user.TwitchAccountManager;
 import tv.twitch.android.models.webview.WebViewSource;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
+import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
 import tv.twitch.android.shared.chat.chatsource.IClickableUsernameSpanListener;
+import tv.twitch.android.shared.chat.messagefactory.adapteritem.UserNoticeRecyclerItem;
+import tv.twitch.android.shared.chat.messageinput.emotes.RecentEmotesManager;
 import tv.twitch.android.shared.chat.tracking.ChatFiltersSettings;
 import tv.twitch.android.shared.chat.util.ChatItemClickEvent;
 import tv.twitch.android.shared.ui.elements.span.CenteredImageSpan;
@@ -24,7 +31,10 @@ import tv.twitch.chat.ChatMessageInfo;
 
 
 public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPLEMENT
-    private final TwitchAccountManager accountManager = null;
+    private ContextWrapper context;
+
+    private TwitchAccountManager accountManager;
+    private RecentEmotesManager recentEmotesManager;
 
     /* ... */
 
@@ -33,7 +43,7 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     }
 
     private final CharSequence usernameSpannable(ChatMessageInterface chatMessageInterface, int color, IClickableUsernameSpanListener iClickableUsernameSpanListener, boolean z, String str, String str2) {
-        color = Hooks.hookUsernameSpanColor(color); // TODO: __HOOK_PARAM
+        color = Hooks.hookUsernameSpanColor(color); // TODO: __HOOK_PARAM // TODO: __FIX
 
         /* ... */
         return null;
@@ -70,11 +80,11 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     @Override
     public CharSequence getSpannedEmote(String url, String emoteText) { // TODO: __INJECT_METHOD
         UrlDrawable urlDrawable = new UrlDrawable(url, MediaSpan$Type.Emote);
-        urlDrawable.setIsTwitchEmote(false);
+        urlDrawable.setTwitchEmote(false);
         urlDrawable.setShouldWide(Hooks.isSupportWideEmotes());
 
         SpannableString spannableString = new SpannableString(emoteText);
-        spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, emoteText.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, emoteText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;
     }
@@ -84,8 +94,19 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
         UrlDrawable urlDrawable = new UrlDrawable(url, MediaSpan$Type.Badge);
 
         SpannableString spannableString = new SpannableString(badgeName + " ");
-        spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, badgeName.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, badgeName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;
+    }
+
+    @Override
+    public TwitchAccountManager getAccountManager() { // TODO: __INJECT_METHOD
+        return accountManager;
+    }
+
+    public ChatAdapterItem createRecentMessageItem(String line) { // TODO: __INJECT_METHOD
+        UserNoticeRecyclerItem.UserNoticeConfig.GenericNotice genericNotice = new UserNoticeRecyclerItem.UserNoticeConfig.GenericNotice();
+
+        return new UserNoticeRecyclerItem(this.context, 0, (int) TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()), null, genericNotice, new SpannableStringBuilder(line), null, null, line, false);
     }
 }

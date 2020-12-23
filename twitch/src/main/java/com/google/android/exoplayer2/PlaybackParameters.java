@@ -6,9 +6,7 @@ package com.google.android.exoplayer2;
  */
 public class PlaybackParameters {
     public static final PlaybackParameters DEFAULT = new PlaybackParameters(1.0f);
-    public final float speed;
+    public float speed;
 
-    public PlaybackParameters(float f) {
-        speed = f;
-    }
+    public PlaybackParameters(float f) {/* ... */}
 }

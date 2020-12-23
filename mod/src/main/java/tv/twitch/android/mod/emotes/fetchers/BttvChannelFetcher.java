@@ -9,9 +9,11 @@ import retrofit2.Call;
 import tv.twitch.android.mod.bridges.ApiCallback;
 import tv.twitch.android.mod.emotes.BaseEmoteSet;
 import tv.twitch.android.mod.models.BttvEmoteModel;
+import tv.twitch.android.mod.models.EmoteSet;
 import tv.twitch.android.mod.models.api.BttvChannelResponse;
 import tv.twitch.android.mod.models.api.BttvEmoteResponse;
 import tv.twitch.android.mod.models.api.FailReason;
+import tv.twitch.android.mod.models.api.ImageType;
 import tv.twitch.android.mod.utils.Logger;
 
 import static tv.twitch.android.mod.net.ServiceFactory.getBttvApi;
@@ -22,7 +24,7 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
     private final Callback mCallback;
 
     public interface Callback {
-        void onBttvEmotesParsed(BaseEmoteSet set);
+        void onBttvEmotesParsed(EmoteSet set);
     }
 
     public BttvChannelFetcher(int channelId, Callback callback) {
@@ -32,7 +34,7 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
 
     @Override
     public void onRequestSuccess(BttvChannelResponse bttvResponse) {
-        BaseEmoteSet bttvSet = new BaseEmoteSet();
+        EmoteSet bttvSet = new BaseEmoteSet();
 
         List<BttvEmoteResponse> channelEmotes = bttvResponse.getChannelEmotes();
         if (channelEmotes != null) {
@@ -51,7 +53,7 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
                 if (emoticon.getImageType() == null) {
                     continue;
                 }
-                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType()));
+                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType() == ImageType.GIF));
             }
         }
 
@@ -72,7 +74,7 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
                 if (emoticon.getImageType() == null) {
                     continue;
                 }
-                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType()));
+                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType() == ImageType.GIF));
             }
         }
         mCallback.onBttvEmotesParsed(bttvSet);

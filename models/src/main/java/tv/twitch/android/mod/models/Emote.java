@@ -10,7 +10,9 @@ public interface Emote {
     @NonNull
     String getCode();
 
-    String getUrl(@EmoteSize int size);
-
     boolean isGif();
+
+    String getEmoteId();
+
+    String getUrl(@EmoteSize String size);
 }

@@ -1,0 +1,12 @@
+<tv.twitch.android.mod.bridges.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        android:title="@string/mod_settings_disable_recent_search"
+        android:summary="@string/mod_settings_disable_recent_search_desc"
+        android:key="mod_hide_recent_search_results"/>
+
+    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        android:title="@string/mod_settings_force_disable_google_billing"
+        android:summary="@string/mod_settings_force_disable_google_billing_desc"
+        android:key="mod_disable_google_billing"/>
+</tv.twitch.android.mod.bridges.preference.PreferenceScreen>

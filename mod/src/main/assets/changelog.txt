@@ -1,0 +1,145 @@
+TwitchMod 2.8
+Rebase to 9.10.0
+Added: Stream uptime
+Added: Sleep timer
+Added: Hide chat bar an option
+Added: Change the max chat width an option
+Added: Timestamps in vod
+Added: SureStream AdBlock (OAuth Token & Embedded Player)
+Updated: Translations (Portuguese, Brazilian; Turkish; Dutch; Italian)
+Fixed: Title bar popup
+Removed: FFZ badges
+Redesigned settings mod
+
+TwitchMod 2.7 (541)
+Rebase to 9.9.2
+Added: Font size option
+Added: Adjust the seek time (#28)
+Added: Autoclicker option (now with delay ~5 seconds)
+Added: Translations (check Mod settings -> Credits)
+Fixed: Bttv button in emote picker
+Fixed: Filtering messages in vods
+Fixed: Using monospace font for timestamps
+Various improvements
+
+TwitchMod 2.6 (432)
+Core: 9.8.0
+Added: wide emotes patch
+Added: disable google billing patch
+Added: lock button for swipper
+Removed: GPS patch
+Fixed: swipper bugs
+Fixed: mod settings
+Fixed: clip downloader
+Fixed: emote picker in whispers
+And a lot of bug fixes and improvements
+
+TwitchMod 2.5 (305)
+Core: 9.7.0
+Removed libs: comscore, sentry
+Added: keywords blacklist
+Added: UI patches
+Fixed: recent messages service
+Changed: settings
+Bugfixes and improvements
+
+TwitchMod 2.5 (175)
+Core: 9.6.0 
+Fixed: refresh button
+Fixed: settings (Warning! Update reset all settings to default values)
+Fixed: floating chat
+Added: deleted message style option
+Added: load chat history option (API recent-messages.robotty.de)
+Bugfixes and improvements
+
+TwitchMod 2.5 (68)
+Minor bug fixes
+
+TwitchMod 2.5 (50)
+Fixed: channel point rewards
+Fixed: mention
+
+TwitchMod 2.5 (46)
+Twitch core: 9.5.0 (+ update 9.5.1 + update 9.5.2)
+Fixed: badge injection performance
+Added: mention option
+Minor bug fixes
+
+TwitchMod 2.4 (92)
+Core: 9.4.0
+Added: adblock option
+Added: ffz badges
+Added: view banned chat
+Updated: settings
+code optimization
+
+TwitchMod 2.3 (83)
+BTTV: support new emote picker
+Removed: rate alert
+
+TwitchMod 2.3 (59)
+Core: 9.3.2
+
+TwitchMod 2.2 (r9)
+Core: 9.2.0
+Minor bug fixes
+
+TwitchMod 2.2 (r8)
+Core: 9.2.0
+Bugfixes and improvement
+
+TwitchMod 2.1
+Core: 9.1.1
+Languages: en, ru, ar, de, es, fa, it, pt, uz, zh, uk
+CPUs: universal
+DPIs: hdpi, ldpi, mdpi, tvdpi, xhdpi, xxhdpi, xxxhdpi
+Removed:
+• Ads and telemetry
+• Libraries: Comscore Analytics, Firebase Crashlytics, Branch Analytics, Nielsen analytics, Amazon ADS, Google ADS, Google Play Lib, Twitch ADS
+• Unused code
+Features (Settings > Mod settings):
+• BetterTTV and FrankerFaceZ emotes
+• Force ExoPlayer2
+• Timestamps
+• Prevent messages from being removed
+• Copy messages by tapping & holding them
+• Autoclicker for Channel Points
+• Floating chat
+• Video stats
+• And more
+
+TwitchMod 9.1.1 (r11+)
+Fixed: earning channel points
+
+TwitchMod 9.1.1 (r11)
+Bug fixes and performance improvements
+
+TwitchMod 9.1.1 (r10)
+Core: v9.1.1
+Languages: en, ru, ar, de, es, fa, it, pt, uz, zh
+CPUs: universal
+DPIs: hdpi, ldpi, mdpi, tvdpi, xhdpi, xxhdpi, xxxhdpi
+Added: Mod settings (Main settings -> Mod settings)
+Disabled/Removed: Comscore Analytics, Firebase Crashlytics, Branch Analytics, Nielsen analytics, Amazon ADS, Google ADS, Google Play Lib, Twitch ADS
+Removed: ADBLOCK patch (default), FIXBRIGHTNESS patch, DISABLEGIFS2 patch (default), SHOWDELMESSAGES patch (default)
+Fixed: gestures
+
+TwitchMod 9.0.2 (r11)
+Added: Navigations patch
+Added: Dev mode patch
+Added: Floating chat option (twitch experimental feature)
+Fixed: Emote picker bug
+Fixed: Mod settings crash
+Disabled: Crashlytics report uploader
+Disabled(?): Update prompt
+
+TwitchMod 9.0.2 (r8)
+Added: swipe controls
+Added: long-press on profile image icon to open Mod Menu
+Fixed: live gifs
+Fixed: emote picker bug
+Deleted: spade schema.json
+Disabled: firebase analytics
+
+Twitch 9.0.2
+init

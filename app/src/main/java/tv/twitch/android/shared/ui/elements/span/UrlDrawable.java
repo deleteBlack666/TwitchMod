@@ -14,6 +14,7 @@ import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
 public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TODO: __IMPLEMENT
     private Drawable drawable;
     private MediaSpan$Type type;
+    private String url;
 
     private boolean isTwitchEmote = true; // TODO: __INJECT_FIELD
     private boolean shouldWide = false; // TODO: __INJECT_FIELD
@@ -27,7 +28,6 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
         this.drawable = drawable;
     }
 
-    @Override
     public void draw(Canvas canvas) { // TODO: __REPLACE_METHOD
         Drawable drawable = this.drawable;
         if (drawable != null) {
@@ -49,7 +49,7 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
         return type == MediaSpan$Type.Badge;
     }
 
-    public void setIsTwitchEmote(boolean z) { // TODO: __INJECT_METHOD
+    public void setTwitchEmote(boolean z) { // TODO: __INJECT_METHOD
         isTwitchEmote = z;
     }
 
@@ -63,5 +63,9 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
 
     public boolean isTwitchEmote() { // TODO: __INJECT_METHOD
         return isTwitchEmote;
+    }
+
+    public final String getUrl() {
+        return this.url;
     }
 }

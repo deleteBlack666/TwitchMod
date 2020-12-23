@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:id="@+id/dialog_mod_info__sv"
+        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/default_margin_double" >
+
+        <TextView
+            android:id="@+id/dialog_mod_info__text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ModInfoBanner" />
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_alignParentStart="true"
+            android:id="@+id/dialog_mod_info__telegram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:src="@drawable/ic_telegram2" />
+
+        <ImageView
+            android:layout_toEndOf="@+id/dialog_mod_info__telegram"
+            android:id="@+id/dialog_mod_info__github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin_double"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:src="@drawable/ic_github3"
+            />
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/dialog_mod_info__dismiss"
+            android:layout_margin="@dimen/default_margin_double"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/mod_dismiss"
+            style="@style/ButtonStyle.Primary" />
+    </RelativeLayout>
+
+</LinearLayout>

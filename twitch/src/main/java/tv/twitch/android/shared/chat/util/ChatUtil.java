@@ -1,5 +1,6 @@
 package tv.twitch.android.shared.chat.util;
 
+
 import android.content.Context;
 import android.text.Spanned;
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gifs_values">
+        <item>disabled</item>
+        <item>static</item>
+        <item>animated</item>
+    </string-array>
+    <string-array name="source_emote_size_values">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+    </string-array>
+    <string-array name="msg_del_values">
+        <item>default</item>
+        <item>mod</item>
+        <item>strikethrough</item>
+    </string-array>
+    <string-array name="filter_level_values">
+        <item>disabled</item>
+        <item>subs</item>
+        <item>mods</item>
+        <item>broadcaster</item>
+    </string-array>
+    <string-array name="player_impl_values">
+        <item>auto</item>
+        <item>playercore</item>
+        <item>exoplayer_2</item>
+    </string-array>
+    <string-array name="surestream_adblock_values">
+        <item>disabled</item>
+        <item>v1</item>
+        <item>v2</item>
+    </string-array>
+</resources>

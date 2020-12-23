@@ -2,8 +2,9 @@ package tv.twitch.android.models.chomments;
 
 
 public class ChommentModel {
-    private final ChommentCommenterModel commenter = null;
-    private final ChommentMessageModel message = null;
+    private ChommentCommenterModel commenter;
+    private ChommentMessageModel message;
+    private int contentOffsetSeconds;
 
     /* ... */
 
@@ -13,6 +14,10 @@ public class ChommentModel {
 
     public ChommentCommenterModel getCommenter() {
         return commenter;
+    }
+
+    public final int getContentOffsetSeconds() {
+        return this.contentOffsetSeconds;
     }
 
     /* ... */

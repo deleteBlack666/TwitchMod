@@ -4,10 +4,11 @@ package tv.twitch.android.feature.theatre.metadata;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import tv.twitch.android.core.mvp.viewdelegate.BaseViewDelegate;
 import tv.twitch.android.mod.bridges.Hooks;
 
 
-public final class ExtendedPlayerMetadataViewDelegate {
+public final class ExtendedPlayerMetadataViewDelegate extends BaseViewDelegate {
     /* ... */
 
     public static final class Companion {
@@ -28,4 +29,8 @@ public final class ExtendedPlayerMetadataViewDelegate {
         // this.followOrSubButtonContainer.addView(this.subButtonViewDelegate.getContentView()); // TODO: __REMOVE_CODE
     }
 
+    public void show() { // TODO: __REMOVE
+        new Exception().printStackTrace();
+        super.show();
+    }
 }

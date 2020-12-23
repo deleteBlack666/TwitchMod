@@ -9,7 +9,7 @@ public interface IUrlDrawable {
 
     boolean isBadge();
 
-    void setIsTwitchEmote(boolean z);
+    void setTwitchEmote(boolean z);
 
     boolean isTwitchEmote();
 }

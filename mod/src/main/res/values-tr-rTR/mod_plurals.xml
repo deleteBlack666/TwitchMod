@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="timer_hours">
+        <item quantity="one">%d saat</item>
+        <item quantity="other">%d saatler</item>
+    </plurals>
+    <plurals name="timer_minutes">
+        <item quantity="one">%d dakika</item>
+        <item quantity="other">%d dakikalar</item>
+    </plurals>
+    <plurals name="timer_seconds">
+        <item quantity="one">%d saniye</item>
+        <item quantity="other">%d saniyeler</item>
+    </plurals>
+</resources>

@@ -7,14 +7,16 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
-import android.text.style.RelativeSizeSpan;
+import android.text.format.DateUtils;
+import android.text.style.ScaleXSpan;
 import android.text.style.StrikethroughSpan;
-import android.text.style.TypefaceSpan;
 import android.util.LruCache;
+import android.util.Pair;
+
+import androidx.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -24,13 +26,14 @@ import tv.twitch.android.mod.bridges.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridges.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.chat.fetchers.RobottyFetcher;
 import tv.twitch.android.mod.emotes.EmoteManager;
-import tv.twitch.android.mod.models.Badge;
 import tv.twitch.android.mod.models.Emote;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
 import tv.twitch.android.models.channel.ChannelInfo;
+import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.util.ClickableUsernameSpan;
 import tv.twitch.chat.ChatEmoticonToken;
 import tv.twitch.chat.ChatMentionToken;
+import tv.twitch.chat.ChatMessageInfo;
 import tv.twitch.chat.ChatMessageToken;
 import tv.twitch.chat.ChatTextToken;
 import tv.twitch.chat.ChatUrlToken;
@@ -94,7 +97,7 @@ public class ChatUtil {
             return;
         }
 
-        source.addRecentMessage("[ROBOTTY] Fetching recent messages... ( https://recent-messages.robotty.de )");
+        source.addRecentMessage("[ROBOTTY] Fetching recent messages... (https://recent-messages.robotty.de)");
         RobottyFetcher fetcher = new RobottyFetcher(channelInfo, limit, new RobottyFetcher.Callback() {
             @Override
             public void onMessagesParsed(ChannelInfo channel, List<String> ircMessages) {
@@ -168,35 +171,55 @@ public class ChatUtil {
         return msg;
     }
 
-    public static SpannedString tryAddBadges(SpannedString messageBadgeSpan, IChatMessageFactory factory, Collection<Badge> badges) {
-        if (badges == null || badges.isEmpty())
-            return messageBadgeSpan;
+    @NonNull
+    public static List<Pair<String, Integer>> splitByWords(CharSequence message) {
+        final List<Pair<String, Integer>> words = new ArrayList<>();
 
-        SpannableStringBuilder ssb = messageBadgeSpan == null ? new SpannableStringBuilder() : new SpannableStringBuilder(messageBadgeSpan);
+        if (TextUtils.isEmpty(message))
+            return words;
 
-        for (Badge badge : badges) {
-            if (badge == null)
-                continue;
+        boolean newWord = false;
+        int startPos = 0;
+        int messageLength = message.length();
 
-            CharSequence newBadgeSpan = factory.getSpannedBadge(badge.getUrl(), badge.getName());
-            if (TextUtils.isEmpty(newBadgeSpan))
-                continue;
-
-            if (!TextUtils.isEmpty(badge.getReplaces())) {
-                final String replaces = badge.getReplaces() + " ";
-                int pos = TextUtils.indexOf(ssb, replaces);
-                if (pos != -1) {
-                    ssb.replace(pos, replaces.length(), newBadgeSpan);
+        for (int currentPos = 0; currentPos <= messageLength; currentPos++) {
+            if (currentPos != messageLength && message.charAt(currentPos) != ' ') {
+                if (!newWord) {
+                    newWord = true;
+                    startPos = currentPos;
                 }
             } else {
-                ssb.append(newBadgeSpan);
+                if (newWord) {
+                    newWord = false;
+                    final String word = TextUtils.substring(message, startPos, currentPos);
+                    words.add(new Pair<>(word, startPos));
+                }
             }
         }
 
-        return new SpannedString(ssb);
+        return words;
     }
 
-    public static SpannedString tryAddEmotes(final IChatMessageFactory factory, SpannedString messageSpan, final int channelID, final boolean isGifsDisabled, final @EmoteSize int emoteSize) {
+
+    public static List<Pair<Emote, Integer>> getBttvEmotes(SpannedString messageSpan, final int channelID) {
+        List<Pair<Emote, Integer>> bttvEmotes = new ArrayList<>();
+
+        if (TextUtils.isEmpty(messageSpan)) {
+            return bttvEmotes;
+        }
+
+        for (Pair<String, Integer> word : splitByWords(messageSpan)) {
+            final String emoteCode = word.first;
+            final Emote emote = EmoteManager.INSTANCE.findEmote(emoteCode, channelID);
+            if (emote != null) {
+                bttvEmotes.add(new Pair<>(emote, word.second));
+            }
+        }
+
+        return bttvEmotes;
+    }
+
+    public static SpannedString tryAddEmotes(final IChatMessageFactory factory, ChatMessageInterface chatMessageInterface, SpannedString messageSpan, final int channelID, final boolean isGifsDisabled, final @EmoteSize String emoteSize) {
         if (factory == null) {
             Logger.error("factory is null");
             return messageSpan;
@@ -206,52 +229,46 @@ public class ChatUtil {
             return messageSpan;
         }
 
-        boolean newWord = false;
-        int startPos = 0;
-        int messageLength = messageSpan.length();
+        List<Pair<Emote, Integer>> bttvEmotes = getBttvEmotes(messageSpan, channelID);
+        if (bttvEmotes.size() == 0)
+            return messageSpan;
 
-        SpannableStringBuilder ssb = null;
+        SpannableStringBuilder ssb = new SpannableStringBuilder(messageSpan);
 
-        for (int currentPos = 0; currentPos <= messageLength; currentPos++) {
-            if (currentPos != messageLength && messageSpan.charAt(currentPos) != ' ') {
-                if (!newWord) {
-                    newWord = true;
-                    startPos = currentPos;
-                }
-            } else {
-                if (newWord) {
-                    newWord = false;
+        for (Pair<Emote, Integer> emote : bttvEmotes) {
+            final Emote emoteModel = emote.first;
+            final Integer startPos = emote.second;
+            final String emoteCode = emoteModel.getCode();
 
-                    final String code = TextUtils.substring(messageSpan, startPos, currentPos);
-                    final Emote emote = EmoteManager.INSTANCE.findEmote(code, channelID);
-                    if (emote != null) {
-                        if (emote.isGif() && isGifsDisabled)
-                            continue;
+            if (emoteModel.isGif() && isGifsDisabled)
+                continue;
 
-                        SpannableString emoteSpan = (SpannableString) factory.getSpannedEmote(emote.getUrl(emoteSize), emote.getCode());
-                        if (emoteSpan != null) {
-                            if (ssb == null)
-                                ssb = new SpannableStringBuilder(messageSpan);
+            String url = emoteModel.getUrl(emoteSize);
+            if (url == null)
+                continue;
 
-                            ssb.replace(startPos, currentPos, emoteSpan);
-                        }
-                    }
-                }
+            SpannableString emoteSpan = (SpannableString) factory.getSpannedEmote(url, emoteCode);
+            if (emoteSpan != null) {
+                ssb.replace(startPos, startPos + emoteCode.length(), emoteSpan);
             }
         }
 
-        if (ssb != null)
-            return SpannedString.valueOf(ssb);
+        return SpannedString.valueOf(ssb);
+    }
 
-        return messageSpan;
+    public static Spanned formatTimestamp(Spanned message, CharSequence timestamp) {
+        SpannableString timestampSpan = SpannableString.valueOf(timestamp);
+        timestampSpan.setSpan(new ScaleXSpan(0.8f), 0, timestampSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return SpannableString.valueOf(new SpannableStringBuilder(timestampSpan).append(" ").append(new SpannableStringBuilder(message)));
+    }
+
+    public static Spanned addOffsetTimestamp(Spanned message, int seconds) {
+        return formatTimestamp(message, DateUtils.formatElapsedTime(seconds));
     }
 
     public static Spanned addTimestamp(Spanned message, final Date date) {
-        SpannableString timeSpan = SpannableString.valueOf(new SimpleDateFormat(TIMESTAMP_DATE_FORMAT, Locale.UK).format(date));
-        timeSpan.setSpan(new TypefaceSpan("monospace"), 0, timeSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        timeSpan.setSpan(new RelativeSizeSpan(TIMESTAMP_SPAN_PROPORTIONAL), 0, timeSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return SpannableString.valueOf(new SpannableStringBuilder(timeSpan).append(" ").append(new SpannableStringBuilder(message)));
+        return formatTimestamp(message, new SimpleDateFormat(TIMESTAMP_DATE_FORMAT, Locale.UK).format(date));
     }
 
     public static Integer fixUsernameColor(int color, final boolean isDarkTheme) {
@@ -271,5 +288,30 @@ public class ChatUtil {
         }
 
         return null;
+    }
+
+    public static boolean isMentionUser(ChatMessageInfo chatMessageInfo, String userName) {
+        if (TextUtils.isEmpty(userName))
+            return false;
+
+        if (chatMessageInfo == null || chatMessageInfo.tokens == null)
+            return false;
+
+        ChatMessageToken[] tokens = chatMessageInfo.tokens;
+
+        for (ChatMessageToken messageToken : tokens) {
+            if (messageToken instanceof ChatMentionToken) {
+                ChatMentionToken mentionToken = (ChatMentionToken) messageToken;
+                String mentionUser = mentionToken.userName;
+                if (TextUtils.isEmpty(mentionUser))
+                    continue;
+
+                if (mentionUser != null && mentionUser.equalsIgnoreCase(userName)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

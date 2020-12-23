@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import tv.twitch.android.mod.models.preferences.UserMessagesFiltering;
+import tv.twitch.android.models.chomments.ChommentCommenterModel;
+import tv.twitch.android.models.chomments.ChommentMessageModel;
+import tv.twitch.android.models.chomments.ChommentModel;
 import tv.twitch.chat.ChatLiveMessage;
 import tv.twitch.chat.ChatMessageInfo;
 import tv.twitch.chat.ChatMessageToken;
@@ -23,6 +26,28 @@ public class ChatMesssageFilteringUtil {
     private final HashSet<String> mUsernameBlocklist = new HashSet<>();
 
     public static final ChatMesssageFilteringUtil INSTANCE = new ChatMesssageFilteringUtil();
+
+    public boolean filterChomment(ChommentModel chommentModel) {
+        if (chommentModel == null || isEmpty())
+            return true;
+
+        ChommentMessageModel messageModel = chommentModel.getMessage();
+        if (messageModel == null)
+            return true;
+
+        String body = messageModel.getBody();
+        if (body == null || body.length() == 0)
+            return true;
+
+        ChommentCommenterModel commenterModel = chommentModel.getCommenter();
+        if (commenterModel != null) {
+            String username = commenterModel.getUsername();
+            if (!filterByUsername(username))
+                return false;
+        }
+
+        return filterByKeywords(body.split(" "));
+    }
 
     public enum MessageLevel {
         DEFAULT,
@@ -52,7 +77,7 @@ public class ChatMesssageFilteringUtil {
         return str.equalsIgnoreCase(str2);
     }
 
-    public boolean isDisabled() {
+    public boolean isEmpty() {
         return mWordsBlocklist.isEmpty() && mCaseInsensitiveWordsBlocklist.isEmpty() && mUsernameBlocklist.isEmpty();
     }
 
@@ -63,7 +88,7 @@ public class ChatMesssageFilteringUtil {
         return mUsernameBlocklist.contains(username.toLowerCase());
     }
 
-    public ChatLiveMessage[] filterByMessageLevel(ChatLiveMessage[] messages, int viewerId, @UserMessagesFiltering int filteringPreference) {
+    public ChatLiveMessage[] filterByMessageLevel(ChatLiveMessage[] messages, int viewerId, @UserMessagesFiltering String filteringPreference) {
         if (messages == null || messages.length == 0)
             return null;
 
@@ -179,7 +204,7 @@ public class ChatMesssageFilteringUtil {
         }
     }
 
-    public boolean filterByMessageLevel(ChatLiveMessage liveMessage, int userId, @UserMessagesFiltering int filtering) {
+    public boolean filterByMessageLevel(ChatLiveMessage liveMessage, int userId, @UserMessagesFiltering String filtering) {
         if (liveMessage == null || liveMessage.messageInfo == null)
             return true;
 

@@ -2,9 +2,9 @@ package tv.twitch.android.models.chomments;
 
 
 public class ChommentCommenterModel {
-    private final String displayName = null;
-    private final String id = null;
-    private final String username = null;
+    private String displayName;
+    private String id ;
+    private String username;
 
     /* ... */
 

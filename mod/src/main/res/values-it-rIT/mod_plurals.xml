@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="timer_hours">
+        <item quantity="one">%d ora</item>
+        <item quantity="other">%d ore</item>
+    </plurals>
+    <plurals name="timer_minutes">
+        <item quantity="one">%d minuto</item>
+        <item quantity="other">%d minuti</item>
+    </plurals>
+    <plurals name="timer_seconds">
+        <item quantity="one">%d secondo</item>
+        <item quantity="other">%d secondi</item>
+    </plurals>
+</resources>

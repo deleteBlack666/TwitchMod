@@ -21,13 +21,12 @@ import tv.twitch.android.mod.models.preferences.EmoteSize;
 import tv.twitch.android.shared.emotes.models.EmotePickerEmoteModel;
 import tv.twitch.chat.ChatEmoticon;
 import tv.twitch.chat.ChatEmoticonSet;
-import tv.twitch.chat.ChatEmoticonToken;
 
 
 public class ChatFactory {
     private static final int EMOTE_ID_MASK = 0xFFFF0000;
 
-    private static int sLastEmoteId = Integer.MAX_VALUE;
+    private static volatile int sLastEmoteId = Integer.MAX_VALUE;
 
     @NonNull
     private static synchronized String generateEmoteId() {

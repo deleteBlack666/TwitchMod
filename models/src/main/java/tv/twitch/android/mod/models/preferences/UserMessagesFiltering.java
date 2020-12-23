@@ -1,17 +1,17 @@
 package tv.twitch.android.mod.models.preferences;
 
 
-import androidx.annotation.IntDef;
+import androidx.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.SOURCE)
-@IntDef({UserMessagesFiltering.DISABLED, UserMessagesFiltering.SUBS, UserMessagesFiltering.MODS, UserMessagesFiltering.BROADCASTER})
+@StringDef({UserMessagesFiltering.DISABLED, UserMessagesFiltering.SUBS, UserMessagesFiltering.MODS, UserMessagesFiltering.BROADCASTER})
 public @interface UserMessagesFiltering {
-    int DISABLED = 0;
-    int SUBS = 1;
-    int MODS = 2;
-    int BROADCASTER = 3;
+    String DISABLED = "disabled";
+    String SUBS = "subs";
+    String MODS = "mods";
+    String BROADCASTER = "broadcaster";
 }

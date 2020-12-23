@@ -9,6 +9,7 @@ import java.util.Collections;
 import tv.twitch.android.mod.emotes.fetchers.BttvChannelFetcher;
 import tv.twitch.android.mod.emotes.fetchers.FfzChannelFetcher;
 import tv.twitch.android.mod.models.Emote;
+import tv.twitch.android.mod.models.EmoteSet;
 import tv.twitch.android.mod.utils.Logger;
 
 
@@ -16,8 +17,8 @@ class Room implements BttvChannelFetcher.Callback, FfzChannelFetcher.Callback {
     private final BttvChannelFetcher bttvChannelFetcher;
     private final FfzChannelFetcher ffzChannelFetcher;
 
-    private BaseEmoteSet mBttvSet;
-    private BaseEmoteSet mFfzSet;
+    private EmoteSet mBttvSet;
+    private EmoteSet mFfzSet;
 
     public Room(int channelId) {
         bttvChannelFetcher = new BttvChannelFetcher(channelId, this);
@@ -60,7 +61,7 @@ class Room implements BttvChannelFetcher.Callback, FfzChannelFetcher.Callback {
     }
 
     @Override
-    public void onBttvEmotesParsed(BaseEmoteSet set) {
+    public void onBttvEmotesParsed(EmoteSet set) {
         if (set == null) {
             Logger.error("set is null");
             return;
@@ -70,7 +71,7 @@ class Room implements BttvChannelFetcher.Callback, FfzChannelFetcher.Callback {
     }
 
     @Override
-    public void onFfzEmotesParsed(BaseEmoteSet set) {
+    public void onFfzEmotesParsed(EmoteSet set) {
         if (set == null) {
             Logger.error("set is null");
             return;

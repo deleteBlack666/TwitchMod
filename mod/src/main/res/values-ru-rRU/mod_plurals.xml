@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="timer_hours">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часов</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часов</item>
+    </plurals>
+    <plurals name="timer_minutes">
+        <item quantity="one">%d минуту</item>
+        <item quantity="few">%d минут</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
+    <plurals name="timer_seconds">
+        <item quantity="one">%d секунду</item>
+        <item quantity="few">%d секунд</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунд</item>
+    </plurals>
+</resources>

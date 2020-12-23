@@ -44,13 +44,13 @@ public class ChatViewPresenter {
     public final void setChannel(ChannelInfo channelInfo2, String str, StreamType streamType2) {/* ... */}
 
     public final void onChannelStateChanged(ChatConnectionEvents chatConnectionEvents) {
-        /* ... */
-
         maybeInjectRecentMessages(chatConnectionEvents); // TODO: __INJECT_CODE
+
+        /* ... */
     }
 
     private void maybeInjectRecentMessages(ChatConnectionEvents chatConnectionEvent) { // TODO: __INJECT_METHOD
-        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectedEvent) {
+        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectingEvent) {
             if (channel != null && channel.getId() == chatConnectionEvent.getChannelId())
                 Hooks.injectRecentMessages(liveChatSource, channel);
         }

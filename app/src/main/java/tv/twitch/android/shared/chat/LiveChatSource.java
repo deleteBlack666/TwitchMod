@@ -42,6 +42,6 @@ public class LiveChatSource implements ILiveChatSource { // TODO: __IMPLEMENT
 
     @Override
     public void addRecentMessage(String line) { // TODO: __INJECT_METHOD
-        addSystemMessage(line, false, null);
+        this.messageListAdapterBinder.addRecentMessage(line);
     }
 }

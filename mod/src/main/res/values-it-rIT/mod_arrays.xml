@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="player_impl_choices">
+        <item>Auto</item>
+        <item>TwitchCore</item>
+        <item>ExoPlayer V2</item>
+    </string-array>
+    <string-array name="filter_level_choices">
+        <item>Disabilitato</item>
+        <item>Iscrizioni</item>
+        <item>Mod</item>
+        <item>Broadcaster</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Predefinito</item>
+        <item>Eredità</item>
+        <item>Barrato</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Disabilitato</item>
+        <item>Statico</item>
+        <item>Animato</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Piccolo</item>
+        <item>Medio</item>
+        <item>Grande</item>
+    </string-array>
+    <string-array name="surestream_adblock_choices">
+        <item>Disabilitato</item>
+        <item>Token OAuth Falso</item>
+        <item>Giocatore Incorporato Falso</item>
+    </string-array>
+</resources>

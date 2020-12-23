@@ -9,9 +9,10 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.android.exoplayer2.PlaybackParameters;
 
@@ -22,7 +23,6 @@ import java.util.List;
 
 import io.reactivex.subjects.PublishSubject;
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.badges.BadgeManager;
 import tv.twitch.android.mod.bridges.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.bridges.interfaces.IChatConnectionController;
 import tv.twitch.android.mod.bridges.interfaces.ICommunityPointsButtonViewDelegate;
@@ -30,15 +30,15 @@ import tv.twitch.android.mod.bridges.interfaces.IEmotePickerViewDelegate;
 import tv.twitch.android.mod.bridges.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.bridges.interfaces.ISharedPanelWidget;
 import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
-import tv.twitch.android.mod.models.Badge;
-import tv.twitch.android.mod.models.preferences.ChatWidthScale;
-import tv.twitch.android.mod.models.preferences.FontSize;
+import tv.twitch.android.mod.fragments.SleepTimerFragment;
+import tv.twitch.android.mod.fragments.settings.MainSettingsFragment;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.utils.ClipDownloader;
+import tv.twitch.android.mod.utils.DateUtil;
+import tv.twitch.android.mod.utils.FragmentUtil;
 import tv.twitch.android.mod.utils.ViewUtil;
-import tv.twitch.android.models.chomments.ChommentCommenterModel;
-import tv.twitch.android.models.chomments.ChommentMessageModel;
 import tv.twitch.android.models.chomments.ChommentModel;
+import tv.twitch.android.models.streams.StreamModel;
 import tv.twitch.android.shared.chat.adapter.item.ChatMessageClickedEvents;
 import tv.twitch.android.shared.chat.events.ChannelSetEvent;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
@@ -64,9 +64,7 @@ import tv.twitch.android.shared.ui.elements.bottomsheet.InteractiveRowView;
 import tv.twitch.android.util.EmoteUrlUtil;
 import tv.twitch.chat.ChatEmoticonSet;
 import tv.twitch.chat.ChatLiveMessage;
-import tv.twitch.chat.ChatMentionToken;
 import tv.twitch.chat.ChatMessageInfo;
-import tv.twitch.chat.ChatMessageToken;
 
 
 @SuppressWarnings({"FinalStaticMethod"})
@@ -74,6 +72,10 @@ public class Hooks {
     private final static String VOD_PLAYER_PRESENTER_CLASS = "tv.twitch.android.shared.player.presenters.VodPlayerPresenter";
     private final static String PLAYER_CORE = "playercore";
     private final static String PLAYER_EXO2 = "exoplayer_2";
+    private final static float DEFAULT_PLAYBACK_SPEED = 1.0f;
+    private final static int DEFAULT_FONT_SIZE = 13;
+    private final static String FAKE_PACKAGE_NAME = "tv.twitch.android.app";
+    private final static String FAKE_PLAYER_TYPE = "embed";
 
     private static final int HIGHLIGHT_COLOR = Color.argb(100, 255, 0, 0);
 
@@ -120,11 +122,15 @@ public class Hooks {
             case UPDATE_PROMPT_ROLLOUT:
                 return false;
 
+            case COMMUNITY_POINTS_PREDICTIONS:
+            case CREATOR_SETTINGS_MENU:
+                return true;
+
             case MGST_DISABLE_PRE_ROLLS:
                 return PreferenceManager.INSTANCE.isPlayerAdblockOn() ? true : org;
 
-            case CREATOR_SETTINGS_MENU:
-                return true;
+            case HYPETRAIN:
+                return PreferenceManager.INSTANCE.shouldShowHypeTrain();
 
             case CHAT_INPUT_FOLLOWER:
             case CHAT_INPUT_VERIFIED:
@@ -137,6 +143,7 @@ public class Hooks {
             case SURESTREAM_ADS_PBYP:
             case ADS_PBYP:
             case MULTIPLAYER_ADS:
+            case VAES_DEVICE_TARGETING_PARAMETERS:
                 return PreferenceManager.INSTANCE.isPlayerAdblockOn() ? false : org;
 
             case FLOATING_CHAT:
@@ -152,15 +159,14 @@ public class Hooks {
     public final static PlaybackParameters hookVodPlayerStandaloneMediaClockInit() {
         if (Helper.isOnStackTrace(VOD_PLAYER_PRESENTER_CLASS)) {
             PreferenceManager preferenceManager = PreferenceManager.INSTANCE;
-            float speed = Float.parseFloat(preferenceManager.getExoplayerSpeed());
-            return new PlaybackParameters(speed);
+            return new PlaybackParameters(preferenceManager.getExoplayerSpeed());
         }
 
         return PlaybackParameters.DEFAULT;
     }
 
     public final static boolean shouldHighlightMessage(ChatMessageInfo messageInfo, TwitchAccountManager accountManager) {
-        if (!PreferenceManager.INSTANCE.highlightMentionMessage())
+        if (!PreferenceManager.INSTANCE.isHighlightingEnabled())
             return false;
 
         if (accountManager == null) {
@@ -173,30 +179,7 @@ public class Hooks {
             return false;
         }
 
-        ChatMessageToken[] tokens = messageInfo.tokens;
-        if (tokens == null || tokens.length == 0) {
-            return false;
-        }
-
-        String userName = accountManager.getUsername();
-        if (TextUtils.isEmpty(userName)) {
-            return false;
-        }
-
-        for (ChatMessageToken messageToken : tokens) {
-            if (messageToken instanceof ChatMentionToken) {
-                ChatMentionToken mentionToken = (ChatMentionToken) messageToken;
-                String mentionUser = mentionToken.userName;
-                if (TextUtils.isEmpty(mentionUser))
-                    continue;
-
-                if (mentionUser != null && mentionUser.equalsIgnoreCase(userName)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return ChatUtil.isMentionUser(messageInfo, accountManager.getUsername());
     }
 
     public final static Spanned addTimestampToMessage(Spanned message, int userId) {
@@ -308,9 +291,7 @@ public class Hooks {
 
     public final static int hookMiniPlayerWidth(int size) {
         PreferenceManager preferenceManager = PreferenceManager.INSTANCE;
-        float k = Float.parseFloat(preferenceManager.getMiniPlayerScale());
-
-        return (int) (k * size);
+        return (int) (preferenceManager.getMiniPlayerScale() * size);
     }
 
     public final static boolean isJumpDisRecentSearch() {
@@ -351,7 +332,7 @@ public class Hooks {
             return chatLiveMessageArr;
 
         ChatMesssageFilteringUtil filteringUtil = ChatMesssageFilteringUtil.INSTANCE;
-        if (filteringUtil.isDisabled())
+        if (filteringUtil.isEmpty())
             return chatLiveMessageArr;
 
         chatLiveMessageArr = filteringUtil.filterLiveMessages(chatLiveMessageArr);
@@ -397,7 +378,7 @@ public class Hooks {
     }
 
     public final static boolean isGifsEnabled() {
-        return PreferenceManager.INSTANCE.getGifsStrategy() == Gifs.ANIMATED;
+        return PreferenceManager.INSTANCE.isGifsAnimated();
     }
 
     public final static int hookUsernameSpanColor(int usernameColor) {
@@ -406,10 +387,6 @@ public class Hooks {
 
     public static int getFloatingChatQueueSize() {
         return PreferenceManager.INSTANCE.getFloatingChatQueueSize();
-    }
-
-    public static long getFloatingChatRefresh() {
-        return PreferenceManager.INSTANCE.getFloatingChatRefreshRate();
     }
 
     public static void injectRecentMessages(final ILiveChatSource source, final ChannelInfo channelInfo) {
@@ -462,26 +439,6 @@ public class Hooks {
             return badges;
         }
 
-        if (PreferenceManager.INSTANCE.showCustomBadges()) {
-            try {
-                Collection<Badge> newBadges = BadgeManager.INSTANCE.findBadges(chatMessageInterface.getUserId());
-                if (!newBadges.isEmpty()) {
-                    badges = ChatUtil.tryAddBadges(badges, factory, newBadges);
-                }
-            } catch (Throwable th) {
-                th.printStackTrace();
-            }
-        }
-
-        try {
-            Collection<Badge> newBadges = BadgeManager.INSTANCE.getCustomBadges(chatMessageInterface.getUserId());
-            if (!newBadges.isEmpty()) {
-                badges = ChatUtil.tryAddBadges(badges, factory, newBadges);
-            }
-        } catch (Throwable th) {
-            th.printStackTrace();
-        }
-
         return badges;
     }
 
@@ -498,7 +455,8 @@ public class Hooks {
             SpannedString hooked = orgMessage;
 
             if (manager.showBttvEmotesInChat())
-                hooked = ChatUtil.tryAddEmotes(factory, hooked, channelId, manager.getGifsStrategy() == Gifs.DISABLED, manager.getEmoteSize());
+                hooked = ChatUtil.tryAddEmotes(factory, chatMessageInterface, hooked, channelId,
+                        manager.getGifsStrategy().equals(Gifs.DISABLED), manager.getEmoteSize());
 
             return hooked;
         } catch (Throwable th) {
@@ -551,12 +509,12 @@ public class Hooks {
         return EmoteUrlUtil.getEmoteUrl(context, emoteUiModel.getId());
     }
 
-    public static int hookChatScreenEdgePercentage(int org) {
-        @ChatWidthScale int scale = PreferenceManager.INSTANCE.getLandscapeChatScale();
-        if (scale == ChatWidthScale.DEFAULT)
-            return org;
+    public static int hookSetupForLandscapeDefaultChatScreenEdgePercentage(int org) {
+        return PreferenceManager.INSTANCE.getLandscapeChatScale();
+    }
 
-        return scale;
+    public static int hookSetupForLandscapeSplitViewChatScreenEdgePercentage(int org) {
+        return PreferenceManager.INSTANCE.getLandscapeChatScaleMax();
     }
 
     public static boolean isBypassChatBanJump() {
@@ -564,8 +522,8 @@ public class Hooks {
     }
 
     public final static void helper() {
-        Object o = hookVodPlayerStandaloneMediaClockInit(); // TODO: __HOOK
         float res = Hooks.hookMediaSpanDpSize(0); // TODO: __HOOK
+        String pkg = Hooks.hookPackageName(""); // TODO: __HOOK
     }
 
     public static boolean isSupportWideEmotes() {
@@ -588,7 +546,7 @@ public class Hooks {
             return org;
         }
 
-        if (str.length() == 0) {
+        if (str.isEmpty()) {
             Logger.warning("empty str");
             return org;
         }
@@ -633,7 +591,7 @@ public class Hooks {
     }
 
     public static boolean isMentionHighlightingEnabled() {
-        return PreferenceManager.INSTANCE.highlightMentionMessage();
+        return PreferenceManager.INSTANCE.isHighlightingEnabled();
     }
 
     public static void highlightView(View view, boolean isHighlighted) {
@@ -644,32 +602,10 @@ public class Hooks {
         if (model == null)
             return null;
 
-        ChatMesssageFilteringUtil filteringUtil = ChatMesssageFilteringUtil.INSTANCE;
-        if (filteringUtil.isDisabled())
+        if (ChatMesssageFilteringUtil.INSTANCE.filterChomment(model))
             return model;
 
-        ChommentMessageModel messageModel = model.getMessage();
-        if (messageModel == null)
-            return model;
-
-        String body = messageModel.getBody();
-        if (body == null || body.length() == 0)
-            return model;
-
-        ChommentCommenterModel commenterModel = model.getCommenter();
-        if (commenterModel != null) {
-            String username = commenterModel.getUsername();
-            if (!filteringUtil.filterByUsername(username))
-                return null;
-        } else {
-            Logger.warning("commenter is null");
-        }
-
-        if (!filteringUtil.filterByKeywords(body.split(" "))) {
-            return null;
-        }
-
-        return model;
+        return null;
     }
 
     public static int getRewindSeek() {
@@ -686,21 +622,21 @@ public class Hooks {
             return;
         }
 
-        @FontSize int fontSize = PreferenceManager.INSTANCE.getChatMessageFontSize();
+        int fontSize = PreferenceManager.INSTANCE.getChatMessageFontSize();
 
-        if (fontSize == FontSize.DEFAULT)
+        if (fontSize == DEFAULT_FONT_SIZE)
             return;
 
         textView.setTextSize(fontSize);
     }
 
     public static float hookMediaSpanDpSize(float size) {
-        @FontSize int fontSize = PreferenceManager.INSTANCE.getChatMessageFontSize();
+       int fontSize = PreferenceManager.INSTANCE.getChatMessageFontSize();
 
-        if (fontSize == FontSize.DEFAULT)
+        if (fontSize == 13)
             return size;
 
-        float scale = (float) fontSize / FontSize.DEFAULT;
+        float scale = (float) fontSize / DEFAULT_FONT_SIZE;
 
         return Math.round(size * scale);
     }
@@ -771,5 +707,89 @@ public class Hooks {
                     emotePickerViewDelegate.scrollToBttvSection();
             }
         });
+    }
+
+    public static String hookUserAgentString(String org) {
+        if (org == null)
+            return null;
+
+        if (org.contains("tv.twitchmod.android.app/"))
+            org = org.replace("tv.twitchmod.android.app/", "tv.twitch.android.app/");
+
+        return org;
+    }
+
+    public static void setupTimerSleepButton(final Context context, ImageView timerSleepButton) {
+        if (timerSleepButton == null) {
+            Logger.error("timerSleepButton is null");
+            return;
+        }
+
+        timerSleepButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentUtil.showDialogFragment(context, new SleepTimerFragment(), "timePicker");
+            }
+        });
+    }
+
+    public static Fragment getModSettingsFragment() {
+        return new MainSettingsFragment();
+    }
+
+    public static Spanned addVodTimestampToMessages(Spanned message, ChommentModel chommentModel) {
+        if (message == null)
+            return null;
+
+        if (chommentModel == null)
+            return null;
+
+        if (!PreferenceManager.INSTANCE.isChatTimestampsVodEnabled())
+            return message;
+
+        return ChatUtil.addOffsetTimestamp(message, chommentModel.getContentOffsetSeconds());
+    }
+
+    public static boolean shouldShowChatHeader() {
+        return !PreferenceManager.INSTANCE.shouldHideChatHeaderContainer();
+    }
+
+    public static boolean isSurestreamAdblockOn() {
+        return PreferenceManager.INSTANCE.isSurestreamAdblockV1On();
+    }
+
+    public static boolean isSurestreamAdblockV2On() {
+        return PreferenceManager.INSTANCE.isSurestreamAdblockV2On();
+    }
+
+    public static int getStreamUptimeSeconds(StreamModel streamModel) {
+        if (streamModel == null) {
+            Logger.error("streamModel is null");
+            return -1;
+        }
+        Date created = DateUtil.getStandardizeDateString(streamModel.getCreatedAt());
+        if (created == null) {
+            Logger.error("date is null");
+            return -1;
+        }
+
+        long diff = new Date().getTime() - created.getTime();
+
+        return (int) diff / 1000;
+    }
+
+    public static boolean shouldShowStreamUptime() {
+        return PreferenceManager.INSTANCE.shouldShowStreamUptime();
+    }
+
+    public static String hookPlaybackAccessPlayerType(String org) {
+        if (PreferenceManager.INSTANCE.isSurestreamAdblockV2On())
+            return FAKE_PLAYER_TYPE;
+
+        return org;
+    }
+
+    public static String hookPackageName(String org) { // TODO: __HOOK
+        return FAKE_PACKAGE_NAME;
     }
 }

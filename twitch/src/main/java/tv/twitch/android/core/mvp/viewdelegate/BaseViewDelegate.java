@@ -13,5 +13,7 @@ public class BaseViewDelegate {
         return null;
     }
 
+    public void show() {/* ... */}
+
     /* ... */
 }

@@ -11,18 +11,19 @@ import java.util.Collections;
 
 import tv.twitch.android.mod.emotes.fetchers.BttvGlobalFetcher;
 import tv.twitch.android.mod.models.Emote;
+import tv.twitch.android.mod.models.EmoteSet;
 import tv.twitch.android.mod.utils.Logger;
 
 
 public class EmoteManager implements BttvGlobalFetcher.Callback {
     private final Object lock = new Object();
 
-    private static final int MAX_ROOMS = 20;
+    private static final int MAX_ROOMS = 10;
 
     private final RoomCache mRoomCache = new RoomCache(MAX_ROOMS);
 
     private final BttvGlobalFetcher mBttvGlobalFetcher;
-    private BaseEmoteSet mBttvGlobalSet;
+    private EmoteSet mBttvGlobalSet;
 
     private boolean isGlobalSetRequested = false;
 
@@ -35,7 +36,7 @@ public class EmoteManager implements BttvGlobalFetcher.Callback {
     }
 
     @Override
-    public void onGlobalBttvEmotesParsed(BaseEmoteSet set) {
+    public void onGlobalBttvEmotesParsed(EmoteSet set) {
         if (set == null) {
             Logger.error("set is null");
             return;

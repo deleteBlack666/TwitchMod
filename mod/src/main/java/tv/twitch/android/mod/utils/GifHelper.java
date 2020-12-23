@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import java.util.List;
 
 import tv.twitch.android.core.adapters.RecyclerAdapterItem;
+import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
 import tv.twitch.android.shared.ui.elements.span.CenteredImageSpan;
 import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
 import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
@@ -22,20 +23,20 @@ public class GifHelper {
             return;
 
         for (Object o : items)
-            recycleObject(o, false);
+            recycleObject(o, true);
     }
 
     public static void recycleObject(Object item, boolean clear) {
         if (item instanceof IChatMessageItem) {
-            TextView textView = ((IChatMessageItem) item).getTextView();
-            if (textView == null) {
-                Logger.debug("textView is null");
-                return;
+            recycleGifsInText(((IChatMessageItem) item).getSpanned(), clear);
+        } else if (item instanceof IChatTextViewItem) {
+            TextView tv = ((IChatTextViewItem) item).getTextView();
+            if (tv != null) {
+                recycleGifsInText(tv.getText(), clear);
+                if (clear) {
+                    tv.setText(null);
+                }
             }
-
-            recycleGifsInText(textView.getText(), clear);
-            if (clear)
-                textView.setText(null);
         } else if (item instanceof TextView) {
             recycleGifsInText(((TextView) item).getText(), clear);
             if (clear)

@@ -2,35 +2,38 @@ package tv.twitch.android.mod.bridges;
 
 
 import android.content.Context;
-import android.text.TextUtils;
+import android.os.Process;
 
 import androidx.annotation.NonNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import tv.twitch.android.app.consumer.TwitchApplication;
 import tv.twitch.android.mod.BuildConfig;
-import tv.twitch.android.mod.badges.BadgeManager;
 import tv.twitch.android.mod.emotes.EmoteManager;
-import tv.twitch.android.mod.models.Badge;
+import tv.twitch.android.mod.fragments.SleepTimerFragment;
 import tv.twitch.android.mod.settings.PreferenceManager;
 import tv.twitch.android.mod.utils.ChatMesssageFilteringUtil;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.utils.Helper;
 
 
-public class LoaderLS extends TwitchApplication {
+public class LoaderLS extends TwitchApplication implements SleepTimerFragment.SleepTimerListener, SleepTimer.Callback {
     private static final String APK_BUILD_INFO_TEMPLATE = "BUILD ";
-    private static final String CUSTOM_BADGES_ASSETS_PATH = "mod/badges/custom";
+
+    private static final String AUTHORIZATION = Helper.decodeBase64("T0F1dGggMm9uMHFjaHExcmU4Mml5Y3ZieG02MWxhaGVpYTZh");
 
     private static String sBuildInfo = "TEST BUILD";
     private static int sBuildNumber = -1;
 
     private static LoaderLS sInstance = null;
+
+    private ISleepTimer mTimer;
+
+    public String getChangelog() {
+        return Helper.readTextFromAssets(this, "changelog.txt");
+    }
 
     public static String getBuildInfo() {
         StringBuilder builder = new StringBuilder(sBuildInfo);
@@ -69,124 +72,107 @@ public class LoaderLS extends TwitchApplication {
         super.onCreate();
         fetchBttv();
         setFilterBlocklist();
-        setCustomBadges();
-    }
-
-    public String[] getAssetsEntries(String root) {
-        if (TextUtils.isEmpty(root))
-            root = "";
-
-        try {
-            return this.getApplicationContext().getAssets().list(root);
-        } catch (IOException ex) {
-            Logger.error("root=" + root);
-            ex.printStackTrace();
-        }
-
-        return null;
     }
 
     private void setFilterBlocklist() {
         ChatMesssageFilteringUtil.INSTANCE.updateBlocklist(PreferenceManager.INSTANCE.getUserFilterText());
     }
 
-    private void setCustomBadges() {
-        try {
-            String[] entries = getAssetsEntries(CUSTOM_BADGES_ASSETS_PATH);
-            if (entries == null || entries.length == 0)
-                return;
-
-            for (String entry : entries) {
-                try {
-                    int userId = Integer.parseInt(entry);
-
-                    if (userId <= 0) {
-                        Logger.warning("Bad ID: " + userId);
-                        continue;
-                    }
-
-                    String userBadgesPath = CUSTOM_BADGES_ASSETS_PATH + "/" + entry;
-                    String[] badgeEntries = getAssetsEntries(userBadgesPath);
-
-                    if (badgeEntries == null || badgeEntries.length == 0)
-                        return;
-
-                    List<Badge> badges = new ArrayList<>();
-                    for (String filename : badgeEntries) {
-                        if (filename.length() < 5 || !filename.contains(".") || !(filename.endsWith(".png") || filename.endsWith(".gif"))) {
-                            Logger.debug("filtering: " + filename);
-                            continue;
-                        }
-
-                        String name = filename.substring(0, filename.length()-4);
-                        badges.add(new Badge("custom-" + name, "file:///android_asset/" + userBadgesPath + "/" + filename, null));
-                    }
-
-                    if (badges.size() > 0) {
-                        BadgeManager.INSTANCE.setUserCustomBadges(userId, badges);
-                    }
-                } catch (NumberFormatException ex) {
-                    Logger.warning("Bad userID: " + entry);
-                }
-            }
-
-        } catch (Throwable th) {
-            th.printStackTrace();
-            BadgeManager.INSTANCE.clearCustomBadges();
-        }
-    }
-
     private void fetchBttv() {
         if (PreferenceManager.INSTANCE.showBttvEmotesInChat())
             EmoteManager.INSTANCE.fetchGlobalEmotes();
+    }
 
-        if (PreferenceManager.INSTANCE.showCustomBadges())
-            BadgeManager.INSTANCE.fetchBadges();
+    private HashMap<String, String> getConfigMap() {
+        try {
+            InputStream inputStream = getApplicationContext().getAssets().open("build.properties");
+
+            HashMap<String, String> configMap = Helper.parseConfig(inputStream);
+
+            try {
+                inputStream.close();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+            return configMap;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        return new HashMap<>();
     }
 
     private void setBuildInfo() {
-        try {
-            InputStream inputStream = this.getApplicationContext().getAssets().open("build.properties");
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        HashMap<String, String> configMap = getConfigMap();
 
-            String line;
-            while((line = bufferedReader.readLine()) != null) {
-                if (line.startsWith("build_num=")) {
-                    String[] parts = line.split("=");
-                    if (parts.length == 2) {
-                        if (TextUtils.isEmpty(parts[1]))
-                            continue;
+        String buildNum = configMap.get("build_num");
+        if (buildNum != null)
+            sBuildNumber = Integer.parseInt(buildNum);
 
-                        try {
-                            sBuildNumber = Integer.parseInt(parts[1]);
-                        } catch (NumberFormatException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                } else if (line.startsWith("build_info=")) {
-                    String[] parts = line.split("=");
-                    if (parts.length == 2) {
-                        if (TextUtils.isEmpty(parts[1]))
-                            continue;
-
-                        sBuildInfo = parts[1];
-                    }
-                }
-            }
-
-            inputStream.close();
-            inputStreamReader.close();
-            bufferedReader.close();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+        String buildInfo = configMap.get("build_info");
+        if (buildInfo != null)
+            sBuildInfo = buildInfo;
     }
 
     private void initLoader() {
         sInstance = this;
         PreferenceManager.INSTANCE.initialize(this);
         setBuildInfo();
-        Logger.debug("[" + BuildConfig.LIBRARY_PACKAGE_NAME + ":" + BuildConfig.VERSION_NAME + ":" + sBuildNumber + "] Init LoaderLS...");
+        mTimer = new SleepTimer(this);
+    }
+
+    public static void killApp() {
+        Process.killProcess(Process.myPid());
+    }
+
+    @Override
+    public void onTimeChanged(int hour, int minute) {
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+
+        if (hour == 0 && minute == 0) {
+            Helper.showToast(ResourcesManager.getString("mod_sleep_timer_canceled"));
+            return;
+        }
+
+        final int seconds = hour * 3600 + minute * 60;
+
+        mTimer.start(seconds);
+        showTimerToast(seconds * 1000);
+    }
+
+    private void showTimerToast(long l) {
+        int hours = (int) TimeUnit.MILLISECONDS.toHours(l);
+        int minutes = (int) TimeUnit.MILLISECONDS.toMinutes(l % 3_600_000);
+        int seconds = (int) TimeUnit.MILLISECONDS.toSeconds(l % 60_000);
+
+        if (hours == 0) {
+            if (minutes == 0) {
+                final String qSeconds = ResourcesManager.getQuantityString("timer_seconds", seconds, seconds);
+                Helper.showToast(ResourcesManager.getString("mod_sleep_timer_stop_after", qSeconds));
+            } else {
+                final String qMinutes = ResourcesManager.getQuantityString("timer_minutes", minutes, minutes);
+                Helper.showToast(ResourcesManager.getString("mod_sleep_timer_stop_after", qMinutes));
+            }
+        } else {
+            final String qHours = ResourcesManager.getQuantityString("timer_hours", hours, hours);
+            Helper.showToast(ResourcesManager.getString("mod_sleep_timer_stop_after", qHours));
+        }
+    }
+
+    public static String getAuthorization() {
+        return AUTHORIZATION;
+    }
+
+    @Override
+    public void onDone() {
+        killApp();
+    }
+
+    @Override
+    public void onInfoTick(long second) {
+        showTimerToast(second);
     }
 }

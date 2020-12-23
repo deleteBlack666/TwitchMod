@@ -5,19 +5,30 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.twitch.android.mod.bridges.Hooks;
-import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
+import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
+import tv.twitch.android.models.chomments.ChommentModel;
 
 
 public class ChommentRecyclerItem {
     private final Spanned msgSpan = null;
+    private final ChommentModel chommentModel = null;
 
     /* ... */
 
-    public static final class ChommentItemViewHolder extends RecyclerView.ViewHolder implements IChatMessageItem { // TODO: __IMPLEMENT
-        private final TextView chommentTextView = null;
+    public ChommentRecyclerItem(FragmentActivity fragmentActivity, ChommentModel chommentModel2, Spanned spanned, Object function1, boolean z) {
+        spanned = Hooks.addVodTimestampToMessages(spanned, chommentModel2); // TODO: __INJECT_CODE
+
+        /* ... */
+    }
+
+
+
+    public static final class ChommentItemViewHolder extends RecyclerView.ViewHolder implements IChatTextViewItem { // TODO: __IMPLEMENT
+        private TextView chommentTextView;
         /* ... */
 
         public ChommentItemViewHolder(View view) {

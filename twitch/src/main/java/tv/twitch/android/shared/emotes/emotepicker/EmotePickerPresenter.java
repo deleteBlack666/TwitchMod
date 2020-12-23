@@ -1,12 +1,10 @@
 package tv.twitch.android.shared.emotes.emotepicker;
 
+
 import java.util.List;
 
-import tv.twitch.android.core.adapters.RecyclerAdapterSection;
-import tv.twitch.android.core.adapters.TwitchSectionAdapter;
 import tv.twitch.android.core.mvp.viewdelegate.ViewDelegateState;
 import tv.twitch.android.shared.emotes.emotepicker.adapter.EmotePickerAdapterBinder;
-import tv.twitch.android.shared.emotes.emotepicker.adapter.EmotePickerAdapterSection;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmotePickerSection;
 import tv.twitch.android.shared.emotes.models.EmoteMessageInput;
 import tv.twitch.android.shared.emotes.models.EmotePickerEmoteModel;
@@ -40,18 +38,6 @@ public final class EmotePickerPresenter {
         public static final class EmoteSectionSelected extends UpdateEvent  {/* ... */}
 
         /* ... */
-    }
-
-    public final State.Loaded createLoadedState(State.Loaded loaded, UpdateEvent updateEvent) {
-        /* ... */
-
-        if (updateEvent instanceof UpdateEvent.EmoteSectionSelected) {
-           /* ... */
-        }
-
-        /* ... */
-
-        return null;
     }
 
     public static abstract class ClickedEmote {

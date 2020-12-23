@@ -10,6 +10,11 @@ public final class TwitchAccountManager {
         return null;
     }
 
+
+    public final int getUserId() {
+        return -1;
+    }
+
     public final boolean isAffiliate() {
         return false;
     }

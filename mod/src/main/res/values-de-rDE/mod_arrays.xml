@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_level_choices">
+        <item>Deaktiviert</item>
+        <item>Abonnenten</item>
+        <item>Mods</item>
+        <item>Streamer</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Standard</item>
+        <item>Veraltete Ausgabe</item>
+        <item>Durchgestrichen</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Deaktiviert</item>
+        <item>Statisch</item>
+        <item>Animiert</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Klein</item>
+        <item>Mittel</item>
+        <item>Groß</item>
+    </string-array>
+</resources>

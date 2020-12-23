@@ -9,6 +9,7 @@ import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.view.StreamUptimeView;
 
 
 public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerControlOverlayViewDelegate { // TODO: __IMPLEMENT
@@ -18,6 +19,8 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
     private ImageView refreshButton; // TODO: __INJECT_FIELD
     private ImageView lockButton; // TODO: __INJECT_FIELD
+    private ImageView uptimeIcon; // TODO: __INJECT_FIELD
+    private StreamUptimeView uptimeView; // TODO: __INJECT_FIELD
 
     /* ... */
 
@@ -32,6 +35,7 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
         setupRefreshButton(view); // TODO: __INJECT_CODE
         setupLockButton(view); // TODO: __INJECT_CODE
+        setupUptime(view); // TODO: __INJECT_CODE
     }
 
     public void updateLockButtonState() { // TODO: __INJECT_METHOD
@@ -117,6 +121,52 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
         if (!Hooks.shouldShowRefreshButton()) {
             this.refreshButton.setVisibility(View.GONE);
+        }
+    }
+
+    private void setupUptime(View view) { // TODO: __INJECT_METHOD
+        if (view == null) {
+            Logger.error("view is null");
+            return;
+        }
+
+        int uptimeViewId = ResourcesManager.getId("stream_uptime");
+        if (uptimeViewId != 0) {
+            this.uptimeView = view.findViewById(uptimeViewId);
+        } else {
+            Logger.error("uptimeViewId == 0");
+        }
+
+        int uptimeIconId = ResourcesManager.getId("stream_uptime_icon");
+        if (uptimeIconId != 0) {
+            this.uptimeIcon = view.findViewById(uptimeIconId);
+        } else {
+            Logger.error("uptimeIconId == 0");
+        }
+
+        hideUptime();
+    }
+
+    public void showUptime(int seconds) { // TODO: __INJECT_METHOD
+        if (!Hooks.shouldShowStreamUptime())
+            return;
+
+        if (this.uptimeIcon != null) {
+            this.uptimeIcon.setVisibility(View.VISIBLE);
+        }
+
+        if (this.uptimeView != null) {
+            this.uptimeView.show(seconds);
+        }
+    }
+
+    public void hideUptime() { // TODO: __INJECT_METHOD
+        if (this.uptimeIcon != null) {
+            this.uptimeIcon.setVisibility(View.INVISIBLE);
+        }
+
+        if (this.uptimeView != null) {
+            this.uptimeView.hide();
         }
     }
 }

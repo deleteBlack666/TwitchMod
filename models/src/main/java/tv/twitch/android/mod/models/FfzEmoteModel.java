@@ -1,8 +1,6 @@
 package tv.twitch.android.mod.models;
 
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 
 import java.util.HashMap;
@@ -12,17 +10,18 @@ import tv.twitch.android.mod.models.preferences.EmoteSize;
 
 public class FfzEmoteModel implements Emote {
     private final String mCode;
+    private final String mEmoteId;
     
     private final String mSmallEmoteUrl;
     private final String mMediumEmoteUrl;
     private final String mLargeEmoteUrl;
 
-    public FfzEmoteModel(String code, HashMap<String, String> urls) {
+    public FfzEmoteModel(String code, String id, HashMap<String, String> urls) {
         this.mCode = code;
-
-        this.mSmallEmoteUrl = getUrl("1x", urls);
-        this.mMediumEmoteUrl = getUrl("2x", urls);
-        this.mLargeEmoteUrl = getUrl("4x", urls);
+        this.mEmoteId = id;
+        this.mSmallEmoteUrl = urls.get("1x");
+        this.mMediumEmoteUrl = urls.get("2x");
+        this.mLargeEmoteUrl = urls.get("4x");
     }
 
     @NonNull
@@ -32,7 +31,7 @@ public class FfzEmoteModel implements Emote {
     }
 
     @Override
-    public String getUrl(@EmoteSize int size) {
+    public String getUrl(@EmoteSize String size) {
         switch (size) {
             case EmoteSize.LARGE:
                 if (mLargeEmoteUrl != null)
@@ -54,25 +53,16 @@ public class FfzEmoteModel implements Emote {
         return false;
     }
 
-    private String getUrl(String size, HashMap<String, String> urls) {
-        if (urls.containsKey(size)) {
-            String url = urls.get(size);
-            if (TextUtils.isEmpty(url))
-                return null;
-
-            if (url != null && url.startsWith("//"))
-                url = "https:" + url;
-
-            return url;
-        }
-
-        return null;
+    @Override
+    public String getEmoteId() {
+        return mEmoteId;
     }
 
     @Override
     public String toString() {
         return "FfzEmoteModel{" +
                 "mCode='" + mCode + '\'' +
+                ", mEmoteId='" + mEmoteId + '\'' +
                 ", mSmallEmoteUrl='" + mSmallEmoteUrl + '\'' +
                 ", mMediumEmoteUrl='" + mMediumEmoteUrl + '\'' +
                 ", mLargeEmoteUrl='" + mLargeEmoteUrl + '\'' +

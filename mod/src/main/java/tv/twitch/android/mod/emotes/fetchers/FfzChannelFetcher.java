@@ -3,11 +3,13 @@ package tv.twitch.android.mod.emotes.fetchers;
 
 import android.text.TextUtils;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
 import tv.twitch.android.mod.bridges.ApiCallback;
 import tv.twitch.android.mod.emotes.BaseEmoteSet;
+import tv.twitch.android.mod.models.EmoteSet;
 import tv.twitch.android.mod.models.FfzEmoteModel;
 import tv.twitch.android.mod.models.api.FailReason;
 import tv.twitch.android.mod.models.api.FfzEmoteResponse;
@@ -21,7 +23,7 @@ public class FfzChannelFetcher extends ApiCallback<List<FfzEmoteResponse>> {
     private final Callback mCallback;
 
     public interface Callback {
-        void onFfzEmotesParsed(BaseEmoteSet set);
+        void onFfzEmotesParsed(EmoteSet set);
     }
 
     public FfzChannelFetcher(int channelId, Callback callback) {
@@ -45,7 +47,21 @@ public class FfzChannelFetcher extends ApiCallback<List<FfzEmoteResponse>> {
             if (TextUtils.isEmpty(emoteResponse.getId()))
                 continue;
 
-            FfzEmoteModel emote = new FfzEmoteModel(emoteResponse.getCode(), emoteResponse.getImages());
+            HashMap<String, String> images = emoteResponse.getImages();
+
+            HashMap<String, String> urls = new HashMap<>();
+
+            for (String key : images.keySet()) {
+                String url = images.get(key);
+                if (TextUtils.isEmpty(url))
+                    continue;
+
+                if (url != null && url.startsWith("//"))
+                    url = "https:" + url;
+                urls.put(key, url);
+            }
+
+            FfzEmoteModel emote = new FfzEmoteModel(emoteResponse.getCode(), emoteResponse.getId(), urls);
             ffzSet.addEmote(emote);
         }
 

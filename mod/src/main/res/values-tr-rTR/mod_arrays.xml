@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="player_impl_choices">
+        <item>Otomatik</item>
+        <item>TwitchCore</item>
+        <item>ExoPlayer V2</item>
+    </string-array>
+    <string-array name="filter_level_choices">
+        <item>Kapalı</item>
+        <item>Aboneler</item>
+        <item>Modaretörler</item>
+        <item>Yayıncı</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Varsayılan</item>
+        <item>Görülebilir</item>
+        <item>Üstü çizili</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Kapalı</item>
+        <item>Sabit</item>
+        <item>Animasyonlu</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Küçük</item>
+        <item>Orta</item>
+        <item>Büyük</item>
+    </string-array>
+    <string-array name="surestream_adblock_choices">
+        <item>Kapalı</item>
+        <item>Sahte OAuth Jetonu</item>
+        <item>Sahte Gömülü Oynatıcı</item>
+    </string-array>
+</resources>

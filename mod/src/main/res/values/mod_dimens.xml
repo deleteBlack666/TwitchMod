@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="preference_icon_minWidth">0dp</dimen>
+    <dimen name="preference_seekbar_padding_horizontal">0dp</dimen>
+    <dimen name="preference_seekbar_padding_vertical">15dp</dimen>
+    <dimen name="preference_seekbar_value_minWidth">48dp</dimen>
+    <dimen name="preference_dropdown_padding_start">72dp</dimen>
+</resources>

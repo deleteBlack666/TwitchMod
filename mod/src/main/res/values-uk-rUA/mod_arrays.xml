@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_level_choices">
+        <item>Вимкнено</item>
+        <item>Підписники</item>
+        <item>Модератори</item>
+        <item>Стрімер</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Стандартний</item>
+        <item>Legacy</item>
+        <item>Перекреслений</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Вимкнено</item>
+        <item>Статичні</item>
+        <item>Анімовані</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Малі</item>
+        <item>Середні</item>
+        <item>Великі</item>
+    </string-array>
+</resources>

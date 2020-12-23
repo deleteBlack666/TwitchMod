@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_level_choices">
+        <item>Onemogočeno</item>
+        <item>Naročniki</item>
+        <item>Moderatorji</item>
+        <item>Ustvarjalec</item>
+    </string-array>
+    <string-array name="msg_del_choices">
+        <item>Privzeto</item>
+        <item>V starem načinu</item>
+        <item>Prečrtano</item>
+    </string-array>
+    <string-array name="gifs_choices">
+        <item>Onemogočeno</item>
+        <item>Statično</item>
+        <item>Animirano</item>
+    </string-array>
+    <string-array name="source_emote_size_choices">
+        <item>Malo</item>
+        <item>Srednje</item>
+        <item>Veliko</item>
+    </string-array>
+</resources>

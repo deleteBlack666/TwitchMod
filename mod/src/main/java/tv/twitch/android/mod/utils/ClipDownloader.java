@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import org.w3c.dom.Text;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.ISharedPanelWidget;
@@ -112,33 +115,26 @@ public class ClipDownloader implements View.OnClickListener {
                 clipQualityView.setText(item.getFormattedQuality());
                 clipSizeView.setText(item.getSize());
 
-                new UpdateSize(clipSizeView, item).execute();
+                ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+                final Handler handler = new Handler(Looper.getMainLooper());
+
+                singleThreadExecutor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        final int fileLength = Helper.getFileLength(item.getUrl());
+
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                item.setSize(fileLength);
+                                clipSizeView.setText(item.getSize());
+                            }
+                        });
+                    }
+                });
             }
 
             return convertView;
-        }
-
-        public static class UpdateSize extends AsyncTask<Object, Object, Integer> {
-            final WeakReference<TextView> textView;
-            final ClipItem clipItem;
-
-            public UpdateSize(TextView view, ClipItem item) {
-                textView = new WeakReference<>(view);
-                clipItem = item;
-            }
-
-            @Override
-            protected Integer doInBackground(Object... objects) {
-                return Helper.getFileLength(clipItem.getUrl());
-            }
-
-            @Override
-            protected void onPostExecute(Integer integer) {
-                clipItem.setSize(integer);
-                TextView view = textView.get();
-                if (view != null)
-                    view.setText(clipItem.getSize());
-            }
         }
 
         public ClipsAdapter(@NonNull Context context) {
