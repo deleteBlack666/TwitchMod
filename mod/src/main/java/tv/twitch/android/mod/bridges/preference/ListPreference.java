@@ -68,7 +68,7 @@ public class ListPreference extends DialogPreference {
         a = context.obtainStyledAttributes(attrs,
                 ResourcesManager.getStyleableArr("Preference"), defStyleAttr, defStyleRes);
 
-        mSummary = TypedArrayUtils.getString(a, 0x21, 7);
+        mSummary = TypedArrayUtils.getString(a, 31, 7);
 
         a.recycle();
     }

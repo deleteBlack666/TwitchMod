@@ -68,7 +68,6 @@ public class ResourcesManager {
                 android.R.attr.summary, android.R.attr.order, android.R.attr.widgetLayout,
                 android.R.attr.dependency, android.R.attr.defaultValue,
                 android.R.attr.shouldDisableView, android.R.attr.fragment,
-                android.R.attr.singleLineTitle, android.R.attr.iconSpaceReserved,
                 getAttrId("allowDividerAbove"), getAttrId("allowDividerBelow"),
                 getAttrId("defaultValue"), getAttrId("dependency"),
                 getAttrId("enableCopying"), getAttrId("enabled"),

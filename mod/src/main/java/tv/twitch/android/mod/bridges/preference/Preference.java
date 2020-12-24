@@ -137,7 +137,7 @@ public class Preference implements Comparable<Preference> {
     private boolean mAllowDividerAbove = true;
     private boolean mAllowDividerBelow = true;
     private boolean mHasSingleLineTitleAttr;
-    private boolean mSingleLineTitle = true;
+    private boolean mSingleLineTitle = false;
     private boolean mIconSpaceReserved;
     private boolean mCopyingEnabled;
 
@@ -194,52 +194,52 @@ public class Preference implements Comparable<Preference> {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, ResourcesManager.getStyleableArr("Preference"), defStyleAttr, defStyleRes);
 
-        mIconResId = TypedArrayUtils.getResourceId(a, 0x17, 0, 0);
+        mIconResId = TypedArrayUtils.getResourceId(a, 21, 0, 0);
 
-        mKey = TypedArrayUtils.getString(a, 0x1a, 6);
+        mKey = TypedArrayUtils.getString(a, 24, 6);
 
-        mTitle = TypedArrayUtils.getText(a, 0x22, 4);
+        mTitle = TypedArrayUtils.getText(a, 32, 4);
 
-        mSummary = TypedArrayUtils.getText(a, 0x21, 7);
+        mSummary = TypedArrayUtils.getText(a, 31, 7);
 
-        mOrder = TypedArrayUtils.getInt(a, 0x1c, 8, DEFAULT_ORDER);
+        mOrder = TypedArrayUtils.getInt(a, 26, 8, DEFAULT_ORDER);
 
-        mFragment = TypedArrayUtils.getString(a, 0x16, 0xd);
+        mFragment = TypedArrayUtils.getString(a, 20, 0xd);
 
-        mLayoutResId = TypedArrayUtils.getResourceId(a, 0x1b, 0x3, ResourcesManager.getLayoutId("preference"));
+        mLayoutResId = TypedArrayUtils.getResourceId(a, 25, 0x3, ResourcesManager.getLayoutId("preference"));
 
-        mWidgetLayoutResId = TypedArrayUtils.getResourceId(a, 0x23, 9, 0);
+        mWidgetLayoutResId = TypedArrayUtils.getResourceId(a, 33, 9, 0);
 
-        mEnabled = TypedArrayUtils.getBoolean(a, 0x15, 2, true);
+        mEnabled = TypedArrayUtils.getBoolean(a, 19, 2, true);
 
-        mSelectable = TypedArrayUtils.getBoolean(a, 0x1e, 5, true);
+        mSelectable = TypedArrayUtils.getBoolean(a, 28, 5, true);
 
-        mPersistent = TypedArrayUtils.getBoolean(a, 0x1d, 1, true);
+        mPersistent = TypedArrayUtils.getBoolean(a, 27, 1, true);
 
-        mDependencyKey = TypedArrayUtils.getString(a, 0x13, 0xa);
+        mDependencyKey = TypedArrayUtils.getString(a, 17, 0xa);
 
-        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, 0x10, 0x10, mSelectable);
+        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, 14, 0x10, mSelectable);
 
-        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, 0x11, 0x11, mSelectable);
+        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, 15, 0x11, mSelectable);
 
-        if (a.hasValue(0x12)) {
-            mDefaultValue = onGetDefaultValue(a, 0x12);
+        if (a.hasValue(16)) {
+            mDefaultValue = onGetDefaultValue(a, 16);
         } else if (a.hasValue(0xb)) {
             mDefaultValue = onGetDefaultValue(a, 0xb);
         }
 
-        mShouldDisableView = TypedArrayUtils.getBoolean(a, 0x1f, 0xc, true);
+        mShouldDisableView = TypedArrayUtils.getBoolean(a, 29, 0xc, true);
 
-        mHasSingleLineTitleAttr = a.hasValue(0x20);
+        mHasSingleLineTitleAttr = a.hasValue(30);
         if (mHasSingleLineTitleAttr) {
-            mSingleLineTitle = TypedArrayUtils.getBoolean(a, 0x20, 0xe, true);
+            mSingleLineTitle = TypedArrayUtils.getBoolean(a, 30, 30, false);
         }
 
-        mIconSpaceReserved = TypedArrayUtils.getBoolean(a, 0x18, 0xf, false);
+        mIconSpaceReserved = TypedArrayUtils.getBoolean(a, 22, 22, false);
 
-        mVisible = TypedArrayUtils.getBoolean(a, 0x19, 0x19, true);
+        mVisible = TypedArrayUtils.getBoolean(a, 23, 0x19, true);
 
-        mCopyingEnabled = TypedArrayUtils.getBoolean(a, 0x14, 0x14, false);
+        mCopyingEnabled = TypedArrayUtils.getBoolean(a, 18, 18, false);
 
         a.recycle();
     }
