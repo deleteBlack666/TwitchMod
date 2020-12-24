@@ -9,11 +9,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
 import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
 import tv.twitch.android.models.chomments.ChommentModel;
 
 
-public class ChommentRecyclerItem {
+public class ChommentRecyclerItem implements IChatMessageItem { // TODO: __IMPLEMENT
     private final Spanned msgSpan = null;
     private final ChommentModel chommentModel = null;
 
@@ -25,6 +26,10 @@ public class ChommentRecyclerItem {
         /* ... */
     }
 
+    @Override
+    public CharSequence getSpanned() { // TODO: __INJECT_CODE
+        return msgSpan;
+    }
 
 
     public static final class ChommentItemViewHolder extends RecyclerView.ViewHolder implements IChatTextViewItem { // TODO: __IMPLEMENT
