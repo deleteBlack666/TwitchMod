@@ -131,7 +131,7 @@
     <string name="mod_sleep_timer_title">Sleep timer</string>
     <string name="mod_settings_adblock_surestream">SureStream AdBlock</string>
     <string name="mod_settings_adblock_surestream_desc">Experimental</string>
-    <string name="mod_settings_translators_list" translatable="false">Russain (nopbreak, dumreview, Pro100_Tim), German (disusedmind, Timley) | Spanish (Slayer015, dimateos) | Spanish, Mexico (SoulXR, programas013, Slayer015, Jeshuan) | Czech (Zinec, MrJaroslavik) | Portuguese, Brazilian (johnerik63, Jeshuan) | Dutch (StephanBruh) | Ukrainian (arestocrat47) | Turkish (cankarsli) | Slovenian(olupko) | Italian (GiorgioHerbie) | French (SonicX)</string>
+    <string name="mod_settings_translators_list" translatable="false">Russian (nopbreak, dumreview, Pro100_Tim), German (disusedmind, Timley) | Spanish (Slayer015, dimateos) | Spanish, Mexico (SoulXR, programas013, Slayer015, Jeshuan) | Czech (Zinec, MrJaroslavik) | Portuguese, Brazilian (johnerik63, Jeshuan) | Dutch (StephanBruh) | Ukrainian (arestocrat47) | Turkish (cankarsli) | Slovenian(olupko) | Italian (GiorgioHerbie) | French (SonicX)</string>
     <string name="mod_dismiss">Dismiss</string>
     <string name="mod_sleep_timer_stop_after">The app will be stopped after %1$s</string>
     <string name="mod_sleep_timer_canceled">The timer has been canceled</string>
