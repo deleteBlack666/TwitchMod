@@ -1,4 +1,4 @@
-TwitchMod 2.8
+TwitchMod 2.8 (792)
 Rebase to 9.10.0
 Added: Stream uptime
 Added: Sleep timer
@@ -8,6 +8,7 @@ Added: Timestamps in vod
 Added: SureStream AdBlock (OAuth Token & Embedded Player)
 Updated: Translations (Portuguese, Brazilian; Turkish; Dutch; Italian)
 Fixed: Title bar popup
+Fixed: Annotations issue (hype train, predictions)
 Removed: FFZ badges
 Redesigned settings mod
 
