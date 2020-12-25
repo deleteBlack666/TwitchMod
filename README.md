@@ -6,7 +6,7 @@ TwitchMod is a modified version of Twitch Android Application.
 - AdBlock (for non-stream ads)
 - Autoclicker for channel points
 - View banned chat
-- FFZ badges
+- Stream uptime
 - Prevent messages from being removed
 - Video stats
 - Switch between Exoplayer V2 and TwitchCore player
