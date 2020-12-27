@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 import tv.twitch.android.mod.emotes.fetchers.BttvGlobalFetcher;
-import tv.twitch.android.mod.models.Emote;
-import tv.twitch.android.mod.models.EmoteSet;
+import tv.twitch.android.mod.models.chat.Emote;
+import tv.twitch.android.mod.models.chat.EmoteSet;
 import tv.twitch.android.mod.utils.Logger;
 
 

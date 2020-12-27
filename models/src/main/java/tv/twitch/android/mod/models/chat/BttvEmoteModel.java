@@ -1,4 +1,4 @@
-package tv.twitch.android.mod.models;
+package tv.twitch.android.mod.models.chat;
 
 
 import androidx.annotation.NonNull;

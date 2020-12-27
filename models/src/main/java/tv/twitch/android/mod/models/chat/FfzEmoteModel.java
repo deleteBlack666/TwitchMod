@@ -1,4 +1,4 @@
-package tv.twitch.android.mod.models;
+package tv.twitch.android.mod.models.chat;
 
 
 import androidx.annotation.NonNull;
@@ -58,6 +58,7 @@ public class FfzEmoteModel implements Emote {
         return mEmoteId;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "FfzEmoteModel{" +

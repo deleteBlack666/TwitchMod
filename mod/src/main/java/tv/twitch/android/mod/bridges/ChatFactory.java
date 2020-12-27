@@ -16,7 +16,7 @@ import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiModel;
 import tv.twitch.android.shared.emotes.models.EmoteMessageInput;
 import tv.twitch.android.mod.bridges.models.ChatEmoticonUrl;
 import tv.twitch.android.mod.bridges.models.EmoteUiModelWithUrl;
-import tv.twitch.android.mod.models.Emote;
+import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
 import tv.twitch.android.shared.emotes.models.EmotePickerEmoteModel;
 import tv.twitch.chat.ChatEmoticon;
