@@ -50,7 +50,7 @@ import tv.twitch.android.mod.bridges.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridges.models.EmoteSet;
 import tv.twitch.android.mod.bridges.models.EmoteUiModelWithUrl;
 import tv.twitch.android.mod.emotes.EmoteManager;
-import tv.twitch.android.mod.models.Emote;
+import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.Gifs;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
 import tv.twitch.android.mod.settings.PreferenceManager;
@@ -144,6 +144,7 @@ public class Hooks {
             case ADS_PBYP:
             case MULTIPLAYER_ADS:
             case VAES_DEVICE_TARGETING_PARAMETERS:
+            case AMAZON_IDENTITY_INTEGRATION:
                 return PreferenceManager.INSTANCE.isPlayerAdblockOn() ? false : org;
 
             case FLOATING_CHAT:
