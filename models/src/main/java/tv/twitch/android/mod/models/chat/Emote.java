@@ -3,7 +3,7 @@ package tv.twitch.android.mod.models.chat;
 
 import androidx.annotation.NonNull;
 
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.emotes.UrlProvider;
 
 
 public interface Emote {
@@ -14,5 +14,5 @@ public interface Emote {
 
     String getEmoteId();
 
-    String getUrl(@EmoteSize String size);
+    UrlProvider getUrlProvider();
 }

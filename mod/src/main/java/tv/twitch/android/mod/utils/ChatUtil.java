@@ -243,7 +243,7 @@ public class ChatUtil {
             if (emoteModel.isGif() && isGifsDisabled)
                 continue;
 
-            String url = emoteModel.getUrl(emoteSize);
+            String url = emoteModel.getUrlProvider().getUrl(emoteSize);
             if (url == null)
                 continue;
 

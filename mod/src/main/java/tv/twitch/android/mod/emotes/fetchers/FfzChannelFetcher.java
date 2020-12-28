@@ -9,6 +9,8 @@ import java.util.List;
 import retrofit2.Call;
 import tv.twitch.android.mod.bridges.ApiCallback;
 import tv.twitch.android.mod.emotes.BaseEmoteSet;
+import tv.twitch.android.mod.emotes.FfzUrlProvider;
+import tv.twitch.android.mod.emotes.UrlProviderFactory;
 import tv.twitch.android.mod.models.chat.EmoteSet;
 import tv.twitch.android.mod.models.chat.FfzEmoteModel;
 import tv.twitch.android.mod.models.api.FailReason;
@@ -60,8 +62,8 @@ public class FfzChannelFetcher extends ApiCallback<List<FfzEmoteResponse>> {
                     url = "https:" + url;
                 urls.put(key, url);
             }
-
-            FfzEmoteModel emote = new FfzEmoteModel(emoteResponse.getCode(), emoteResponse.getId(), urls);
+            FfzEmoteModel emote = new FfzEmoteModel(emoteResponse.getCode(), emoteResponse.getId(),
+                    UrlProviderFactory.getFfzUrlProvider(urls));
             ffzSet.addEmote(emote);
         }
 

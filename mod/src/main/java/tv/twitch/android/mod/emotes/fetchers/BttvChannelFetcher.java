@@ -8,6 +8,9 @@ import java.util.List;
 import retrofit2.Call;
 import tv.twitch.android.mod.bridges.ApiCallback;
 import tv.twitch.android.mod.emotes.BaseEmoteSet;
+import tv.twitch.android.mod.emotes.BttvUrlProvider;
+import tv.twitch.android.mod.emotes.UrlProvider;
+import tv.twitch.android.mod.emotes.UrlProviderFactory;
 import tv.twitch.android.mod.models.chat.BttvEmoteModel;
 import tv.twitch.android.mod.models.chat.EmoteSet;
 import tv.twitch.android.mod.models.api.BttvChannelResponse;
@@ -53,7 +56,9 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
                 if (emoticon.getImageType() == null) {
                     continue;
                 }
-                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType() == ImageType.GIF));
+                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(),
+                        emoticon.getImageType() == ImageType.GIF,
+                        UrlProviderFactory.getBttvUrlProvider(emoticon.getId())));
             }
         }
 
@@ -74,7 +79,9 @@ public class BttvChannelFetcher extends ApiCallback<BttvChannelResponse> {
                 if (emoticon.getImageType() == null) {
                     continue;
                 }
-                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(), emoticon.getImageType() == ImageType.GIF));
+                bttvSet.addEmote(new BttvEmoteModel(emoticon.getCode(), emoticon.getId(),
+                        emoticon.getImageType() == ImageType.GIF,
+                        UrlProviderFactory.getBttvUrlProvider(emoticon.getId())));
             }
         }
         mCallback.onBttvEmotesParsed(bttvSet);

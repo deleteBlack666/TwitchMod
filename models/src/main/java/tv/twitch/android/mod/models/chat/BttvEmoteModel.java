@@ -3,27 +3,21 @@ package tv.twitch.android.mod.models.chat;
 
 import androidx.annotation.NonNull;
 
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.emotes.UrlProvider;
 
 
 public final class BttvEmoteModel implements Emote {
-    private static final String BASE_URL = "https://cdn.betterttv.net/emote/";
-
     private final String mCode;
     private final String mEmoteId;
     private final boolean bIsGif;
 
-    private final String mSmallEmoteUrl;
-    private final String mMediumEmoteUrl;
-    private final String mLargeEmoteUrl;
+    private final UrlProvider mUrlProvider;
 
-    public BttvEmoteModel(String code, String id, boolean isGif) {
+    public BttvEmoteModel(String code, String id, boolean isGif, UrlProvider urlProvider) {
         this.mCode = code;
         this.mEmoteId = id;
         this.bIsGif = isGif;
-        this.mSmallEmoteUrl = getUrl("1x", id);
-        this.mMediumEmoteUrl = getUrl("2x", id);
-        this.mLargeEmoteUrl = getUrl("3x", id);
+        this.mUrlProvider = urlProvider;
     }
 
     @NonNull
@@ -32,18 +26,6 @@ public final class BttvEmoteModel implements Emote {
         return mCode;
     }
 
-    @Override
-    public String getUrl(@EmoteSize String size) {
-        switch (size) {
-            case EmoteSize.LARGE:
-                return mLargeEmoteUrl;
-            default:
-            case EmoteSize.MEDIUM:
-                return mMediumEmoteUrl;
-            case EmoteSize.SMALL:
-                return mSmallEmoteUrl;
-        }
-    }
 
     @Override
     public boolean isGif() {
@@ -55,8 +37,9 @@ public final class BttvEmoteModel implements Emote {
         return mEmoteId;
     }
 
-    private static String getUrl(String size, String id) {
-        return BASE_URL + id + "/" + size;
+    @Override
+    public UrlProvider getUrlProvider() {
+        return mUrlProvider;
     }
 
     @Override
@@ -65,9 +48,7 @@ public final class BttvEmoteModel implements Emote {
                 "mCode='" + mCode + '\'' +
                 ", mEmoteId='" + mEmoteId + '\'' +
                 ", bIsGif=" + bIsGif +
-                ", mSmallEmoteUrl='" + mSmallEmoteUrl + '\'' +
-                ", mMediumEmoteUrl='" + mMediumEmoteUrl + '\'' +
-                ", mLargeEmoteUrl='" + mLargeEmoteUrl + '\'' +
+                ", mUrlProvider=" + mUrlProvider +
                 '}';
     }
 }

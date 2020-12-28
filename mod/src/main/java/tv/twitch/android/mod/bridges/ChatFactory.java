@@ -38,7 +38,7 @@ public class ChatFactory {
 
     @NonNull
     public static ChatEmoticon getEmoticon(Emote emote) {
-        ChatEmoticon chatEmoticon = new ChatEmoticonUrl(emote.getUrl(EmoteSize.LARGE));
+        ChatEmoticon chatEmoticon = new ChatEmoticonUrl(emote.getUrlProvider().getUrl(EmoteSize.LARGE));
         chatEmoticon.match = emote.getCode();
         chatEmoticon.isRegex = false;
         chatEmoticon.emoticonId = generateEmoteId();
@@ -76,7 +76,7 @@ public class ChatFactory {
         EmoteMessageInput emoteMessageInput = new EmoteMessageInput(emote.getCode(), fakeEmoteId, false);
         EmotePickerEmoteModel emotePicker = new EmotePickerEmoteModel.Generic(fakeEmoteId, emote.getCode());
         EmotePickerPresenter.ClickedEmote clickedEmote = new EmotePickerPresenter.ClickedEmote.Unlocked(emotePicker, emoteMessageInput, null, Collections.<EmotePickerPresenter.ClickedEmote.Unlocked>emptyList());
-        return new EmoteUiModelWithUrl(fakeEmoteId, false, false, clickedEmote, emote.getUrl(EmoteSize.LARGE));
+        return new EmoteUiModelWithUrl(fakeEmoteId, false, false, clickedEmote, emote.getUrlProvider().getUrl(EmoteSize.LARGE));
     }
 
     @NonNull
