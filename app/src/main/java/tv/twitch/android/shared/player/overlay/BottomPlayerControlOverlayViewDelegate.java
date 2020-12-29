@@ -5,10 +5,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
-import tv.twitch.android.mod.bridges.Hooks;
-import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.IBottomPlayerControlOverlayViewDelegate;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.Jump;
 import tv.twitch.android.mod.view.StreamUptimeView;
 
 
@@ -39,58 +38,16 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
     }
 
     public void updateLockButtonState() { // TODO: __INJECT_METHOD
-        if (this.lockButton == null)
-            return;
-
-        int lockDrawableId = ResourcesManager.getDrawableId("ic_lock");
-        if (lockDrawableId == 0) {
-            Logger.error("ic_lock not found");
-            return;
-        }
-
-        int unlockDrawableId = ResourcesManager.getDrawableId("ic_unlock");
-        if (unlockDrawableId == 0) {
-            Logger.error("ic_unlock not found");
-            return;
-        }
-
-        if (Hooks.shouldLockSwiper()) {
-            this.lockButton.setImageResource(unlockDrawableId);
-        } else {
-            this.lockButton.setImageResource(lockDrawableId);
-        }
+        Controller.updateLockButtonState(this.lockButton);
     }
 
     private void setupLockButton(View view) { // TODO: __INJECT_METHOD
-        if (view == null) {
-            Logger.error("view is null");
-            return;
-        }
-
-        int lockButton = ResourcesManager.getId("lock_button");
-        if (lockButton == 0) {
-            Logger.error("lockButton == 0");
-            return;
-        }
-        this.lockButton = view.findViewById(lockButton);
-        if (this.lockButton == null) {
-            Logger.error("lock button is null");
-            return;
-        }
-
-        Hooks.setupLockButtonClickListener(this.lockButton, this);
+        this.lockButton = (ImageView) Controller.setupLockButton(view, this);
         updateLockButtonState();
     }
 
     public void setLockButtonVisible(boolean z) { // TODO: __INJECT_METHOD
-        if (this.lockButton != null) {
-            if (!Hooks.isSwipperEnabled() || !Hooks.shouldShowLockButton()) {
-                this.lockButton.setVisibility(View.GONE);
-                return;
-            }
-
-            this.lockButton.setVisibility(z ? View.VISIBLE : View.GONE);
-        }
+        Controller.changeLockButtonVisibility(this.lockButton, z);
     }
 
     public void clickRefresh() { // TODO: __INJECT_METHOD
@@ -101,54 +58,21 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
 
     private void setupRefreshButton(View view) { // TODO: __INJECT_METHOD
-        if (view == null) {
-            Logger.error("view is null");
-            return;
-        }
-        int refreshButtonId = ResourcesManager.getId("refresh_button");
-        if (refreshButtonId == 0) {
-            Logger.error("refreshButtonId == 0");
-            return;
-        }
-
-        this.refreshButton = view.findViewById(refreshButtonId);
-        if (this.refreshButton == null) {
-            Logger.error("refresh button is null");
-            return;
-        }
-
-        Hooks.setupRefreshButtonClickListener(this.refreshButton, this);
-
-        if (!Hooks.shouldShowRefreshButton()) {
+        this.refreshButton = (ImageView) Controller.setupRefreshButton(view, this);
+        if (!Jump.shouldShowRefreshButton() && this.refreshButton != null) {
             this.refreshButton.setVisibility(View.GONE);
         }
     }
 
     private void setupUptime(View view) { // TODO: __INJECT_METHOD
-        if (view == null) {
-            Logger.error("view is null");
-            return;
-        }
-
-        int uptimeViewId = ResourcesManager.getId("stream_uptime");
-        if (uptimeViewId != 0) {
-            this.uptimeView = view.findViewById(uptimeViewId);
-        } else {
-            Logger.error("uptimeViewId == 0");
-        }
-
-        int uptimeIconId = ResourcesManager.getId("stream_uptime_icon");
-        if (uptimeIconId != 0) {
-            this.uptimeIcon = view.findViewById(uptimeIconId);
-        } else {
-            Logger.error("uptimeIconId == 0");
-        }
+        this.uptimeView = (StreamUptimeView) Controller.setupUptime(view, this);
+        this.uptimeIcon = (ImageView) Controller.setupUptimeIcon(view, this);
 
         hideUptime();
     }
 
     public void showUptime(int seconds) { // TODO: __INJECT_METHOD
-        if (!Hooks.shouldShowStreamUptime())
+        if (!Jump.shouldShowStreamUptime())
             return;
 
         if (this.uptimeIcon != null) {

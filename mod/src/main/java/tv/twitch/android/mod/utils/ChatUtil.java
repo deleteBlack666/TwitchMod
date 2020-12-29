@@ -135,7 +135,7 @@ public class ChatUtil {
         fetcher.fetch();
     }
 
-    public static Spanned tryAddStrikethrough(Spanned msg) {
+    public static Spanned createDeletedStrikethroughSpanFromChatMessageSpan(Spanned msg) {
         try {
             if (TextUtils.isEmpty(msg))
                 return msg;
@@ -263,11 +263,11 @@ public class ChatUtil {
         return SpannableString.valueOf(new SpannableStringBuilder(timestampSpan).append(" ").append(new SpannableStringBuilder(message)));
     }
 
-    public static Spanned addOffsetTimestamp(Spanned message, int seconds) {
+    public static Spanned createOffsetTimestampSpanFromChatMessageSpan(Spanned message, int seconds) {
         return formatTimestamp(message, DateUtils.formatElapsedTime(seconds));
     }
 
-    public static Spanned addTimestamp(Spanned message, final Date date) {
+    public static Spanned createTimestampSpanFromChatMessageSpan(Spanned message, final Date date) {
         return formatTimestamp(message, new SimpleDateFormat(TIMESTAMP_DATE_FORMAT, Locale.UK).format(date));
     }
 

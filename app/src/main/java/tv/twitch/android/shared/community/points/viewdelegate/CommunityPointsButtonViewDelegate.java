@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.interfaces.ICommunityPointsButtonViewDelegate;
+import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.shared.chat.communitypoints.models.CommunityPointsModel;
 
 
@@ -23,7 +23,7 @@ public class CommunityPointsButtonViewDelegate implements ICommunityPointsButton
     private final void showClaimAvailable(CommunityPointsModel communityPointsModel) {
         /* ... */
 
-        Hooks.setupClicker(this); // TODO: __INJECT_CODE
+        Controller.setupClicker(this); // TODO: __INJECT_CODE
     }
 
     private void handleClaimError() {
@@ -33,8 +33,7 @@ public class CommunityPointsButtonViewDelegate implements ICommunityPointsButton
 
     @Override
     public void maybeClickOnBonus() { // TODO: __INJECT_METHOD
-        if (buttonLayout != null && buttonLayout.getVisibility() == View.VISIBLE
-                && buttonLayout.isEnabled() && buttonLayout.getBackground() != null) {
+        if (buttonLayout != null && buttonLayout.isEnabled()) {
             buttonLayout.performClick();
         }
     }

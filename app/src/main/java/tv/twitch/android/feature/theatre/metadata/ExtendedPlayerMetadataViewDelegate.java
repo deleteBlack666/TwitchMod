@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import tv.twitch.android.core.mvp.viewdelegate.BaseViewDelegate;
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.General;
 
 
 public final class ExtendedPlayerMetadataViewDelegate extends BaseViewDelegate {
@@ -17,7 +17,7 @@ public final class ExtendedPlayerMetadataViewDelegate extends BaseViewDelegate {
         public final ExtendedPlayerMetadataViewDelegate create(Context context, ViewGroup viewGroup, ViewGroup viewGroup2, ViewGroup viewGroup3) {
             // View inflate = LayoutInflater.from(context).inflate(R$layout.player_metadata_view_extended, viewGroup, false);
 
-            int id = Hooks.hookPlayerMetadataViewId(0); // TODO: __HOOK_ARG
+            int id = General.hookPlayerMetadataViewId(0); // TODO: __HOOK_ARG
 
             return null;
         }
@@ -25,7 +25,7 @@ public final class ExtendedPlayerMetadataViewDelegate extends BaseViewDelegate {
         /* ... */
     }
 
-    private final void showSubscribeButton() {
+    private void showSubscribeButton() {
         // this.followOrSubButtonContainer.addView(this.subButtonViewDelegate.getContentView()); // TODO: __REMOVE_CODE
     }
 

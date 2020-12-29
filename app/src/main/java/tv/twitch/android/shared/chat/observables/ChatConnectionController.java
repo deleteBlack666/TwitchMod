@@ -1,8 +1,8 @@
 package tv.twitch.android.shared.chat.observables;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.interfaces.IChatConnectionController;
+import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.models.channel.ChannelInfo;
 
 
@@ -12,7 +12,7 @@ public class ChatConnectionController implements IChatConnectionController { // 
     /* ... */
 
     private final void connect(ChannelInfo channelInfo) {
-        Hooks.requestEmotes(channelInfo); // TODO: __INJECT_CODE
+        General.requestEmotes(channelInfo); // TODO: __INJECT_CODE
 
         /* ... */
     }

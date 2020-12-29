@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.models.settings.SettingsDestination;
 
 public class MainSettingsPresenter$navController$1 {
@@ -18,7 +18,7 @@ public class MainSettingsPresenter$navController$1 {
 
         switch (6) {
             case 6:
-                fragment = Hooks.getModSettingsFragment();
+                fragment = Controller.getModSettingsFragment();
                 break;
         }
         /* ... */

@@ -7,8 +7,8 @@ import android.graphics.drawable.Drawable;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 
-import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
+import tv.twitch.android.mod.hooks.Jump;
 
 
 public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TODO: __IMPLEMENT
@@ -33,7 +33,7 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
         if (drawable != null) {
             drawable.draw(canvas);
             if (drawable instanceof GifDrawable) {
-                if (Hooks.isGifsEnabled()) {
+                if (Jump.shouldAnimate()) {
                     ((GifDrawable) drawable).start();
                 }
             }

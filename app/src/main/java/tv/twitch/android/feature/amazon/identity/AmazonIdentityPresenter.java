@@ -1,14 +1,15 @@
 package tv.twitch.android.feature.amazon.identity;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.Jump;
 
 public class AmazonIdentityPresenter {
     /* ... */
 
     public final boolean isUserEligibleToRegister(int i, int i2) {
-        if (Hooks.isAdblockOn()) // TODO: __INJECT_CODE
+        if (Jump.isAdblockOn()) { // TODO: __INJECT_CODE
             return false;
+        }
 
         /* ... */
 

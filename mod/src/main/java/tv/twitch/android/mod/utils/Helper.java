@@ -198,16 +198,6 @@ public class Helper {
 
     public static void showPartnerBanner(Context context) {}
 
-    public static void maybeShowModInfoBanner(final FragmentActivity fragmentActivity, final TwitchAccountManager accountManager) {
-        if (PreferenceManager.INSTANCE.getLastBuildNumber() == LoaderLS.getBuildNumber())
-            return;
-
-        if (PreferenceManager.INSTANCE.isBannerShown())
-            return;
-
-        FragmentUtil.showDialogFragment(fragmentActivity, new ModInfoBannerFragment(), "modInfo");
-    }
-
     public static int getFileLength(@NonNull String url) {
         URL fileUrl;
         try {

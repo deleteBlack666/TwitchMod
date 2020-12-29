@@ -4,7 +4,7 @@ package tv.twitch.android.app.core.navigation;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.Jump;
 
 
 public class BottomNavigationPresenter {
@@ -32,10 +32,10 @@ public class BottomNavigationPresenter {
             return items;
         }
 
-        if (Hooks.isHideDiscoverTab()) {
+        if (Jump.shouldHideDiscoverTab()) {
             items.remove(BottomNavigationItem.DISCOVER);
         }
-        if (Hooks.isHideEsportsTab()) {
+        if (Jump.shouldHideEsportsTab()) {
             items.remove(BottomNavigationItem.ESPORTS);
         }
 

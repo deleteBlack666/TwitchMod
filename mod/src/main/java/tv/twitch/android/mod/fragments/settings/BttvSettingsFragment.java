@@ -3,13 +3,10 @@ package tv.twitch.android.mod.fragments.settings;
 
 import android.os.Bundle;
 
-import tv.twitch.android.mod.bridges.preference.Preference;
 import tv.twitch.android.mod.bridges.preference.PreferenceFragmentCompat;
 
 import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.IPreferenceFragment;
-import tv.twitch.android.mod.models.Preferences;
-import tv.twitch.android.mod.settings.SettingsController;
 
 
 public class BttvSettingsFragment extends PreferenceFragmentCompat implements IPreferenceFragment {

@@ -1,8 +1,7 @@
 package tv.twitch.android.feature.theatre;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
-
+import tv.twitch.android.mod.hooks.General;
 
 public class LandscapeChatLayoutController {
     /* ... */
@@ -11,7 +10,7 @@ public class LandscapeChatLayoutController {
         /* ... */
 
         // ViewExtensionsKt.setLargestScreenEdgePercentage(this.mLandscapeContainer, experience.shouldShowTabletUI(context) ? 20 : 30);
-        int percent = Hooks.hookSetupForLandscapeDefaultChatScreenEdgePercentage(30); // TODO: __HOOK_ARG
+        int percent = General.hookSetupForLandscapeDefaultChatScreenEdgePercentage(30); // TODO: __HOOK_ARG
 
         /* ... */
     }
@@ -20,7 +19,7 @@ public class LandscapeChatLayoutController {
         /* ... */
 
         // ViewExtensionsKt.setLargestScreenEdgePercentage(this.mLandscapeContainer, 50);
-        int percent = Hooks.hookSetupForLandscapeSplitViewChatScreenEdgePercentage(50); // TODO: __HOOK_ARG
+        int percent = General.hookSetupForLandscapeSplitViewChatScreenEdgePercentage(50); // TODO: __HOOK_ARG
 
         /* ... */
     }

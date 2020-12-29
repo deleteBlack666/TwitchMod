@@ -1,12 +1,11 @@
 package tv.twitch.android.shared.player.overlay.seekable;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
-
+import tv.twitch.android.mod.hooks.General;
 
 public class PlayPauseFastSeekViewDelegate {
     private final void setTouchListenersForFastSeeking() {
-        int fastSeekRewind = Hooks.getRewindSeek(); // TODO: __HOOK
-        int fastSeekForward = Hooks.getForwardSeek(); // TODO: __HOOK
+        int fastSeekRewind = General.getRewindSeek(); // TODO: __HOOK
+        int fastSeekForward = General.getForwardSeek(); // TODO: __HOOK
     }
 }

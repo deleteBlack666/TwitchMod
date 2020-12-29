@@ -7,9 +7,8 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 import tv.twitch.android.app.core.ViewExtensionsKt;
-import tv.twitch.android.mod.bridges.Hooks;
-import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.ISharedPanelWidget;
+import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.models.clips.ClipModel;
 import tv.twitch.android.models.videos.VodModel;
 import tv.twitch.android.shared.player.presenters.PlayerPresenter;
@@ -41,14 +40,8 @@ public class SharePanelWidget extends FrameLayout implements ISharedPanelWidget 
     }
 
     private void setupDownloadButton() { // TODO: __INJECT_METHOD
-        int downloadButtonId = ResourcesManager.getId("download_model");
-        if (downloadButtonId != 0) {
-            this.mDownloadButton = findViewById(downloadButtonId);
-            if (this.mDownloadButton != null) {
-                ViewExtensionsKt.visibilityForBoolean(this.mDownloadButton, mClipModel != null);
-                Hooks.setupClipDownloader(mDownloadButton, this);
-            }
-        }
+        this.mDownloadButton = (InteractiveRowView) Controller.setupDownloadButton(this,
+                mClipModel, this);
     }
 
     private void init() {

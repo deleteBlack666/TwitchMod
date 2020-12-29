@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
 import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
 import tv.twitch.android.models.chomments.ChommentModel;
@@ -21,7 +21,7 @@ public class ChommentRecyclerItem implements IChatMessageItem { // TODO: __IMPLE
     /* ... */
 
     public ChommentRecyclerItem(FragmentActivity fragmentActivity, ChommentModel chommentModel2, Spanned spanned, Object function1, boolean z) {
-        spanned = Hooks.addVodTimestampToMessages(spanned, chommentModel2); // TODO: __INJECT_CODE
+        spanned = General.addVodTimestampToMessages(spanned, chommentModel2); // TODO: __INJECT_CODE
 
         /* ... */
     }
@@ -41,7 +41,7 @@ public class ChommentRecyclerItem implements IChatMessageItem { // TODO: __IMPLE
 
             /* ... */
 
-            Hooks.setChatMessageFontSize(chommentTextView); // TODO: __INJECT_CODE
+            General.setChatMessageFontSize(chommentTextView); // TODO: __INJECT_CODE
         }
 
         public final TextView getChommentTextView() {

@@ -1,15 +1,14 @@
 package tv.twitch.android.shared.emotes.emotepicker;
 
 
-import android.view.View;
 import android.widget.ImageView;
 
 import tv.twitch.android.core.adapters.TwitchSectionAdapter;
 import tv.twitch.android.core.mvp.viewdelegate.RxViewDelegate;
 import tv.twitch.android.core.mvp.viewdelegate.ViewDelegateEvent;
-import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.ResourcesManager;
 import tv.twitch.android.mod.bridges.interfaces.IEmotePickerViewDelegate;
+import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.mod.utils.Helper;
 import tv.twitch.android.mod.utils.Logger;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmotePickerSection;
@@ -75,8 +74,7 @@ public class EmotePickerViewDelegate extends RxViewDelegate<EmotePickerPresenter
             return;
         }
 
-        Hooks.setupBttvEmotesButtonClickListener(bttvEmotesButton, this);
-        this.bttvEmotesButton.setVisibility(Hooks.isBttvEmotesEnabled() ? View.VISIBLE : View.GONE);
+        Controller.setupBttvEmotesButtonClickListener(bttvEmotesButton, this);
     }
 
     private ImageView getBttvButtonView() { // TODO: __INJECT_METHOD

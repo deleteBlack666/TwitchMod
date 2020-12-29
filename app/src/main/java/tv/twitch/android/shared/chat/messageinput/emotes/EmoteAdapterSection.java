@@ -1,8 +1,7 @@
 package tv.twitch.android.shared.chat.messageinput.emotes;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
-
+import tv.twitch.android.mod.hooks.General;
 
 public class EmoteAdapterSection {
     private String emoteSetId;
@@ -14,7 +13,7 @@ public class EmoteAdapterSection {
 
         /* ... */
 
-        return Hooks.hookSetName(res, this.emoteSetId); // TODO: __INJECT_CODE
+        return General.hookSetName(res, this.emoteSetId); // TODO: __INJECT_CODE
     }
 
     /* ... */

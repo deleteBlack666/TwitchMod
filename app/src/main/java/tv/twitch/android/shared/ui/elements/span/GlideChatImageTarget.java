@@ -7,7 +7,7 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.mod.utils.Logger;
 
 
@@ -50,6 +50,6 @@ public class GlideChatImageTarget {
     public void onResourceReady(Object drawable, Object transition) {
         /* ... */
 
-        Hooks.maybeInvalidateContainerView(mContainerView, mUrlDrawable); // TODO: __INJECT_CODE
+        General.maybeInvalidateChatItem(mContainerView, mUrlDrawable); // TODO: __INJECT_CODE
     }
 }

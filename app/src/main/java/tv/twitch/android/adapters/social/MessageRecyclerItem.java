@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.subjects.PublishSubject;
 import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
 import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
-import tv.twitch.android.mod.utils.Logger;
 import tv.twitch.android.shared.chat.adapter.SystemMessageType;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
 import tv.twitch.android.shared.chat.adapter.item.ChatMessageClickedEvents;
@@ -22,7 +21,7 @@ import tv.twitch.android.shared.chat.util.ChatItemClickEvent;
 import tv.twitch.android.shared.chat.util.ChatUtil;
 
 
-public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem  { // TODO: __IMPLEMENT
+public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem { // TODO: __IMPLEMENT
     private boolean hasModAccess;
     private Spanned message;
     private PublishSubject<ChatMessageClickedEvents> messageClickSubject;
@@ -52,15 +51,14 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem  {
 
     private void maybeHighlightMessage(ChatMessageViewHolder holder) { // TODO: __INJECT_METHOD
         if (holder == null) {
-            Logger.error("holder is null");
             return;
         }
 
-        Hooks.highlightView(holder.itemView, shouldHighlightBackground);
+        General.highlightView(holder.itemView, shouldHighlightBackground);
     }
 
     public MessageRecyclerItem(Context context2, String str, int authorUserId, String str2, String str3, int i2, Spanned message, SystemMessageType systemMessageType, float f, int i3, float f2, boolean z, boolean z2, String str4, EventDispatcher<ChatItemClickEvent> eventDispatcher) {
-        message = Hooks.addTimestampToMessage(message, authorUserId); // TODO: __HOOK_PARAM
+        message = General.addTimestampToMessage(message, authorUserId); // TODO: __HOOK_PARAM
 
         /* ... */
     }
@@ -70,7 +68,7 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem  {
 
         /* ... */
 
-        this.message = Hooks.hookMarkAsDeleted(companion, this.message, this.context, this.messageClickSubject, this.hasModAccess); // TODO: __REPLACE_CODE
+        this.message = General.hookMarkAsDeleted(companion, this.message, this.context, this.messageClickSubject, this.hasModAccess); // TODO: __REPLACE_CODE
     }
 
     @Override
@@ -80,7 +78,7 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem  {
 
 
     public static final class ChatMessageViewHolder extends RecyclerView.ViewHolder implements IChatTextViewItem { // TODO: __IMPLEMENT
-        private final TextView messageTextView = null;
+        private TextView messageTextView;
 
         /* ... */
 
@@ -88,7 +86,7 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem  {
             super(itemView);
             /* ... */
 
-            Hooks.setChatMessageFontSize(messageTextView); // TODO: __INJECT_CODE
+            General.setChatMessageFontSize(messageTextView); // TODO: __INJECT_CODE
         }
 
         public final TextView getMessageTextView() {

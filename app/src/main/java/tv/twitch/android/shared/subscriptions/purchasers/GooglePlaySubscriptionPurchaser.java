@@ -3,14 +3,14 @@ package tv.twitch.android.shared.subscriptions.purchasers;
 
 import android.content.Context;
 
-import tv.twitch.android.mod.bridges.Hooks;
+import tv.twitch.android.mod.hooks.Jump;
 
 
 public class GooglePlaySubscriptionPurchaser {
     /* ... */
 
     public boolean isAvailable(Context context) {
-        if (Hooks.isDisableGoogleBillingJump()) // TODO: __INJECT_CODE
+        if (Jump.isGoogleBillingDisabled()) // TODO: __INJECT_CODE
             return false;
 
         /* ... */

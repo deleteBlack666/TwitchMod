@@ -1,8 +1,7 @@
 package tv.twitch.android.feature.theatre.common;
 
 
-import tv.twitch.android.mod.bridges.Hooks;
-
+import tv.twitch.android.mod.hooks.General;
 
 public class MiniPlayerSize {
     /* ... */
@@ -12,7 +11,7 @@ public class MiniPlayerSize {
     }
 
     public final int getWidth() { // TODO: __INJECT_METHOD
-        return Hooks.hookMiniPlayerWidth(getWidthOrg());
+        return General.hookMiniPlayerWidth(getWidthOrg());
     }
 
     /* ... */

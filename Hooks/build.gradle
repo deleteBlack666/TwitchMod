@@ -1,0 +1,39 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    implementation project(path: ':twitch')
+    implementation project(path: ':mod')
+    implementation project(path: ':models')
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}
+

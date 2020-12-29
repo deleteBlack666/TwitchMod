@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 import tv.twitch.android.adapters.social.MessageRecyclerItem;
 import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
 import tv.twitch.android.core.user.TwitchAccountManager;
+import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Jump;
 import tv.twitch.android.models.webview.WebViewSource;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
@@ -24,7 +26,6 @@ import tv.twitch.android.shared.ui.elements.span.CenteredImageSpan;
 import tv.twitch.android.shared.ui.elements.span.TwitchUrlSpanClickListener;
 import tv.twitch.android.shared.ui.elements.span.MediaSpan$Type;
 import tv.twitch.android.shared.chat.UrlImageClickableProvider;
-import tv.twitch.android.mod.bridges.Hooks;
 import tv.twitch.android.mod.bridges.interfaces.IChatMessageFactory;
 import tv.twitch.android.shared.ui.elements.span.UrlDrawable;
 import tv.twitch.chat.ChatMessageInfo;
@@ -43,7 +44,7 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     }
 
     private final CharSequence usernameSpannable(ChatMessageInterface chatMessageInterface, int color, IClickableUsernameSpanListener iClickableUsernameSpanListener, boolean z, String str, String str2) {
-        color = Hooks.hookUsernameSpanColor(color); // TODO: __HOOK_PARAM // TODO: __FIX
+        color = General.hookUsernameSpanColor(color); // TODO: __HOOK_PARAM // TODO: __FIX
 
         /* ... */
         return null;
@@ -57,7 +58,7 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
 
         /* ... */
 
-        ret.setShouldHighlightBackground(Hooks.shouldHighlightMessage(chatMessageInfo, accountManager)); // TODO: __INJECT_CODE
+        ret.setShouldHighlightBackground(General.shouldHighlightMessage(chatMessageInfo, accountManager)); // TODO: __INJECT_CODE
 
         return ret;
     }
@@ -67,8 +68,8 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
 
         SpannedString parseChatMessageTokens$default = new SpannedString("KEKW");
         SpannedString generateBadges = new SpannedString("LULW");
-        parseChatMessageTokens$default = Hooks.hookChatMessage(this, chatMessageInterface, parseChatMessageTokens$default, channelId); // TODO: __HOOK
-        generateBadges = Hooks.hookBadges(this, chatMessageInterface, generateBadges); // TODO: __HOOK
+        parseChatMessageTokens$default = General.hookChatMessage(this, chatMessageInterface, parseChatMessageTokens$default, channelId); // TODO: __HOOK
+        generateBadges = General.hookChatMessageBadges(this, chatMessageInterface, generateBadges); // TODO: __HOOK
 
         /* ... */
 
@@ -81,7 +82,7 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     public CharSequence getSpannedEmote(String url, String emoteText) { // TODO: __INJECT_METHOD
         UrlDrawable urlDrawable = new UrlDrawable(url, MediaSpan$Type.Emote);
         urlDrawable.setTwitchEmote(false);
-        urlDrawable.setShouldWide(Hooks.isSupportWideEmotes());
+        urlDrawable.setShouldWide(Jump.isWideEmotesEnabled());
 
         SpannableString spannableString = new SpannableString(emoteText);
         spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, emoteText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

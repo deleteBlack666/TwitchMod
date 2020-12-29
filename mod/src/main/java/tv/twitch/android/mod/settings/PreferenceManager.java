@@ -398,7 +398,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return shouldHideChatHeaderContainer;
     }
 
-    public boolean isSurestreamAdblockV1On() {
+    public boolean isSurestreamAdblockOn() {
         return getSureStreamAdBlockVariant().equals(SureStreamAdBlock.V1);
     }
 
