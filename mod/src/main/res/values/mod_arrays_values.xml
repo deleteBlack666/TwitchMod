@@ -29,6 +29,6 @@
     <string-array name="surestream_adblock_values">
         <item>disabled</item>
         <item>v1</item>
-        <item>v2</item>
+        <item>v3</item>
     </string-array>
 </resources>

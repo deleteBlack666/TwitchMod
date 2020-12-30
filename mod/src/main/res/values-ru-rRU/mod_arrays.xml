@@ -29,6 +29,6 @@
     <string-array name="surestream_adblock_choices">
         <item>Отключен</item>
         <item>Поддельный OAuth Token</item>
-        <item>Поддельный Embedded Player</item>
+        <item>Прокси сервер</item>
     </string-array>
 </resources>

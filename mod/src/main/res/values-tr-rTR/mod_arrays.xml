@@ -26,9 +26,4 @@
         <item>Orta</item>
         <item>Büyük</item>
     </string-array>
-    <string-array name="surestream_adblock_choices">
-        <item>Kapalı</item>
-        <item>Sahte OAuth Jetonu</item>
-        <item>Sahte Gömülü Oynatıcı</item>
-    </string-array>
 </resources>

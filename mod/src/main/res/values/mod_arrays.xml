@@ -29,6 +29,6 @@
     <string-array name="surestream_adblock_choices">
         <item>Disabled</item>
         <item>Fake OAuth Token</item>
-        <item>Fake Embedded Player</item>
+        <item>Proxy Server</item>
     </string-array>
 </resources>

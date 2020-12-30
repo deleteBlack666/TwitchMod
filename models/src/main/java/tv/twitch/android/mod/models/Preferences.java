@@ -56,7 +56,7 @@ public enum Preferences {
     SHOW_HYPE_TRAIN("mod_show_hype_train", "mod_settings_show_hype_train", "mod_settings_show_hype_train_desc", Type.BOOLEAN),
     STREAM_UPTIME("mod_player_show_stream_uptime", "mod_settings_show_stream_uptime", "mod_settings_show_stream_uptime_desc", Type.BOOLEAN),
     LAST_BUILD_NUMBER("mod_last_build_number", Type.INTEGER),
-    SURESTREAM_ADBLOCK("mod_surestream_adblock_type", "mod_settings_surestream_adblock_var", "mod_settings_surestream_adblock_var_desc", Type.STRING);
+    SURESTREAM_ADBLOCK("mod_surestream_adblock_v2_type", "mod_settings_surestream_adblock_var", "mod_settings_surestream_adblock_var_desc", Type.STRING);
 
     private static final Map<String, Preferences> s_Map = new HashMap<>();
 

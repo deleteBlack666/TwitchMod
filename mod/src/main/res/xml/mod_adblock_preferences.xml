@@ -21,7 +21,7 @@
             android:defaultValue="v1"
             android:title="@string/mod_settings_adblock_surestream"
             android:summary="%s"
-            android:key="mod_surestream_adblock_type"
+            android:key="mod_surestream_adblock_v2_type"
             android:entries="@array/surestream_adblock_choices"
             android:entryValues="@array/surestream_adblock_values"/>
     </tv.twitch.android.mod.bridges.preference.PreferenceCategory>

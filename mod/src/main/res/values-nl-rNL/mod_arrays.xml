@@ -26,9 +26,4 @@
         <item>Normaal</item>
         <item>Groot</item>
     </string-array>
-    <string-array name="surestream_adblock_choices">
-        <item>Uitgeschakeld</item>
-        <item>Neppe OAuth Token</item>
-        <item>Neppe ingesloten speler</item>
-    </string-array>
 </resources>

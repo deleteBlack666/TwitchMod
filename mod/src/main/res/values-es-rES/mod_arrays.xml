@@ -26,9 +26,4 @@
         <item>Mediano</item>
         <item>Grande</item>
     </string-array>
-    <string-array name="surestream_adblock_choices">
-        <item>Desabilitado</item>
-        <item>Token de OAuth Falso</item>
-        <item>Reproductor incorporado</item>
-    </string-array>
 </resources>

@@ -26,9 +26,4 @@
         <item>Médio</item>
         <item>Grande</item>
     </string-array>
-    <string-array name="surestream_adblock_choices">
-        <item>Desativado</item>
-        <item>Token OAuth falso</item>
-        <item>Fake Embedded Player</item>
-    </string-array>
 </resources>
