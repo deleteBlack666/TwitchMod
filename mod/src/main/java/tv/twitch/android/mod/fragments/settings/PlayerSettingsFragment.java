@@ -3,10 +3,10 @@ package tv.twitch.android.mod.fragments.settings;
 
 import android.os.Bundle;
 
-import tv.twitch.android.mod.bridges.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
 
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.interfaces.IPreferenceFragment;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
 
 
 public class PlayerSettingsFragment extends PreferenceFragmentCompat implements IPreferenceFragment {

@@ -1,7 +1,7 @@
 package tv.twitch.android.shared.chat.observables;
 
 
-import tv.twitch.android.mod.bridges.interfaces.IChatConnectionController;
+import tv.twitch.android.mod.bridge.interfaces.IChatConnectionController;
 import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.models.channel.ChannelInfo;
 

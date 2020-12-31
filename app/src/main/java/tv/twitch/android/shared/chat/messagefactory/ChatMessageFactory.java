@@ -26,7 +26,7 @@ import tv.twitch.android.shared.ui.elements.span.CenteredImageSpan;
 import tv.twitch.android.shared.ui.elements.span.TwitchUrlSpanClickListener;
 import tv.twitch.android.shared.ui.elements.span.MediaSpan$Type;
 import tv.twitch.android.shared.chat.UrlImageClickableProvider;
-import tv.twitch.android.mod.bridges.interfaces.IChatMessageFactory;
+import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.shared.ui.elements.span.UrlDrawable;
 import tv.twitch.chat.ChatMessageInfo;
 

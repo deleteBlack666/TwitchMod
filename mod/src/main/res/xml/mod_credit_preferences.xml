@@ -1,11 +1,11 @@
-<tv.twitch.android.mod.bridges.preference.PreferenceScreen
+<tv.twitch.android.mod.bridge.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <tv.twitch.android.mod.bridges.preference.Preference
+    <tv.twitch.android.mod.bridge.preference.Preference
         android:title="@string/mod_settings_translators"
         android:summary="@string/mod_settings_translators_list" >
         <intent android:action="android.intent.action.VIEW"
             android:data="https://crwd.in/twitchmod" />
-    </tv.twitch.android.mod.bridges.preference.Preference>
+    </tv.twitch.android.mod.bridge.preference.Preference>
 
-</tv.twitch.android.mod.bridges.preference.PreferenceScreen>
+</tv.twitch.android.mod.bridge.preference.PreferenceScreen>

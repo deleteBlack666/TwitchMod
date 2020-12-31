@@ -3,7 +3,7 @@ package tv.twitch.android.shared.chat.util;
 
 import android.content.Context;
 
-import tv.twitch.android.mod.bridges.models.ChatEmoticonUrl;
+import tv.twitch.android.mod.bridge.model.ChatEmoticonUrl;
 import tv.twitch.chat.ChatEmoticon;
 
 

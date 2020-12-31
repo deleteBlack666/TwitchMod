@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import tv.twitch.android.core.adapters.TwitchAdapter;
-import tv.twitch.android.mod.utils.GifHelper;
+import tv.twitch.android.mod.util.GifHelper;
 
 
 public class ChannelChatAdapter extends TwitchAdapter {

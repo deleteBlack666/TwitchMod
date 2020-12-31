@@ -1,7 +1,7 @@
-<tv.twitch.android.mod.bridges.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<tv.twitch.android.mod.bridge.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <tv.twitch.android.mod.bridges.preference.PreferenceCategory
+    <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_main" >
 
         <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
@@ -29,9 +29,9 @@
             android:summary="@string/mod_settings_hide_esports_desc"
             android:key="mod_hide_esports_tab"/>
 
-    </tv.twitch.android.mod.bridges.preference.PreferenceCategory>
+    </tv.twitch.android.mod.bridge.preference.PreferenceCategory>
 
-    <tv.twitch.android.mod.bridges.preference.PreferenceCategory
+    <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_chat">
         <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_old_emote_picker"
@@ -72,9 +72,9 @@
             android:max="50"
             android:defaultValue="50"
             app:showSeekBarValue="true" />
-    </tv.twitch.android.mod.bridges.preference.PreferenceCategory>
+    </tv.twitch.android.mod.bridge.preference.PreferenceCategory>
 
-    <tv.twitch.android.mod.bridges.preference.PreferenceCategory
+    <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_player">
         <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_compact_follow_view"
@@ -114,5 +114,5 @@
             app:showSeekBarValue="true"
             app:seekBarValueSuffix="%"
             />
-    </tv.twitch.android.mod.bridges.preference.PreferenceCategory>
-</tv.twitch.android.mod.bridges.preference.PreferenceScreen>
+    </tv.twitch.android.mod.bridge.preference.PreferenceCategory>
+</tv.twitch.android.mod.bridge.preference.PreferenceScreen>

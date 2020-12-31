@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 import tv.twitch.android.app.core.ViewExtensionsKt;
-import tv.twitch.android.mod.bridges.interfaces.ISharedPanelWidget;
+import tv.twitch.android.mod.bridge.interfaces.ISharedPanelWidget;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.models.clips.ClipModel;
 import tv.twitch.android.models.videos.VodModel;

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-import tv.twitch.android.mod.bridges.interfaces.ICommunityPointsButtonViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.ICommunityPointsButtonViewDelegate;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.shared.chat.communitypoints.models.CommunityPointsModel;
 

@@ -12,26 +12,26 @@ import androidx.fragment.app.FragmentActivity;
 
 import tv.twitch.android.app.core.ViewExtensionsKt;
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.bridges.LoaderLS;
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.interfaces.IBottomPlayerControlOverlayViewDelegate;
-import tv.twitch.android.mod.bridges.interfaces.ICommunityPointsButtonViewDelegate;
-import tv.twitch.android.mod.bridges.interfaces.IEmotePickerViewDelegate;
-import tv.twitch.android.mod.bridges.interfaces.IPreferenceFragment;
-import tv.twitch.android.mod.bridges.interfaces.ISharedPanelWidget;
-import tv.twitch.android.mod.bridges.preference.Preference;
-import tv.twitch.android.mod.bridges.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.bridge.LoaderLS;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.ICommunityPointsButtonViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.IEmotePickerViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
+import tv.twitch.android.mod.bridge.interfaces.ISharedPanelWidget;
+import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
 import tv.twitch.android.mod.fragments.ModInfoBannerFragment;
 import tv.twitch.android.mod.fragments.SleepTimerFragment;
 import tv.twitch.android.mod.fragments.settings.MainSettingsFragment;
 import tv.twitch.android.mod.settings.PreferenceManager;
-import tv.twitch.android.mod.utils.ClipDownloader;
-import tv.twitch.android.mod.utils.FragmentUtil;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.ClipDownloader;
+import tv.twitch.android.mod.util.FragmentUtil;
+import tv.twitch.android.mod.util.Logger;
 import tv.twitch.android.models.clips.ClipModel;
 
 public final class Controller {
-    public static View setupLockButton(View container, IBottomPlayerControlOverlayViewDelegate delegate) { // TODO: __INJECT_METHOD
+    public static View setupLockButton(View container, IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -42,6 +42,7 @@ public final class Controller {
             Logger.error("buttonId == 0");
             return null;
         }
+
         View buttonView = container.findViewById(buttonId);
         if (buttonView == null) {
             Logger.error("buttonView is null");
@@ -110,7 +111,7 @@ public final class Controller {
         lockButton.setVisibility(z ? View.VISIBLE : View.GONE);
     }
 
-    public static View setupRefreshButton(View container, final IBottomPlayerControlOverlayViewDelegate delegate) { // TODO: __INJECT_METHOD
+    public static View setupRefreshButton(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -151,7 +152,7 @@ public final class Controller {
         });
     }
 
-    public static View setupUptime(View container, final IBottomPlayerControlOverlayViewDelegate delegate) { // TODO: __INJECT_METHOD
+    public static View setupUptime(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -183,7 +184,7 @@ public final class Controller {
 
 
     public static FrameLayout setupDownloadButton(View container, ClipModel clipModel,
-                                                  ISharedPanelWidget sharedPanelWidget) { // TODO: __INJECT_METHOD
+                                                  ISharedPanelWidget sharedPanelWidget) {
         int buttonId = ResourcesManager.getId("download_model");
         if (buttonId == 0) {
             Logger.error("buttonId == 0");
@@ -226,7 +227,8 @@ public final class Controller {
         return container.findViewById(ResourcesManager.getId("sleep_timer_button"));
     }
 
-    public static void setupBttvEmotesButtonClickListener(ImageView bttvEmotesButton, final IEmotePickerViewDelegate delegate) {
+    public static void setupBttvEmotesButtonClickListener(ImageView bttvEmotesButton,
+                                                          final IEmotePickerViewDelegate delegate) {
         if (bttvEmotesButton == null) {
             Logger.error("bttvEmotesButton is null");
             return;
@@ -265,7 +267,8 @@ public final class Controller {
         view.maybeClickOnBonus();
     }
 
-    public static void maybeShowModInfoBanner(final FragmentActivity fragmentActivity, final TwitchAccountManager accountManager) {
+    public static void maybeShowModInfoBanner(final FragmentActivity fragmentActivity,
+                                              final TwitchAccountManager accountManager) {
         if (PreferenceManager.INSTANCE.getLastBuildNumber() == LoaderLS.getBuildNumber())
             return;
 
@@ -276,7 +279,7 @@ public final class Controller {
     }
 
     public static boolean onPreferenceStartFragment(FragmentActivity fragmentActivity,
-                                             PreferenceFragmentCompat caller, Preference pref) { // TODO: __INJECT_METHOD
+                                             PreferenceFragmentCompat caller, Preference pref) {
         if (fragmentActivity == null) {
             Logger.error("fragmentActivity is null");
             return false;
@@ -293,9 +296,8 @@ public final class Controller {
         }
 
         final Bundle args = pref.getExtras();
-        final Fragment fragment = fragmentActivity.getSupportFragmentManager().getFragmentFactory().instantiate(
-                fragmentActivity.getClassLoader(),
-                pref.getFragment());
+        final Fragment fragment = fragmentActivity.getSupportFragmentManager().getFragmentFactory()
+                .instantiate(fragmentActivity.getClassLoader(), pref.getFragment());
 
         String tag = caller.getTag();
         if (fragment instanceof IPreferenceFragment) {

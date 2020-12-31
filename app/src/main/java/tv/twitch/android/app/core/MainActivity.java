@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.bridges.LoaderLS;
+import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.fragments.SleepTimerFragment;
 import tv.twitch.android.mod.hooks.Controller;
 

@@ -2,7 +2,7 @@ package tv.twitch.android.shared.chat;
 
 
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.bridges.interfaces.ILiveChatSource;
+import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.hooks.Jump;
 import tv.twitch.android.shared.chat.events.ChatNoticeEvents;
 import tv.twitch.android.shared.chat.messagefactory.MessageListAdapterBinder;

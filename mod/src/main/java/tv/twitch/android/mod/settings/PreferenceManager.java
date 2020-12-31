@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 
-import tv.twitch.android.mod.bridges.LoaderLS;
+import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.models.Preferences;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
 import tv.twitch.android.mod.models.preferences.Gifs;
@@ -14,9 +14,9 @@ import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
 import tv.twitch.android.mod.models.preferences.SureStreamAdBlock;
 import tv.twitch.android.mod.models.preferences.UserMessagesFiltering;
-import tv.twitch.android.mod.utils.ChatMesssageFilteringUtil;
-import tv.twitch.android.mod.utils.Helper;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
+import tv.twitch.android.mod.util.Helper;
+import tv.twitch.android.mod.util.Logger;
 
 
 public class PreferenceManager implements PreferenceWrapper.PreferenceListener {

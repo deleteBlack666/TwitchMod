@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.Logger;
 
 
 public final class PreferenceWrapper implements SharedPreferences.OnSharedPreferenceChangeListener  {

@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import tv.twitch.android.mod.bridges.interfaces.IStreamUptimeController;
+import tv.twitch.android.mod.bridge.interfaces.IStreamUptimeController;
 
 
 public class StreamUptimeView extends androidx.appcompat.widget.AppCompatTextView implements IStreamUptimeController {
@@ -51,7 +51,6 @@ public class StreamUptimeView extends androidx.appcompat.widget.AppCompatTextVie
 
     @Override
     public void hide() {
-        destroyTimer();
         setVisibility(GONE);
     }
 

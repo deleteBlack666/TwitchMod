@@ -8,7 +8,7 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 
 import tv.twitch.android.mod.hooks.General;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.Logger;
 
 
 public class GlideChatImageTarget {

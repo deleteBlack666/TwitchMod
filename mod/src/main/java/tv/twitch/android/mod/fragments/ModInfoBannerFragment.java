@@ -20,10 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 
-import tv.twitch.android.mod.bridges.LoaderLS;
-import tv.twitch.android.mod.bridges.ResourcesManager;
+import tv.twitch.android.mod.bridge.LoaderLS;
+import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.settings.PreferenceManager;
-import tv.twitch.android.mod.utils.Helper;
+import tv.twitch.android.mod.util.Helper;
 
 
 public class ModInfoBannerFragment extends DialogFragment {

@@ -1,12 +1,12 @@
-<tv.twitch.android.mod.bridges.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<tv.twitch.android.mod.bridge.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+    <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
         android:title="@string/mod_settings_disable_autoplay"
         android:summary="@string/mod_settings_disable_autoplay_desc"
         android:key="mod_disable_theatre_autoplay"/>
 
-    <tv.twitch.android.mod.bridges.preference.ListPreference
+    <tv.twitch.android.mod.bridge.preference.ListPreference
         android:defaultValue="auto"
         android:title="@string/mod_settings_player_implementation"
         android:summary="%s"
@@ -14,7 +14,7 @@
         android:entries="@array/player_impl_choices"
         android:entryValues="@array/player_impl_values"/>
 
-    <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+    <tv.twitch.android.mod.bridge.preference.SeekBarPreference
         android:title="@string/mod_settings_player_forward_seek"
         android:summary="@string/mod_settings_player_forward_seek_desc"
         android:key="mod_player_forward_seek_value"
@@ -25,7 +25,7 @@
         app:seekBarValueSuffix="sec"
         />
 
-    <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+    <tv.twitch.android.mod.bridge.preference.SeekBarPreference
         android:title="@string/mod_settings_player_backward_seek"
         android:summary="@string/mod_settings_player_backward_seek_desc"
         android:key="mod_player_backward_seek_value"
@@ -35,7 +35,7 @@
         app:showSeekBarValue="true"
         app:seekBarValueSuffix="sec"
         />
-    <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+    <tv.twitch.android.mod.bridge.preference.SeekBarPreference
         android:title="@string/mod_settings_exoplayer_speed"
         android:summary="@string/mod_settings_exoplayer_speed_desc"
         android:key="mod_player_exoplayer_speed"
@@ -45,4 +45,4 @@
         app:showSeekBarValue="true"
         app:seekBarValueSuffix="%"
         />
-</tv.twitch.android.mod.bridges.preference.PreferenceScreen>
+</tv.twitch.android.mod.bridge.preference.PreferenceScreen>

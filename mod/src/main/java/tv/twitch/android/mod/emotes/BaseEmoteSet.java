@@ -12,7 +12,7 @@ import java.util.Map;
 
 import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.chat.EmoteSet;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.Logger;
 
 
 public class BaseEmoteSet implements EmoteSet {

@@ -1,18 +1,18 @@
-<tv.twitch.android.mod.bridges.preference.PreferenceScreen
+<tv.twitch.android.mod.bridge.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+    <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
         android:defaultValue="true"
         android:title="@string/mod_settings_bttv_emotes"
         android:summary="@string/mod_settings_bttv_emotes_desc"
         android:key="mod_bttv_emotes"/>
 
-    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+    <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
         android:title="@string/mod_settings_wide_emotes"
         android:summary="@string/mod_settings_wide_emotes_desc"
         android:key="mod_fix_wide_emotes"/>
 
-    <tv.twitch.android.mod.bridges.preference.ListPreference
+    <tv.twitch.android.mod.bridge.preference.ListPreference
         android:defaultValue="static"
         android:title="@string/mod_settings_gifs"
         android:summary="%s"
@@ -20,11 +20,11 @@
         android:entries="@array/gifs_choices"
         android:entryValues="@array/gifs_values"/>
 
-    <tv.twitch.android.mod.bridges.preference.ListPreference
+    <tv.twitch.android.mod.bridge.preference.ListPreference
         android:defaultValue="medium"
         android:title="@string/mod_settings_emote_size"
         android:summary="%s"
         android:key="mod_emote_size_type"
         android:entries="@array/source_emote_size_choices"
         android:entryValues="@array/source_emote_size_values"/>
-</tv.twitch.android.mod.bridges.preference.PreferenceScreen>
+</tv.twitch.android.mod.bridge.preference.PreferenceScreen>

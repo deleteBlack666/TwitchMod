@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import tv.twitch.android.app.core.ActivityUtil;
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.util.Logger;
 
 
 public class SleepTimerFragment extends DialogFragment implements TimePicker.OnTimeChangedListener {

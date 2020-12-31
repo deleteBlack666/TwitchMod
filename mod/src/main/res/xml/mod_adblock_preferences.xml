@@ -1,14 +1,14 @@
-<tv.twitch.android.mod.bridges.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<tv.twitch.android.mod.bridge.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+    <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
         android:title="@string/mod_settings_adblock"
         android:summary="@string/mod_settings_adblock_desc"
         android:key="mod_player_adblock"
         android:defaultValue="true"
         />
 
-    <tv.twitch.android.mod.bridges.preference.PreferenceCategory
+    <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="SureStream">
         <tv.twitch.android.mod.bridges.preference.Preference
             android:title="SureStream"
@@ -24,6 +24,6 @@
             android:key="mod_surestream_adblock_v2_type"
             android:entries="@array/surestream_adblock_choices"
             android:entryValues="@array/surestream_adblock_values"/>
-    </tv.twitch.android.mod.bridges.preference.PreferenceCategory>
+    </tv.twitch.android.mod.bridge.preference.PreferenceCategory>
 
-</tv.twitch.android.mod.bridges.preference.PreferenceScreen>
+</tv.twitch.android.mod.bridge.preference.PreferenceScreen>

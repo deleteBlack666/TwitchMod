@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
-import tv.twitch.android.mod.bridges.interfaces.IBottomPlayerControlOverlayViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.mod.hooks.Jump;
 import tv.twitch.android.mod.view.StreamUptimeView;
@@ -86,7 +86,7 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
     public void hideUptime() { // TODO: __INJECT_METHOD
         if (this.uptimeIcon != null) {
-            this.uptimeIcon.setVisibility(View.INVISIBLE);
+            this.uptimeIcon.setVisibility(View.GONE);
         }
 
         if (this.uptimeView != null) {

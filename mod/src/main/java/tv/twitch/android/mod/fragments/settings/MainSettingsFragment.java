@@ -6,12 +6,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import tv.twitch.android.mod.bridges.preference.Preference;
-import tv.twitch.android.mod.bridges.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
 
-import tv.twitch.android.mod.bridges.LoaderLS;
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.interfaces.IPreferenceFragment;
+import tv.twitch.android.mod.bridge.LoaderLS;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
 import tv.twitch.android.mod.settings.SettingsController;
 
 

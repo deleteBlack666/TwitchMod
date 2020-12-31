@@ -4,9 +4,9 @@ package tv.twitch.android.mod.settings;
 import android.app.Activity;
 
 
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.preference.Preference;
-import tv.twitch.android.mod.utils.Helper;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.util.Helper;
 
 
 public class SettingsController {

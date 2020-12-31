@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.twitch.android.mod.hooks.General;
-import tv.twitch.android.mod.bridges.interfaces.IChatMessageItem;
-import tv.twitch.android.mod.bridges.interfaces.IChatTextViewItem;
+import tv.twitch.android.mod.bridge.interfaces.IChatMessageItem;
+import tv.twitch.android.mod.bridge.interfaces.IChatTextViewItem;
 import tv.twitch.android.models.chomments.ChommentModel;
 
 

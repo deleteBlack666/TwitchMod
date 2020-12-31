@@ -6,11 +6,11 @@ import android.widget.ImageView;
 import tv.twitch.android.core.adapters.TwitchSectionAdapter;
 import tv.twitch.android.core.mvp.viewdelegate.RxViewDelegate;
 import tv.twitch.android.core.mvp.viewdelegate.ViewDelegateEvent;
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.interfaces.IEmotePickerViewDelegate;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.interfaces.IEmotePickerViewDelegate;
 import tv.twitch.android.mod.hooks.Controller;
-import tv.twitch.android.mod.utils.Helper;
-import tv.twitch.android.mod.utils.Logger;
+import tv.twitch.android.mod.util.Helper;
+import tv.twitch.android.mod.util.Logger;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmotePickerSection;
 import tv.twitch.android.shared.ui.elements.list.ContentListViewDelegate;
 

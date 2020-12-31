@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 
-import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
+import tv.twitch.android.mod.bridge.interfaces.IUrlDrawable;
 import tv.twitch.android.mod.hooks.Jump;
 
 

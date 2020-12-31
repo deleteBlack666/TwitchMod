@@ -20,28 +20,27 @@ import io.reactivex.subjects.PublishSubject;
 import okhttp3.Request;
 import tv.twitch.android.api.parsers.PlayableModelParser;
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.bridges.ChatFactory;
-import tv.twitch.android.mod.bridges.LoaderLS;
-import tv.twitch.android.mod.bridges.ResourcesManager;
-import tv.twitch.android.mod.bridges.interfaces.IChatConnectionController;
-import tv.twitch.android.mod.bridges.interfaces.IChatMessageFactory;
-import tv.twitch.android.mod.bridges.interfaces.ICommunityPointsButtonViewDelegate;
-import tv.twitch.android.mod.bridges.interfaces.ILiveChatSource;
-import tv.twitch.android.mod.bridges.interfaces.IUrlDrawable;
-import tv.twitch.android.mod.bridges.models.EmoteSet;
-import tv.twitch.android.mod.bridges.models.EmoteUiModelWithUrl;
+import tv.twitch.android.mod.bridge.ChatFactory;
+import tv.twitch.android.mod.bridge.LoaderLS;
+import tv.twitch.android.mod.bridge.ResourcesManager;
+import tv.twitch.android.mod.bridge.interfaces.IChatConnectionController;
+import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
+import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
+import tv.twitch.android.mod.bridge.interfaces.IUrlDrawable;
+import tv.twitch.android.mod.bridge.model.EmoteSet;
+import tv.twitch.android.mod.bridge.model.EmoteUiModelWithUrl;
 import tv.twitch.android.mod.emotes.EmoteManager;
 import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.Gifs;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
 import tv.twitch.android.mod.settings.PreferenceManager;
-import tv.twitch.android.mod.utils.ChatMesssageFilteringUtil;
-import tv.twitch.android.mod.utils.ChatUtil;
-import tv.twitch.android.mod.utils.DateUtil;
-import tv.twitch.android.mod.utils.Helper;
-import tv.twitch.android.mod.utils.Logger;
-import tv.twitch.android.mod.utils.ViewUtil;
+import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
+import tv.twitch.android.mod.util.ChatUtil;
+import tv.twitch.android.mod.util.DateUtil;
+import tv.twitch.android.mod.util.Helper;
+import tv.twitch.android.mod.util.Logger;
+import tv.twitch.android.mod.util.ViewUtil;
 import tv.twitch.android.models.Playable;
 import tv.twitch.android.models.channel.ChannelInfo;
 import tv.twitch.android.models.chomments.ChommentModel;
@@ -57,6 +56,10 @@ import tv.twitch.chat.ChatEmoticonSet;
 import tv.twitch.chat.ChatLiveMessage;
 import tv.twitch.chat.ChatMessageInfo;
 
+import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.DISABLED;
+import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.V1;
+import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.V3;
+
 
 public final class General {
     private final static String VOD_PLAYER_PRESENTER_CLASS = "tv.twitch.android.shared.player.presenters.VodPlayerPresenter";
@@ -68,19 +71,26 @@ public final class General {
     private final static String FAKE_PLAYER_TYPE = "embed";
     private static final int HIGHLIGHT_COLOR = Color.argb(100, 255, 0, 0);
 
+
     public static void tryPatchAdRequest(Request request, Request.Builder builder) {
-        if (!PreferenceManager.INSTANCE.isSurestreamAdblockOn()) {
-            return;
-        }
+        switch (PreferenceManager.INSTANCE.getSureStreamAdBlockVariant()) {
+            case V1:
+                if (!Helper.isAccessTokenRequest(request)) {
+                    return;
+                }
+                String authorization = LoaderLS.getAuthorization();
+                if (!TextUtils.isEmpty(authorization)) {
+                    builder.removeHeader("Authorization");
+                    builder.addHeader("Authorization", LoaderLS.getAuthorization());
+                }
+            case V3:
+                if (!Helper.isUsherRequest(request)) {
+                    return;
+                }
 
-        if (!Helper.isAccessTokenRequest(request)) {
-            return;
-        }
-
-        String authorization = LoaderLS.getAuthorization();
-        if (!TextUtils.isEmpty(authorization)) {
-            builder.removeHeader("Authorization");
-            builder.addHeader("Authorization", LoaderLS.getAuthorization());
+                // TODO: Set proxy url
+            default:
+            case DISABLED:
         }
     }
 
