@@ -23,3 +23,4 @@ TwitchMod is a modified version of Twitch Android Application.
 ## Credits
 - BatedUrGonnaDie for [glitchify](https://github.com/BatedUrGonnaDie/glitchify)
 - Karumi for [Dexter](https://github.com/Karumi/Dexter) android library
+- Randers for [recent-messages](https://recent-messages.robotty.de) API
