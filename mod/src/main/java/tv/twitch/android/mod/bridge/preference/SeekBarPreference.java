@@ -173,11 +173,13 @@ public class SeekBarPreference extends Preference {
         view.itemView.setOnKeyListener(mSeekBarKeyListener);
         mSeekBar = (SeekBar) view.findViewById(ResourcesManager.getId("seekbar_fix"));
         mSeekBarValueTextView = (TextView) view.findViewById(ResourcesManager.getId("seekbar_value"));
-        if (mShowSeekBarValue) {
-            mSeekBarValueTextView.setVisibility(View.VISIBLE);
-        } else {
-            mSeekBarValueTextView.setVisibility(View.GONE);
-            mSeekBarValueTextView = null;
+        if (mSeekBarValueTextView != null) {
+            if (mShowSeekBarValue) {
+                mSeekBarValueTextView.setVisibility(View.VISIBLE);
+            } else {
+                mSeekBarValueTextView.setVisibility(View.GONE);
+                mSeekBarValueTextView = null;
+            }
         }
 
         if (mSeekBar == null) {
