@@ -57,6 +57,9 @@ public class GifHelper {
         if (TextUtils.isEmpty(sequence))
             return;
 
+        if (!(sequence instanceof  Spanned))
+            return;
+
         Spanned message = (Spanned) sequence;
 
         CenteredImageSpan[] imageSpans = message.getSpans(0, message.length(), CenteredImageSpan.class);
