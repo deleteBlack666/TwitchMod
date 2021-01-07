@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.settings.PreferenceManager;
 import tv.twitch.android.mod.view.StreamUptimeView;
 
 
@@ -38,11 +39,11 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
     }
 
     public void updateLockButtonState() { // TODO: __INJECT_METHOD
-        Controller.updateLockButtonState(this.lockButton);
+        Controller.updatePlayerLockButtonState(this.lockButton);
     }
 
     private void setupLockButton(View view) { // TODO: __INJECT_METHOD
-        this.lockButton = (ImageView) Controller.setupLockButton(view, this);
+        this.lockButton = (ImageView) Controller.setupPlayerLockButton(view, this);
         updateLockButtonState();
     }
 
@@ -58,15 +59,15 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
 
     private void setupRefreshButton(View view) { // TODO: __INJECT_METHOD
-        this.refreshButton = (ImageView) Controller.setupRefreshButton(view, this);
-        if (!Jump.shouldShowRefreshButton() && this.refreshButton != null) {
+        this.refreshButton = (ImageView) Controller.setupPlayerRefreshButton(view, this);
+        if (!PreferenceManager.INSTANCE.shouldShowPlayerRefreshButton() && this.refreshButton != null) {
             this.refreshButton.setVisibility(View.GONE);
         }
     }
 
     private void setupUptime(View view) { // TODO: __INJECT_METHOD
-        this.uptimeView = (StreamUptimeView) Controller.setupUptime(view, this);
-        this.uptimeIcon = (ImageView) Controller.setupUptimeIcon(view, this);
+        this.uptimeView = (StreamUptimeView) Controller.setupPlayerUptime(view, this);
+        this.uptimeIcon = (ImageView) Controller.setupPlayerUptimeIcon(view, this);
 
         hideUptime();
     }

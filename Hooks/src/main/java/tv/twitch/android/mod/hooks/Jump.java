@@ -9,14 +9,6 @@ public final class Jump {
         return PreferenceManager.INSTANCE.hideFollowGameSection();
     }
 
-    public static boolean shouldShowRecommendedStreams() {
-        return PreferenceManager.INSTANCE.hideFollowRecommendationSection();
-    }
-
-    public static boolean shouldShowResumeStreams() {
-        return PreferenceManager.INSTANCE.hideFollowResumeSection();
-    }
-
     public static boolean inDevMode() {
         return PreferenceManager.INSTANCE.isDevModeOn();
     }
@@ -35,10 +27,6 @@ public final class Jump {
 
     public static boolean shouldHideEsportsTab() {
         return PreferenceManager.INSTANCE.hideEsportsTab();
-    }
-
-    public static boolean isBttvEmotesEnabled() {
-        return PreferenceManager.INSTANCE.showBttvEmotesInChat();
     }
 
     public static boolean shouldShowChatHeader() {
@@ -61,7 +49,7 @@ public final class Jump {
         return PreferenceManager.INSTANCE.hideSystemMessagesInChat();
     }
 
-    public static boolean shouldAnimate() {
+    public static boolean shouldAnimateGifsInChat() {
         return PreferenceManager.INSTANCE.isGifsAnimated();
     }
 
@@ -73,27 +61,11 @@ public final class Jump {
         return PreferenceManager.INSTANCE.hideRecentSearchResult();
     }
 
-    public static boolean isSwipperEnabled() {
-        return PreferenceManager.INSTANCE.isVolumeSwiperEnabled() || PreferenceManager.INSTANCE.isBrightnessSwiperEnabled();
-    }
-
     public static boolean shouldShowStreamUptime() {
         return PreferenceManager.INSTANCE.shouldShowStreamUptime();
     }
 
     public static boolean shouldShowStatButton() {
         return PreferenceManager.INSTANCE.shouldShowPlayerStatButton();
-    }
-
-    public static boolean shouldShowRefreshButton() {
-        return PreferenceManager.INSTANCE.shouldShowPlayerRefreshButton();
-    }
-
-    public static boolean shouldShowLockButton() {
-        return PreferenceManager.INSTANCE.shouldShowLockButton();
-    }
-
-    public static boolean shouldLockSwiper() {
-        return PreferenceManager.INSTANCE.shouldLockSwiper();
     }
 }

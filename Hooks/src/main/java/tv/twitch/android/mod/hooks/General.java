@@ -62,7 +62,7 @@ import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.V3;
 
 
 public final class General {
-    private final static String VOD_PLAYER_PRESENTER_CLASS = "tv.twitch.android.shared.player.presenters.VodPlayerPresenter";
+    private final static String VOD_PLAYER_PRESENTER_CLASS = "tv.twitch.android.shared.player.presenters.VodPlayerPresenter"; // FIXME: REMOVE
 
     private final static String PLAYER_CORE = "playercore";
     private final static String PLAYER_EXO2 = "exoplayer_2";
@@ -81,14 +81,14 @@ public final class General {
                 String authorization = LoaderLS.getAuthorization();
                 if (!TextUtils.isEmpty(authorization)) {
                     builder.removeHeader("Authorization");
-                    builder.addHeader("Authorization", LoaderLS.getAuthorization());
+                    builder.addHeader("Authorization", authorization);
                 }
             case V3:
                 if (!Helper.isUsherRequest(request)) {
                     return;
                 }
 
-                // TODO: Set proxy url
+                // TODO: Implement proxy
             default:
             case DISABLED:
         }
@@ -610,10 +610,6 @@ public final class General {
 
     public static String hookPackageName(String org) { // TODO: __HOOK
         return FAKE_PACKAGE_NAME;
-    }
-
-    public static void setLockSwiper(boolean z) {
-        PreferenceManager.INSTANCE.setLockSwiper(z);
     }
 
     public static int hookSetupForLandscapeDefaultChatScreenEdgePercentage(int org) {

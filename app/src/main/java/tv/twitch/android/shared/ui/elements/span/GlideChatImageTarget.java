@@ -3,7 +3,14 @@ package tv.twitch.android.shared.ui.elements.span;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.lang.ref.WeakReference;
 
@@ -11,7 +18,7 @@ import tv.twitch.android.mod.hooks.General;
 import tv.twitch.android.mod.util.Logger;
 
 
-public class GlideChatImageTarget {
+public class GlideChatImageTarget extends SimpleTarget<Drawable> {
     private UrlDrawable mUrlDrawable;
     private WeakReference<View> mContainerView; // TODO: __INJECT_FIELD
 
@@ -47,7 +54,8 @@ public class GlideChatImageTarget {
         return null;
     }
 
-    public void onResourceReady(Object drawable, Object transition) {
+    @Override
+    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
         /* ... */
 
         General.maybeInvalidateChatItem(mContainerView, mUrlDrawable); // TODO: __INJECT_CODE

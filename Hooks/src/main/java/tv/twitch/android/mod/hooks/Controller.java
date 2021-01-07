@@ -30,8 +30,9 @@ import tv.twitch.android.mod.util.FragmentUtil;
 import tv.twitch.android.mod.util.Logger;
 import tv.twitch.android.models.clips.ClipModel;
 
+
 public final class Controller {
-    public static View setupLockButton(View container, IBottomPlayerControlOverlayViewDelegate delegate) {
+    public static View setupPlayerLockButton(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -49,14 +50,21 @@ public final class Controller {
             return null;
         }
 
-        setupLockButtonClickListener(buttonView, delegate);
+        buttonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferenceManager.INSTANCE.setLockSwiper(!PreferenceManager.INSTANCE.shouldLockSwiper());
+                delegate.updateLockButtonState();
+            }
+        });
 
         return buttonView;
     }
 
-    public static void updateLockButtonState(ImageView lockButton) {
-        if (lockButton == null)
+    public static void updatePlayerLockButtonState(ImageView lockButton) {
+        if (lockButton == null) {
             return;
+        }
 
         int lockDrawableId = ResourcesManager.getDrawableId("ic_lock");
         if (lockDrawableId == 0) {
@@ -70,31 +78,7 @@ public final class Controller {
             return;
         }
 
-        if (Jump.shouldLockSwiper()) {
-            lockButton.setImageResource(unlockDrawableId);
-        } else {
-            lockButton.setImageResource(lockDrawableId);
-        }
-    }
-
-    public static void setupLockButtonClickListener(View lockButton, final IBottomPlayerControlOverlayViewDelegate delegate) {
-        if (lockButton == null) {
-            Logger.error("lockButton is null");
-            return;
-        }
-
-        if (delegate == null) {
-            Logger.error("delegate is null");
-            return;
-        }
-
-        lockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                General.setLockSwiper(!Jump.shouldLockSwiper());
-                delegate.updateLockButtonState();
-            }
-        });
+        lockButton.setImageResource(PreferenceManager.INSTANCE.shouldLockSwiper() ? unlockDrawableId : lockDrawableId);
     }
 
     public static void changeLockButtonVisibility(ImageView lockButton, boolean z) {
@@ -103,7 +87,9 @@ public final class Controller {
             return;
         }
 
-        if (!Jump.isSwipperEnabled() || !Jump.shouldShowLockButton()) {
+        if (!(PreferenceManager.INSTANCE.isVolumeSwiperEnabled() ||
+              PreferenceManager.INSTANCE.isBrightnessSwiperEnabled()) ||
+            !PreferenceManager.INSTANCE.shouldShowLockButton()) {
             lockButton.setVisibility(View.GONE);
             return;
         }
@@ -111,11 +97,13 @@ public final class Controller {
         lockButton.setVisibility(z ? View.VISIBLE : View.GONE);
     }
 
-    public static View setupRefreshButton(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
+    public static View setupPlayerRefreshButton(View container,
+                                                final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
         }
+
         int buttonId = ResourcesManager.getId("refresh_button");
         if (buttonId == 0) {
             Logger.error("buttonId == 0");
@@ -128,31 +116,18 @@ public final class Controller {
             return null;
         }
 
-        setupRefreshButtonClickListener(refreshButton, delegate);
-
-        return refreshButton;
-    }
-
-    public static void setupRefreshButtonClickListener(View refreshButton, final IBottomPlayerControlOverlayViewDelegate delegate) {
-        if (refreshButton == null) {
-            Logger.error("refreshButton is null");
-            return;
-        }
-
-        if (delegate == null) {
-            Logger.error("delegate is null");
-            return;
-        }
-
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delegate.clickRefresh();
             }
         });
+
+        return refreshButton;
     }
 
-    public static View setupUptime(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
+    public static View setupPlayerUptime(View container,
+                                         final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -167,7 +142,8 @@ public final class Controller {
         return container.findViewById(uptimeViewId);
     }
 
-    public static View setupUptimeIcon(View container, final IBottomPlayerControlOverlayViewDelegate delegate) { // TODO: __INJECT_METHOD
+    public static View setupPlayerUptimeIcon(View container,
+                                             final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
             return null;
@@ -206,10 +182,20 @@ public final class Controller {
             return;
         }
 
+        if (panelWidget == null) {
+            Logger.error("panelWidget is null");
+            return;
+        }
+
         downloadButton.setOnClickListener(new ClipDownloader(panelWidget));
     }
 
-    public static void setupTimerSleepButton(final Context context, ImageView button) {
+    public static void setupPlayerSleepTimerButton(final Context context, ImageView button) {
+        if (context == null) {
+            Logger.error("context is null");
+            return;
+        }
+
         if (button == null) {
             Logger.error("button is null");
             return;
@@ -218,13 +204,24 @@ public final class Controller {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentUtil.showDialogFragment(context, new SleepTimerFragment(), "sleepTimePicker");
+                FragmentUtil.showDialogFragment(context, new SleepTimerFragment(), "sleepTimerPicker");
             }
         });
     }
 
-    public static View getTimerSleepButton(View container) {
-        return container.findViewById(ResourcesManager.getId("sleep_timer_button"));
+    public static View getSleepTimerButton(View container) {
+        if (container == null) {
+            Logger.error("container is null");
+            return null;
+        }
+
+        int buttonId = ResourcesManager.getId("sleep_timer_button");
+        if (buttonId == 0) {
+            Logger.error("buttonId == 0");
+            return null;
+        }
+
+        return container.findViewById(buttonId);
     }
 
     public static void setupBttvEmotesButtonClickListener(ImageView bttvEmotesButton,
@@ -246,15 +243,15 @@ public final class Controller {
             }
         });
 
-        bttvEmotesButton.setVisibility(Jump.isBttvEmotesEnabled() ? View.VISIBLE :
-                                                                    View.GONE);
+        bttvEmotesButton.setVisibility(PreferenceManager.INSTANCE.showBttvEmotesInChat() ? View.VISIBLE :
+                View.GONE);
     }
 
     public static Fragment getModSettingsFragment() {
         return new MainSettingsFragment();
     }
 
-    public static void setupClicker(final ICommunityPointsButtonViewDelegate view) {
+    public static void setupPointClicker(final ICommunityPointsButtonViewDelegate view) {
         if (!PreferenceManager.INSTANCE.isAutoclickerEnabled()) {
             return;
         }

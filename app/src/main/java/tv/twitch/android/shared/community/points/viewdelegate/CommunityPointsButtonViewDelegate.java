@@ -23,7 +23,7 @@ public class CommunityPointsButtonViewDelegate implements ICommunityPointsButton
     private final void showClaimAvailable(CommunityPointsModel communityPointsModel) {
         /* ... */
 
-        Controller.setupClicker(this); // TODO: __INJECT_CODE
+        Controller.setupPointClicker(this); // TODO: __INJECT_CODE
     }
 
     private void handleClaimError() {

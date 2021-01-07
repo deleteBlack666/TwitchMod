@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     //noinspection GradleDependency
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation project(path: ':hooks')
     implementation project(path: ':mod')
 

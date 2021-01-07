@@ -18,8 +18,8 @@ public class PlayerOverlayViewDelegate extends BaseViewDelegate {
     public PlayerOverlayViewDelegate(Context context, View view, Object iChromecastHelper, Object experience, OverlayLayoutController overlayLayoutController2) {
         /* ... */
 
-        timerSleepButton = (ImageView) Controller.getTimerSleepButton(view); // TODO: __INJECT_CODE
-        Controller.setupTimerSleepButton(context, timerSleepButton); // TODO: __INJECT_CODE
+        timerSleepButton = (ImageView) Controller.getSleepTimerButton(view); // TODO: __INJECT_CODE
+        Controller.setupPlayerSleepTimerButton(context, timerSleepButton); // TODO: __INJECT_CODE
     }
 
     public final OverlayLayoutController getOverlayLayoutController() {

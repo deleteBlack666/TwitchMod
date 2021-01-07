@@ -33,7 +33,7 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
         if (drawable != null) {
             drawable.draw(canvas);
             if (drawable instanceof GifDrawable) {
-                if (Jump.shouldAnimate()) {
+                if (Jump.shouldAnimateGifsInChat()) {
                     ((GifDrawable) drawable).start();
                 }
             }
