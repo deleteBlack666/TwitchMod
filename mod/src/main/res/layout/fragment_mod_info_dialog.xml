@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin_double"
             android:layout_marginTop="@dimen/default_margin_double"
-            android:src="@drawable/ic_github3"
+            android:src="@drawable/ic_github_big"
             />
         <TextView
             android:layout_alignParentEnd="true"
