@@ -10,14 +10,14 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="SureStream">
-        <tv.twitch.android.mod.bridges.preference.Preference
+        <tv.twitch.android.mod.bridge.preference.Preference
             android:title="SureStream"
             android:summary="@string/mod_settings_surestream_desc" >
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://twitchadvertising.tv/ad-products/surestream" />
-        </tv.twitch.android.mod.bridges.preference.Preference>
+        </tv.twitch.android.mod.bridge.preference.Preference>
 
-        <tv.twitch.android.mod.bridges.preference.ListPreference
+        <tv.twitch.android.mod.bridge.preference.ListPreference
             android:defaultValue="v1"
             android:title="@string/mod_settings_adblock_surestream"
             android:summary="%s"

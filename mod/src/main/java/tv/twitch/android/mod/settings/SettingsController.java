@@ -2,16 +2,55 @@ package tv.twitch.android.mod.settings;
 
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 
+import tv.twitch.android.app.core.ActivityUtil;
 import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.models.Preferences;
 import tv.twitch.android.mod.util.Helper;
+import tv.twitch.android.mod.util.Logger;
 
 
 public class SettingsController {
-    public static void showRestartDialog(Activity activity) {
-        Helper.showRestartDialog(activity, ResourcesManager.getString("restart_dialog_text"));
+    private static Preferences[] RESTART_LIST = {Preferences.PLAYER_ADBLOCK, Preferences.FFZ_BADGES,
+    Preferences.DISABLE_GOOGLE_BILLING, Preferences.HIDE_DISCOVER_TAB, Preferences.HIDE_ESPORTS_TAB,
+    Preferences.BTTV_EMOTES};
+
+    public static void maybeShowRestartDialog(Activity activity, String key) {
+        if (TextUtils.isEmpty(key)) {
+            Logger.warning("empty key");
+            return;
+        }
+
+        if (ActivityUtil.isActivityInvalid(activity)) {
+            Logger.error("invalid activity");
+            return;
+        }
+
+        if (isRestartKey(key)) {
+            Helper.showRestartDialog(activity, ResourcesManager.getString("restart_dialog_text"));
+        }
+    }
+
+    private static boolean isRestartKey(String key) {
+        if (TextUtils.isEmpty(key)) {
+            Logger.warning("empty key");
+            return false;
+        }
+
+        Preferences pref = Preferences.lookupKey(key);
+        if (pref == null)
+            return false;
+
+        for (Preferences p : RESTART_LIST) {
+            if (p == pref) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static class OnBuildClickListener implements Preference.OnPreferenceClickListener {

@@ -49,13 +49,13 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_chat_filtering" >
-        <tv.twitch.android.mod.bridges.preference.EditTextPreference
+        <tv.twitch.android.mod.bridge.preference.EditTextPreference
             android:title="@string/mod_settings_blocklist"
             android:summary="@string/mod_settings_blocklist_desc"
             android:key="mod_filter_text"
             android:dialogMessage="@string/mod_filter_blocklist_desc" />
 
-        <tv.twitch.android.mod.bridges.preference.ListPreference
+        <tv.twitch.android.mod.bridge.preference.ListPreference
             android:defaultValue="disabled"
             android:title="@string/mod_settings_filtering_level"
             android:summary="%s"
@@ -63,7 +63,7 @@
             android:entries="@array/filter_level_choices"
             android:entryValues="@array/filter_level_values"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_filtering_ignore_system"
             android:summary="@string/mod_settings_filtering_ignore_system_desc"
             android:key="mod_chat_message_filter_system"/>
@@ -71,12 +71,12 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_settings_recent_messages_service_category">
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_message_history"
             android:summary="@string/mod_settings_message_history_desc"
             android:key="mod_message_history"/>
 
-        <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+        <tv.twitch.android.mod.bridge.preference.SeekBarPreference
             android:title="@string/mod_settings_message_history_limit"
             android:summary="@string/mod_settings_message_history_limit_desc"
             android:key="mod_robotty_limit_value"
@@ -85,22 +85,22 @@
             android:defaultValue="20"
             app:showSeekBarValue="true"
             />
-        <tv.twitch.android.mod.bridges.preference.Preference
+        <tv.twitch.android.mod.bridge.preference.Preference
             android:title="@string/mod_settings_about_service"
             android:summary="@string/mod_settings_visit_website"
             >
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://recent-messages.robotty.de" />
-        </tv.twitch.android.mod.bridges.preference.Preference>
+        </tv.twitch.android.mod.bridge.preference.Preference>
     </tv.twitch.android.mod.bridge.preference.PreferenceCategory>
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_floating_chat">
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_floating_chat"
             android:summary="@string/mod_settings_floating_chat_desc"
             android:key="mod_floating_chat"/>
-        <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+        <tv.twitch.android.mod.bridge.preference.SeekBarPreference
             android:key="mod_floating_chat_size_value"
             android:title="@string/mod_settings_floating_queue"
             android:summary="@string/mod_settings_floating_queue_desc"

@@ -4,27 +4,27 @@
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_main" >
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_disable_recommendations"
             android:summary="@string/mod_settings_disable_recommendations_desc"
             android:key="mod_hide_follow_recommended"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_disable_resume_watching"
             android:summary="@string/mod_settings_disable_resume_watching_desc"
             android:key="mod_hide_follow_resume"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_disable_followed_games"
             android:summary="@string/mod_settings_disable_followed_games_desc"
             android:key="mod_hide_follow_games"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_hide_discover"
             android:summary="@string/mod_settings_hide_discover_desc"
             android:key="mod_hide_discover_tab"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_hide_esports"
             android:summary="@string/mod_settings_hide_esports_desc"
             android:key="mod_hide_esports_tab"/>
@@ -33,28 +33,28 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_chat">
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_old_emote_picker"
             android:summary="@string/mod_settings_old_emote_picker_desc"
             android:key="mod_emote_picker_view"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_hide_chat_restriction"
             android:summary="@string/mod_settings_hide_chat_restriction_desc"
             android:key="mod_hide_chat_restrictions"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_hide_chat_header_container"
             android:summary="@string/mod_settings_hide_chat_header_container_desc"
             android:key="mod_hide_chat_header"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:title="@string/mod_settings_show_hype_train"
             android:summary="@string/mod_settings_show_hype_train_desc"
             android:key="mod_show_hype_train"/>
 
-        <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+        <tv.twitch.android.mod.bridge.preference.SeekBarPreference
             android:key="mod_chat_width_scale_value"
             android:title="@string/mod_settings_landscape_chat_width"
             android:summary="@string/mod_settings_landscape_chat_width_desc"
@@ -63,7 +63,7 @@
             android:max="50"
             android:defaultValue="25"
             app:showSeekBarValue="true" />
-        <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+        <tv.twitch.android.mod.bridge.preference.SeekBarPreference
             android:key="mod_chat_width_scale_max_value"
             android:title="@string/mod_settings_landscape_chat_width_max"
             android:summary="@string/mod_settings_landscape_chat_width_max_desc"
@@ -76,35 +76,35 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_player">
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_compact_follow_view"
             android:summary="@string/mod_settings_compact_follow_view_desc"
             android:key="mod_compact_follow_view"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_show_stream_uptime"
             android:summary="@string/mod_settings_show_stream_uptime_desc"
             android:defaultValue="true"
             android:key="mod_player_show_stream_uptime"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_show_stats_button"
             android:summary="@string/mod_settings_show_stats_button_desc"
             android:defaultValue="true"
             android:key="mod_player_show_stats_button"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_show_refresh_button"
             android:summary="@string/mod_settings_show_refresh_button_desc"
             android:defaultValue="true"
             android:key="mod_player_show_refresh_button"/>
 
-        <tv.twitch.android.mod.bridges.preference.SwitchPreferenceCompat
+        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_disable_new_clips"
             android:summary="@string/mod_settings_disable_new_clips_desc"
             android:key="mod_disable_new_clips_view"/>
 
-        <tv.twitch.android.mod.bridges.preference.SeekBarPreference
+        <tv.twitch.android.mod.bridge.preference.SeekBarPreference
             android:title="@string/mod_settings_miniplayer_size"
             android:summary="@string/mod_settings_miniplayer_size_desc"
             android:key="mod_miniplayer_scale_value"
