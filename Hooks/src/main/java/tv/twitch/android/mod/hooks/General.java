@@ -218,7 +218,7 @@ public final class General {
 
         if (manager.showBttvEmotesInChat()) {
             hooked = ChatUtil.tryAddEmotes(factory, chatMessageInterface, hooked, channelId,
-                    manager.getGifsStrategy().equals(Gifs.DISABLED), manager.getEmoteSize());
+                    manager.getGifsStrategy().equals(Gifs.DISABLED), manager.getImageSize());
         }
 
         return hooked;
