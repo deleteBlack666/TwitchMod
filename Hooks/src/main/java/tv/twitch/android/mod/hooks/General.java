@@ -20,6 +20,7 @@ import io.reactivex.subjects.PublishSubject;
 import okhttp3.Request;
 import tv.twitch.android.api.parsers.PlayableModelParser;
 import tv.twitch.android.core.user.TwitchAccountManager;
+import tv.twitch.android.mod.badges.BadgeManager;
 import tv.twitch.android.mod.bridge.ChatFactory;
 import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.bridge.ResourcesManager;
@@ -30,6 +31,7 @@ import tv.twitch.android.mod.bridge.interfaces.IUrlDrawable;
 import tv.twitch.android.mod.bridge.model.EmoteSet;
 import tv.twitch.android.mod.bridge.model.EmoteUiModelWithUrl;
 import tv.twitch.android.mod.emotes.EmoteManager;
+import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.Gifs;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
@@ -224,23 +226,35 @@ public final class General {
 
     public static SpannedString hookChatMessageBadges(IChatMessageFactory factory,
                                                       ChatMessageInterface chatMessageInterface,
-                                                      SpannedString badges) {
+                                                      SpannedString badgesSpan) {
         if (factory == null) {
             Logger.error("factory is null");
-            return badges;
+            return badgesSpan;
         }
 
         if (chatMessageInterface == null) {
             Logger.error("chatMessageInterface is null");
-            return badges;
+            return badgesSpan;
         }
 
-        if (badges == null) {
-            Logger.error("badges is null");
-            return badges;
+        if (badgesSpan == null) {
+            Logger.error("badgesSpan is null");
+            return badgesSpan;
         }
 
-        return badges;
+        // FIXME: add option to turn off
+        Collection<Badge> badges = BadgeManager.INSTANCE.findBadges(chatMessageInterface.getUserId());
+
+        // FIXME: inject donators badges
+        try {
+            if (!badges.isEmpty()) {
+                badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
+            }
+        } catch (Throwable th) {
+            th.printStackTrace();
+        }
+
+        return badgesSpan;
     }
 
     public static Spanned hookMarkAsDeleted(tv.twitch.android.shared.chat.util.ChatUtil.Companion companion,

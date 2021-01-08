@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import tv.twitch.android.app.consumer.TwitchApplication;
 import tv.twitch.android.mod.BuildConfig;
+import tv.twitch.android.mod.badges.BadgeManager;
 import tv.twitch.android.mod.emotes.EmoteManager;
 import tv.twitch.android.mod.fragments.SleepTimerFragment;
 import tv.twitch.android.mod.settings.PreferenceManager;
@@ -71,7 +72,12 @@ public class LoaderLS extends TwitchApplication implements SleepTimerFragment.Sl
         initLoader();
         super.onCreate();
         fetchBttv();
+        fetchBadges();
         setFilterBlocklist();
+    }
+
+    private void fetchBadges() {
+        BadgeManager.INSTANCE.fetchBadges();
     }
 
     private void setFilterBlocklist() {

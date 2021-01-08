@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import java.util.HashMap;
 
+import tv.twitch.android.mod.models.api.FfzUrls;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
 
 
@@ -17,6 +18,12 @@ public class FfzUrlProvider implements UrlProvider {
         this.mSmallEmoteUrl = urls.get("1x");
         this.mMediumEmoteUrl = urls.get("2x");
         this.mLargeEmoteUrl = urls.get("4x");
+    }
+
+    public FfzUrlProvider(FfzUrls ffzUrls) {
+        this.mSmallEmoteUrl = ffzUrls.getSmall();
+        this.mMediumEmoteUrl = ffzUrls.getMedium();
+        this.mLargeEmoteUrl = ffzUrls.getLarge();
     }
 
     @Override

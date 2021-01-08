@@ -1,5 +1,7 @@
 package tv.twitch.android.mod.models.api;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 
@@ -11,16 +13,17 @@ public class FfzBadge {
     private int id;
     @SerializedName("name")
     private String name;
+    @Nullable
     @SerializedName("replaces")
     private String replaces;
     @SerializedName("urls")
-    private HashMap<Integer, String> urls;
+    private FfzUrls urls;
 
     public int getId() {
         return id;
     }
 
-    public HashMap<Integer, String> getUrls() {
+    public FfzUrls getUrls() {
         return urls;
     }
 
@@ -28,6 +31,7 @@ public class FfzBadge {
         return name;
     }
 
+    @Nullable
     public String getReplaces() {
         return replaces;
     }

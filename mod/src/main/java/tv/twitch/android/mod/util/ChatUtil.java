@@ -17,15 +17,18 @@ import androidx.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 
+import retrofit2.http.Url;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.chat.fetcher.RobottyFetcher;
 import tv.twitch.android.mod.emotes.EmoteManager;
+import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.EmoteSize;
 import tv.twitch.android.models.channel.ChannelInfo;
@@ -217,6 +220,31 @@ public class ChatUtil {
         }
 
         return bttvEmotes;
+    }
+
+    public static SpannedString tryAddBadges(SpannedString messageBadgeSpan, IChatMessageFactory factory, Collection<Badge> badges) {
+        if (badges == null || badges.isEmpty())
+            return messageBadgeSpan;
+
+        SpannableStringBuilder ssb = messageBadgeSpan == null ? new SpannableStringBuilder() : new SpannableStringBuilder(messageBadgeSpan);
+
+        for (Badge badge : badges) {
+            if (badge == null)
+                continue;
+
+            String url = badge.getUrlProvider().getUrl(EmoteSize.LARGE);
+            CharSequence newBadgeSpan = factory.getSpannedBadge(url, badge.getName());
+            if (TextUtils.isEmpty(newBadgeSpan))
+                continue;
+
+            if (badge.getReplaces().length != 0) {
+                Logger.debug("FIX!"); // FIXME: rewrite
+            } else {
+                ssb.append(newBadgeSpan);
+            }
+        }
+
+        return new SpannedString(ssb);
     }
 
     public static SpannedString tryAddEmotes(final IChatMessageFactory factory, ChatMessageInterface chatMessageInterface, SpannedString messageSpan, final int channelID, final boolean isGifsDisabled, final @EmoteSize String emoteSize) {
