@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.models.Preferences;
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.models.preferences.ImageSize;
 import tv.twitch.android.mod.models.preferences.Gifs;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
@@ -76,7 +76,8 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private String userFilterText;
     private String userAgent;
 
-    private @EmoteSize String emoteSize;
+    private @ImageSize
+    String imageSize;
     private int landscapeChatScale;
     private int landscapeChatScaleMax;
     private @Gifs String gifsRenderType;
@@ -156,7 +157,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
         userFilterText = getString(Preferences.USER_FILTER_TEXT, null);
 
-        emoteSize = getString(Preferences.EMOTE_SIZE, Helper.isHiDensityDevice() ? EmoteSize.LARGE : EmoteSize.MEDIUM);
+        imageSize = getString(Preferences.EMOTE_SIZE, Helper.isHiDensityDevice() ? ImageSize.LARGE : ImageSize.MEDIUM);
         landscapeChatScale = getInt(Preferences.LANDSCAPE_CHAT_SCALE, DEFAULT_LANDSCAPE_CHAT_SCALE);
         landscapeChatScaleMax = getInt(Preferences.LANDSCAPE_CHAT_SCALE_MAX, DEFAULT_LANDSCAPE_CHAT_SCALE_MAX);
         gifsRenderType = getString(Preferences.GIFS_RENDER_TYPE, Gifs.STATIC);
@@ -410,8 +411,9 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return showStreamUptime;
     }
 
-    public @EmoteSize String getEmoteSize() {
-        return emoteSize;
+    public @ImageSize
+    String getImageSize() {
+        return imageSize;
     }
 
     public @PlayerImpl String getPlayerImplementation() {
@@ -539,7 +541,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 isDevModeOn = sharedPreferences.getBoolean(key, isDevModeOn);
                 break;
             case EMOTE_SIZE:
-                emoteSize = sharedPreferences.getString(key, emoteSize);
+                imageSize = sharedPreferences.getString(key, imageSize);
                 break;
             case BTTV_EMOTES:
                 showBttvEmoteInChat = sharedPreferences.getBoolean(key, showBttvEmoteInChat);

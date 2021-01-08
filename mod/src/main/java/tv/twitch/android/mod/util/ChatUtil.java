@@ -23,14 +23,13 @@ import java.util.List;
 import java.util.Locale;
 
 
-import retrofit2.http.Url;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.chat.fetcher.RobottyFetcher;
 import tv.twitch.android.mod.emotes.EmoteManager;
 import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.Emote;
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.models.preferences.ImageSize;
 import tv.twitch.android.models.channel.ChannelInfo;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.util.ClickableUsernameSpan;
@@ -232,7 +231,7 @@ public class ChatUtil {
             if (badge == null)
                 continue;
 
-            String url = badge.getUrlProvider().getUrl(EmoteSize.LARGE);
+            String url = badge.getUrlProvider().getUrl(ImageSize.LARGE);
             CharSequence newBadgeSpan = factory.getSpannedBadge(url, badge.getName());
             if (TextUtils.isEmpty(newBadgeSpan))
                 continue;
@@ -247,7 +246,7 @@ public class ChatUtil {
         return new SpannedString(ssb);
     }
 
-    public static SpannedString tryAddEmotes(final IChatMessageFactory factory, ChatMessageInterface chatMessageInterface, SpannedString messageSpan, final int channelID, final boolean isGifsDisabled, final @EmoteSize String emoteSize) {
+    public static SpannedString tryAddEmotes(final IChatMessageFactory factory, ChatMessageInterface chatMessageInterface, SpannedString messageSpan, final int channelID, final boolean isGifsDisabled, final @ImageSize String emoteSize) {
         if (factory == null) {
             Logger.error("factory is null");
             return messageSpan;

@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import java.util.HashMap;
 
 import tv.twitch.android.mod.models.api.FfzUrls;
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.models.preferences.ImageSize;
 
 
 public class FfzUrlProvider implements UrlProvider {
@@ -27,16 +27,16 @@ public class FfzUrlProvider implements UrlProvider {
     }
 
     @Override
-    public String getUrl(@EmoteSize String size) {
+    public String getUrl(@ImageSize String size) {
         switch (size) {
-            case EmoteSize.LARGE:
+            case ImageSize.LARGE:
                 if (!TextUtils.isEmpty(mLargeEmoteUrl))
                     return mLargeEmoteUrl;
             default:
-            case EmoteSize.MEDIUM:
+            case ImageSize.MEDIUM:
                 if (!TextUtils.isEmpty(mMediumEmoteUrl))
                     return mMediumEmoteUrl;
-            case EmoteSize.SMALL:
+            case ImageSize.SMALL:
                 if (!TextUtils.isEmpty(mSmallEmoteUrl))
                     return mSmallEmoteUrl;
         }

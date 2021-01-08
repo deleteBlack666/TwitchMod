@@ -1,7 +1,7 @@
 package tv.twitch.android.mod.emotes;
 
 
-import tv.twitch.android.mod.models.preferences.EmoteSize;
+import tv.twitch.android.mod.models.preferences.ImageSize;
 
 
 public class BttvUrlProvider implements UrlProvider {
@@ -18,14 +18,14 @@ public class BttvUrlProvider implements UrlProvider {
     }
 
     @Override
-    public String getUrl(@EmoteSize String size) {
+    public String getUrl(@ImageSize String size) {
         switch (size) {
-            case EmoteSize.LARGE:
+            case ImageSize.LARGE:
                 return mLargeEmoteUrl;
             default:
-            case EmoteSize.MEDIUM:
+            case ImageSize.MEDIUM:
                 return mMediumEmoteUrl;
-            case EmoteSize.SMALL:
+            case ImageSize.SMALL:
                 return mSmallEmoteUrl;
         }
     }
