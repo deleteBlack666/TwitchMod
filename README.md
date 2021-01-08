@@ -1,5 +1,5 @@
 # TwitchMod
-TwitchMod is a modified version of Twitch Android Application.
+TwitchMod is a **free** modified version of Twitch Android Application.
 
 ## Features
 - BetterTTV and FrankerFaceZ emotes
@@ -24,3 +24,8 @@ TwitchMod is a modified version of Twitch Android Application.
 - BatedUrGonnaDie for [glitchify](https://github.com/BatedUrGonnaDie/glitchify)
 - Karumi for [Dexter](https://github.com/Karumi/Dexter) android library
 - Randers for [recent-messages](https://recent-messages.robotty.de) API
+
+## Donate
+You can now support my work: https://www.donationalerts.com/r/nopbreak
+
+All donators will get a unique badge in future, just write your twitch username or id in the description of transaction.
