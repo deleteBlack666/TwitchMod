@@ -29,7 +29,7 @@ public class BadgeManager implements FfzBadgesFetcher.Callback {
     }
 
     @NonNull
-    public Collection<Badge> findBadges(Integer userId) {
+    public Collection<Badge> getFfzBadges(Integer userId) {
         if (userId <= 0) {
             Logger.debug("userId  <= 0");
             return Collections.emptyList();

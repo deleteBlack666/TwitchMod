@@ -77,7 +77,9 @@ public class LoaderLS extends TwitchApplication implements SleepTimerFragment.Sl
     }
 
     private void fetchBadges() {
-        BadgeManager.INSTANCE.fetchBadges();
+        if (PreferenceManager.INSTANCE.isFfzBadgesEnabled()) {
+            BadgeManager.INSTANCE.fetchBadges();
+        }
     }
 
     private void setFilterBlocklist() {

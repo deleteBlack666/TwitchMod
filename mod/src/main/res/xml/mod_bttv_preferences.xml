@@ -12,6 +12,11 @@
         android:summary="@string/mod_settings_wide_emotes_desc"
         android:key="mod_fix_wide_emotes"/>
 
+    <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
+        android:title="@string/mod_settings_badges"
+        android:summary="@string/mod_settings_badges_desc"
+        android:key="mod_ffz_badges"/>
+
     <tv.twitch.android.mod.bridge.preference.ListPreference
         android:defaultValue="static"
         android:title="@string/mod_settings_gifs"

@@ -242,17 +242,12 @@ public final class General {
             return badgesSpan;
         }
 
-        // FIXME: add option to turn off
-        Collection<Badge> badges = BadgeManager.INSTANCE.findBadges(chatMessageInterface.getUserId());
+        if (PreferenceManager.INSTANCE.isFfzBadgesEnabled()) {
+            Collection<Badge> badges = BadgeManager.INSTANCE.getFfzBadges(chatMessageInterface.getUserId());
+            badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
+        }
 
         // FIXME: inject donators badges
-        try {
-            if (!badges.isEmpty()) {
-                badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
-            }
-        } catch (Throwable th) {
-            th.printStackTrace();
-        }
 
         return badgesSpan;
     }

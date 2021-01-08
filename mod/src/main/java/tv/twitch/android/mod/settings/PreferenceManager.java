@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 
 import tv.twitch.android.mod.bridge.LoaderLS;
+import tv.twitch.android.mod.bridge.preference.Preference;
 import tv.twitch.android.mod.models.Preferences;
 import tv.twitch.android.mod.models.preferences.ImageSize;
 import tv.twitch.android.mod.models.preferences.Gifs;
@@ -69,6 +70,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private boolean showHypeTrain;
     private boolean shouldHideChatHeaderContainer;
     private boolean showStreamUptime;
+    private boolean ffzBadges;
 
     private boolean shouldShowBanner;
     private boolean isBannerShown;
@@ -152,6 +154,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         showHypeTrain = getBoolean(Preferences.SHOW_HYPE_TRAIN, true);
         shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER, false);
         showStreamUptime = getBoolean(Preferences.STREAM_UPTIME, true);
+        ffzBadges = getBoolean(Preferences.FFZ_BADGES, false);
 
         lastBuildNum = getInt(Preferences.LAST_BUILD_NUMBER, -1);
 
@@ -504,6 +507,10 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return lastBuildNum;
     }
 
+    public boolean isFfzBadgesEnabled() {
+        return ffzBadges;
+    }
+
     public void updateBuildNumber() {
         updateInt(Preferences.LAST_BUILD_NUMBER.getKey(), LoaderLS.getBuildNumber());
     }
@@ -681,6 +688,9 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 break;
             case LAST_BUILD_NUMBER:
                 lastBuildNum = sharedPreferences.getInt(key, lastBuildNum);
+                break;
+            case FFZ_BADGES:
+                ffzBadges = sharedPreferences.getBoolean(key, ffzBadges);
                 break;
             default:
                 Logger.warning("Check key: " + key);
