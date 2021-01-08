@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 
+import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.chat.fetcher.RobottyFetcher;
@@ -99,7 +100,7 @@ public class ChatUtil {
             return;
         }
 
-        source.addRecentMessage("[ROBOTTY] Fetching recent messages... (https://recent-messages.robotty.de)");
+        source.addRecentMessage(ResourcesManager.getString("mod_robotty_fetching"));
         RobottyFetcher fetcher = new RobottyFetcher(channelInfo, limit, new RobottyFetcher.Callback() {
             @Override
             public void onMessagesParsed(ChannelInfo channel, List<String> ircMessages) {
@@ -117,7 +118,7 @@ public class ChatUtil {
                 }
 
                 if (messages.size() == 0) {
-                    source.addRecentMessage("[ROBOTTY] No message available");
+                    source.addRecentMessage(ResourcesManager.getString("mod_robotty_no_messages"));
                     return;
                 }
 
@@ -130,7 +131,7 @@ public class ChatUtil {
             public void onError(ChannelInfo info, String text) {
                 if (!TextUtils.isEmpty(text)) {
                     Logger.error(text);
-                    source.addRecentMessage("[ROBOTTY] Error: " + text);
+                    source.addRecentMessage(ResourcesManager.getString("mod_robotty_error") + " " + text);
                 }
             }
         });
