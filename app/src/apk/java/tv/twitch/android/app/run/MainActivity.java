@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import tv.twitch.android.mod.bridge.Hooks;
 import tv.twitch.android.mod.fragments.settings.MainSettingsFragment;
 import tv.twitch.android.mod.util.FragmentUtil;
 
