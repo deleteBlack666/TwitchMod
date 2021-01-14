@@ -12,10 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 import tv.twitch.android.app.consumer.TwitchApplication;
 import tv.twitch.android.mod.BuildConfig;
-import tv.twitch.android.mod.badges.BadgeManager;
-import tv.twitch.android.mod.emotes.EmoteManager;
-import tv.twitch.android.mod.fragments.SleepTimerFragment;
-import tv.twitch.android.mod.settings.PreferenceManager;
+import tv.twitch.android.mod.badge.BadgeManager;
+import tv.twitch.android.mod.emote.EmoteManager;
+import tv.twitch.android.mod.fragment.SleepTimerFragment;
+import tv.twitch.android.mod.setting.PreferenceManager;
 import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
 import tv.twitch.android.mod.util.Helper;
 

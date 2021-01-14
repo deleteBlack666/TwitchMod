@@ -27,7 +27,7 @@ import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.chat.fetcher.RobottyFetcher;
-import tv.twitch.android.mod.emotes.EmoteManager;
+import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.ImageSize;

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 
-import tv.twitch.android.mod.emotes.UrlProvider;
+import tv.twitch.android.mod.emote.UrlProvider;
 
 
 public final class FfzBadge implements Badge {

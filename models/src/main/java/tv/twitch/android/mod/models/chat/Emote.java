@@ -3,7 +3,7 @@ package tv.twitch.android.mod.models.chat;
 
 import androidx.annotation.NonNull;
 
-import tv.twitch.android.mod.emotes.UrlProvider;
+import tv.twitch.android.mod.emote.UrlProvider;
 
 
 public interface Emote {

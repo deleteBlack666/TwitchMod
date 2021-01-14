@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.mod.hooks.Jump;
-import tv.twitch.android.mod.settings.PreferenceManager;
+import tv.twitch.android.mod.setting.PreferenceManager;
 import tv.twitch.android.mod.view.StreamUptimeView;
 
 

@@ -6,11 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.Arrays;
-
-import tv.twitch.android.mod.badges.BadgeManager;
-import tv.twitch.android.mod.fragments.settings.MainSettingsFragment;
-import tv.twitch.android.mod.util.FragmentUtil;
+import tv.twitch.android.mod.badge.BadgeManager;
+import tv.twitch.android.mod.fragment.setting.MainSettingsFragment;
 import tv.twitch.android.mod.util.Logger;
 
 
@@ -29,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 while (true) {
                     try {
                         Thread.sleep(1000);
-                        Logger.debug(BadgeManager.INSTANCE.findBadges(73227142).toString());
+                        Logger.debug(BadgeManager.INSTANCE.getFfzBadges(73227142).toString());
                     } catch (Throwable throwable) {
                         ;
                     }
