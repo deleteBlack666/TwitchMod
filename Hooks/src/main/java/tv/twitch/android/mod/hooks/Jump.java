@@ -1,7 +1,7 @@
 package tv.twitch.android.mod.hooks;
 
 
-import tv.twitch.android.mod.settings.PreferenceManager;
+import tv.twitch.android.mod.setting.PreferenceManager;
 
 
 public final class Jump {
