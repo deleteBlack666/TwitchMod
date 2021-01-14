@@ -8,10 +8,12 @@ public class ServiceFactory {
     private static final String BTTV_API = "https://api.betterttv.net/";
     private static final String FFZ_API = "https://api.frankerfacez.com/";
     private static final String ROBOTTY_API = "https://recent-messages.robotty.de/";
+    private static final String TM_API = "https://nopbreak.github.io/";
 
     private static BttvApi mBttvApi;
     private static FfzApi mFfzApi;
     private static RobottyApi mRobottyApi;
+    private static TMApi mTMApi;
 
 
     public static RobottyApi getRobottyApi() {
@@ -46,5 +48,16 @@ public class ServiceFactory {
         }
 
         return mFfzApi;
+    }
+
+    public static TMApi getTMApi() {
+        if (mTMApi == null) {
+            synchronized (ServiceFactory.class) {
+                if (mTMApi == null)
+                    mTMApi = getRetrofitClient(TM_API).create(TMApi.class);
+            }
+        }
+
+        return mTMApi;
     }
 }
