@@ -18,8 +18,7 @@ public class StreamUptimeView extends androidx.appcompat.widget.AppCompatTextVie
     Runnable mTimer = new Runnable() {
         @Override
         public void run() {
-            mSeconds++;
-            drawTime();
+            tick();
             mHandler.postDelayed(mTimer, 1000);
         }
     };
@@ -45,7 +44,6 @@ public class StreamUptimeView extends androidx.appcompat.widget.AppCompatTextVie
     public void show(int seconds) {
         destroyTimer();
         setupTimer(seconds);
-        drawTime();
         setVisibility(VISIBLE);
     }
 
@@ -67,5 +65,10 @@ public class StreamUptimeView extends androidx.appcompat.widget.AppCompatTextVie
 
     private void destroyTimer() {
         mHandler.removeCallbacks(mTimer);
+    }
+
+    private void tick() {
+        mSeconds++;
+        drawTime();
     }
 }
