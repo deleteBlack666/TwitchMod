@@ -387,7 +387,7 @@ public class Helper {
         if (opName == null || TextUtils.isEmpty(opName))
             return false;
 
-        return opName.equals("StreamAccessTokenQuery") || opName.equals("VodAccessTokenQuery");
+        return opName.equals("StreamAccessTokenQuery");
     }
 
     public static boolean isUsherRequest(Request request) {

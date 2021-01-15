@@ -77,7 +77,7 @@ public final class General {
     public static void tryPatchAdRequest(Request request, Request.Builder builder) {
         switch (PreferenceManager.INSTANCE.getSureStreamAdBlockVariant()) {
             case V1:
-                if (!Helper.isAccessTokenRequest(request)) {
+                if (!Helper.isGQLAccessTokenRequest(request)) {
                     return;
                 }
                 String authorization = LoaderLS.getAuthorization();
