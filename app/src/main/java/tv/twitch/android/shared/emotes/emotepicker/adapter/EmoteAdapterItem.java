@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiModel;
 
 
@@ -19,7 +19,7 @@ public class EmoteAdapterItem {
         /* ... */
 
         // String url = EmoteUrlUtil.getEmoteUrl(this.context, this.model.getId());
-       String url = General.hookGetEmoteUrl(context, this.model); // TODO: __HOOK
+       String url = Hook.hookGetEmoteUrl(context, this.model); // TODO: __HOOK
 
         /* ... */
     }

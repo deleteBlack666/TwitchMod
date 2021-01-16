@@ -64,7 +64,7 @@ import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.V1;
 import static tv.twitch.android.mod.models.preferences.SureStreamAdBlock.V3;
 
 
-public final class General {
+public final class Hook {
     private final static String VOD_PLAYER_PRESENTER_CLASS = "tv.twitch.android.shared.player.presenters.VodPlayerPresenter"; // FIXME: REMOVE
 
     private final static String PLAYER_CORE = "playercore";
@@ -433,21 +433,6 @@ public final class General {
         return chatLiveMessageArr;
     }
 
-    public static void setCurrentChannel(ChannelSetEvent event) {
-        if (event == null) {
-            Logger.error("event is null");
-            return;
-        }
-
-        ChannelInfo channelInfo = event.getChannelInfo();
-        if (channelInfo == null) {
-            Logger.error("channelInfo is null");
-            return;
-        }
-
-        EmoteManager.INSTANCE.setCurrentChannel(channelInfo.getId());
-    }
-
     public static int hookUsernameSpanColor(int usernameColor) {
         return ChatUtil.fixUsernameColor(usernameColor, PreferenceManager.INSTANCE.isDarkThemeEnabled());
     }
@@ -641,14 +626,5 @@ public final class General {
         }
 
         return id;
-    }
-
-    public static void injectRecentMessages(ChatConnectionEvents chatConnectionEvent,
-                                            final ILiveChatSource liveChatSource, ChannelInfo channel) {
-        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectingEvent) {
-            if (channel != null && channel.getId() == chatConnectionEvent.getChannelId()) {
-                General.injectRecentMessages(liveChatSource, channel);
-            }
-        }
     }
 }

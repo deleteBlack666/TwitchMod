@@ -1,14 +1,14 @@
 package tv.twitch.android.shared.chat.pinnedchatmessage.giftsub;
 
 
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookJump;
 
 
 public class GiftSubPinnedMessagePresenter {
     /* ... */
 
     public final void maybeShowGiftSubBanner(String str, int i) {
-        if (Jump.shouldHideSystemMessages()) // TODO: __INJECT_CODE
+        if (HookJump.shouldHideSystemMessages()) // TODO: __INJECT_CODE
             return;
 
         /* ... */

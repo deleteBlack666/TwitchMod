@@ -17,10 +17,12 @@ import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.bridge.interfaces.ICommunityPointsButtonViewDelegate;
 import tv.twitch.android.mod.bridge.interfaces.IEmotePickerViewDelegate;
+import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
 import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
 import tv.twitch.android.mod.bridge.interfaces.ISharedPanelWidget;
 import tv.twitch.android.mod.bridge.preference.Preference;
 import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.fragment.ModInfoBannerFragment;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
 import tv.twitch.android.mod.fragment.setting.MainSettingsFragment;
@@ -28,10 +30,13 @@ import tv.twitch.android.mod.setting.PreferenceManager;
 import tv.twitch.android.mod.util.ClipDownloader;
 import tv.twitch.android.mod.util.FragmentUtil;
 import tv.twitch.android.mod.util.Logger;
+import tv.twitch.android.models.channel.ChannelInfo;
 import tv.twitch.android.models.clips.ClipModel;
+import tv.twitch.android.shared.chat.events.ChannelSetEvent;
+import tv.twitch.android.shared.chat.events.ChatConnectionEvents;
 
 
-public final class Controller {
+public final class HookController {
     public static View setupPlayerLockButton(View container, final IBottomPlayerControlOverlayViewDelegate delegate) {
         if (container == null) {
             Logger.error("container is null");
@@ -312,5 +317,29 @@ public final class Controller {
 
     public static void onSleepTimeChanged(int hour, int minute) {
         LoaderLS.getInstance().onTimeChanged(hour, minute);
+    }
+
+    public static void injectRecentMessages(ChatConnectionEvents chatConnectionEvent,
+                                            final ILiveChatSource liveChatSource, ChannelInfo channel) {
+        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectingEvent) {
+            if (channel != null && channel.getId() == chatConnectionEvent.getChannelId()) {
+                Hook.injectRecentMessages(liveChatSource, channel);
+            }
+        }
+    }
+
+    public static void setCurrentChannel(ChannelSetEvent event) {
+        if (event == null) {
+            Logger.error("event is null");
+            return;
+        }
+
+        ChannelInfo channelInfo = event.getChannelInfo();
+        if (channelInfo == null) {
+            Logger.error("channelInfo is null");
+            return;
+        }
+
+        EmoteManager.INSTANCE.setCurrentChannel(channelInfo.getId());
     }
 }

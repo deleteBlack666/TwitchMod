@@ -1,7 +1,7 @@
 package tv.twitch.android.shared.chat.floating;
 
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 
 
 public class FloatingChatViewDelegate {
@@ -11,7 +11,7 @@ public class FloatingChatViewDelegate {
         /* ... */
 
         // this.messageCarouselViewDelegate = new CompactChatViewDelegate((LinearLayout) findView(R$id.messages_container), Hooks.getFloatingChatQueueSize());
-        int count = General.getFloatingChatQueueSize(); // TODO: __HOOK_ARG
+        int count = Hook.getFloatingChatQueueSize(); // TODO: __HOOK_ARG
 
         /* ... */
     }

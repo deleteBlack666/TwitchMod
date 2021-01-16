@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
-import tv.twitch.android.mod.hooks.Controller;
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookController;
+import tv.twitch.android.mod.hooks.HookJump;
 import tv.twitch.android.mod.setting.PreferenceManager;
 import tv.twitch.android.mod.view.StreamUptimeView;
 
@@ -39,16 +39,16 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
     }
 
     public void updateLockButtonState() { // TODO: __INJECT_METHOD
-        Controller.updatePlayerLockButtonState(this.lockButton);
+        HookController.updatePlayerLockButtonState(this.lockButton);
     }
 
     private void setupLockButton(View view) { // TODO: __INJECT_METHOD
-        this.lockButton = (ImageView) Controller.setupPlayerLockButton(view, this);
+        this.lockButton = (ImageView) HookController.setupPlayerLockButton(view, this);
         updateLockButtonState();
     }
 
     public void setLockButtonVisible(boolean z) { // TODO: __INJECT_METHOD
-        Controller.changeLockButtonVisibility(this.lockButton, z);
+        HookController.changeLockButtonVisibility(this.lockButton, z);
     }
 
     public void clickRefresh() { // TODO: __INJECT_METHOD
@@ -59,21 +59,21 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
 
     private void setupRefreshButton(View view) { // TODO: __INJECT_METHOD
-        this.refreshButton = (ImageView) Controller.setupPlayerRefreshButton(view, this);
+        this.refreshButton = (ImageView) HookController.setupPlayerRefreshButton(view, this);
         if (!PreferenceManager.INSTANCE.shouldShowPlayerRefreshButton() && this.refreshButton != null) {
             this.refreshButton.setVisibility(View.GONE);
         }
     }
 
     private void setupUptime(View view) { // TODO: __INJECT_METHOD
-        this.uptimeView = (StreamUptimeView) Controller.setupPlayerUptime(view, this);
-        this.uptimeIcon = (ImageView) Controller.setupPlayerUptimeIcon(view, this);
+        this.uptimeView = (StreamUptimeView) HookController.setupPlayerUptime(view, this);
+        this.uptimeIcon = (ImageView) HookController.setupPlayerUptimeIcon(view, this);
 
         hideUptime();
     }
 
     public void showUptime(int seconds) { // TODO: __INJECT_METHOD
-        if (!Jump.shouldShowStreamUptime())
+        if (!HookJump.shouldShowStreamUptime())
             return;
 
         if (this.uptimeIcon != null) {

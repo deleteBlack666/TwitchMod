@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import tv.twitch.android.app.core.ViewExtensionsKt;
 import tv.twitch.android.mod.bridge.interfaces.ISharedPanelWidget;
-import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.HookController;
 import tv.twitch.android.models.clips.ClipModel;
 import tv.twitch.android.models.videos.VodModel;
 import tv.twitch.android.shared.player.presenters.PlayerPresenter;
@@ -40,7 +40,7 @@ public class SharePanelWidget extends FrameLayout implements ISharedPanelWidget 
     }
 
     private void setupDownloadButton() { // TODO: __INJECT_METHOD
-        this.mDownloadButton = (InteractiveRowView) Controller.setupDownloadButton(this,
+        this.mDownloadButton = (InteractiveRowView) HookController.setupDownloadButton(this,
                 mClipModel, this);
     }
 

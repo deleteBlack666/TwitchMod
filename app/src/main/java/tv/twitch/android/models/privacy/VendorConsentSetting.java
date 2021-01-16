@@ -1,14 +1,14 @@
 package tv.twitch.android.models.privacy;
 
 
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookJump;
 
 
 public class VendorConsentSetting {
     /* ... */
 
     public final VendorConsentStatus getConsentStatus() {
-        if (Jump.isAdblockOn()) { // TODO: __INJECT_CODE
+        if (HookJump.isAdblockOn()) { // TODO: __INJECT_CODE
             return VendorConsentStatus.Denied;
         }
 

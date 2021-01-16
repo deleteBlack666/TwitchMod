@@ -1,7 +1,7 @@
 package tv.twitch.android.shared.player.overlay;
 
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.models.channel.ChannelModel;
 import tv.twitch.android.models.streams.StreamModel;
 
@@ -38,7 +38,7 @@ public class PlayerOverlayPresenter {
     }
 
     private void updateStreamUptime(StreamModel streamModel2) { // TODO: __INJECT_METHOD
-        this.viewDelegate.showUptime(General.calcSteamUptime(streamModel2));
+        this.viewDelegate.showUptime(Hook.calcSteamUptime(streamModel2));
     }
 
 

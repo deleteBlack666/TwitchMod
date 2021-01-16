@@ -1,14 +1,14 @@
 package tv.twitch.android.shared.billing;
 
 
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookJump;
 
 
 public class RxBillingClient {
     /* ... */
 
     public final boolean isAvailable() {
-        if (Jump.isGoogleBillingDisabled()) // TODO: __INJECT_CODE
+        if (HookJump.isGoogleBillingDisabled()) // TODO: __INJECT_CODE
             return false;
 
         /* ... */

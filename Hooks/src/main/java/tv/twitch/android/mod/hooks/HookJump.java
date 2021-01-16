@@ -4,7 +4,7 @@ package tv.twitch.android.mod.hooks;
 import tv.twitch.android.mod.setting.PreferenceManager;
 
 
-public final class Jump {
+public final class HookJump {
     public static boolean shouldShowFollowedGames() {
         return PreferenceManager.INSTANCE.hideFollowGameSection();
     }

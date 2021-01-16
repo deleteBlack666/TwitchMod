@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.subjects.PublishSubject;
 import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageItem;
 import tv.twitch.android.mod.bridge.interfaces.IChatTextViewItem;
 import tv.twitch.android.shared.chat.adapter.SystemMessageType;
@@ -54,11 +54,11 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem { 
             return;
         }
 
-        General.highlightView(holder.itemView, shouldHighlightBackground);
+        Hook.highlightView(holder.itemView, shouldHighlightBackground);
     }
 
     public MessageRecyclerItem(Context context2, String str, int authorUserId, String str2, String str3, int i2, Spanned message, SystemMessageType systemMessageType, float f, int i3, float f2, boolean z, boolean z2, String str4, EventDispatcher<ChatItemClickEvent> eventDispatcher) {
-        message = General.addTimestampToMessage(message, authorUserId); // TODO: __HOOK_PARAM
+        message = Hook.addTimestampToMessage(message, authorUserId); // TODO: __HOOK_PARAM
 
         /* ... */
     }
@@ -68,7 +68,7 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem { 
 
         /* ... */
 
-        this.message = General.hookMarkAsDeleted(companion, this.message, this.context, this.messageClickSubject, this.hasModAccess); // TODO: __REPLACE_CODE
+        this.message = Hook.hookMarkAsDeleted(companion, this.message, this.context, this.messageClickSubject, this.hasModAccess); // TODO: __REPLACE_CODE
     }
 
     @Override
@@ -86,7 +86,7 @@ public class MessageRecyclerItem implements ChatAdapterItem, IChatMessageItem { 
             super(itemView);
             /* ... */
 
-            General.setChatMessageFontSize(messageTextView); // TODO: __INJECT_CODE
+            Hook.setChatMessageFontSize(messageTextView); // TODO: __INJECT_CODE
         }
 
         public final TextView getMessageTextView() {

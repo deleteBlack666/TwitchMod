@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 
 
 public class ApiRequestInterceptor implements Interceptor {
@@ -20,7 +20,7 @@ public class ApiRequestInterceptor implements Interceptor {
 
         /* ... */
 
-        General.tryPatchAdRequest(request, newBuilder);  // TODO: __INJECT_CODE
+        Hook.tryPatchAdRequest(request, newBuilder);  // TODO: __INJECT_CODE
 
         /* ... */
 

@@ -1,7 +1,7 @@
 package tv.twitch.android.sdk;
 
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.chat.ChatEmoticonSet;
 
 
@@ -11,11 +11,11 @@ public class ChatController {
     /* ... */
 
     public ChatEmoticonSet[] getEmoticonSets() { // TODO: __REPLACE_METHOD
-        return General.hookChatEmoticonSet(this.mEmoticonSets);
+        return Hook.hookChatEmoticonSet(this.mEmoticonSets);
     }
 
     public static /* synthetic */ ChatEmoticonSet[] access$000(ChatController chatController) { // TODO: __REPLACE_METHOD
-        return General.hookChatEmoticonSet(chatController.mEmoticonSets);
+        return Hook.hookChatEmoticonSet(chatController.mEmoticonSets);
     }
 
     /* ... */

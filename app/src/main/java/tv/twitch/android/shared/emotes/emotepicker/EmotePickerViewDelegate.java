@@ -8,7 +8,7 @@ import tv.twitch.android.core.mvp.viewdelegate.RxViewDelegate;
 import tv.twitch.android.core.mvp.viewdelegate.ViewDelegateEvent;
 import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IEmotePickerViewDelegate;
-import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.HookController;
 import tv.twitch.android.mod.util.Helper;
 import tv.twitch.android.mod.util.Logger;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmotePickerSection;
@@ -67,7 +67,7 @@ public class EmotePickerViewDelegate extends RxViewDelegate<EmotePickerPresenter
             return;
         }
 
-        Controller.setupBttvEmotesButtonClickListener(bttvEmotesButton, this);
+        HookController.setupBttvEmotesButtonClickListener(bttvEmotesButton, this);
     }
 
     private ImageView getBttvButtonView() { // TODO: __INJECT_METHOD

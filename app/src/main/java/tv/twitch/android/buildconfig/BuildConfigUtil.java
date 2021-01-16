@@ -1,7 +1,7 @@
 package tv.twitch.android.buildconfig;
 
 
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookJump;
 
 
 public class BuildConfigUtil {
@@ -10,15 +10,15 @@ public class BuildConfigUtil {
     /* ... */
 
     public final boolean isAlpha() { // TODO: __REPLACE_METHOD
-        return Jump.inDevMode();
+        return HookJump.inDevMode();
     }
 
     public final boolean isDebugConfigEnabled() { // TODO: __REPLACE_METHOD
-        return Jump.inDevMode();
+        return HookJump.inDevMode();
     }
     
     public final boolean shouldShowDebugOptions(boolean z) { // TODO: __REPLACE_METHOD
-        return Jump.inDevMode();
+        return HookJump.inDevMode();
     }
 
     /* ... */

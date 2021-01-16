@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
 import tv.twitch.android.shared.chat.util.ChatItemClickEvent;
 
@@ -39,8 +39,8 @@ public class UserNoticeRecyclerItem implements ChatAdapterItem {
         public UserNoticeViewHolder(View view) {
             super(view);
 
-            General.setChatMessageFontSize(chatMessage); // TODO: __INJECT_CODE
-            General.setChatMessageFontSize(systemMessage); // TODO: __INJECT_CODE
+            Hook.setChatMessageFontSize(chatMessage); // TODO: __INJECT_CODE
+            Hook.setChatMessageFontSize(systemMessage); // TODO: __INJECT_CODE
             /* ... */
         }
 

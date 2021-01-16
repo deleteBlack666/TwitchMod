@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import io.reactivex.subjects.PublishSubject;
 import tv.twitch.android.core.mvp.viewdelegate.BaseViewDelegate;
-import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.HookController;
 
 
 public class PlayerOverlayViewDelegate extends BaseViewDelegate {
@@ -18,8 +18,8 @@ public class PlayerOverlayViewDelegate extends BaseViewDelegate {
     public PlayerOverlayViewDelegate(Context context, View view, Object iChromecastHelper, Object experience, OverlayLayoutController overlayLayoutController2) {
         /* ... */
 
-        timerSleepButton = (ImageView) Controller.getSleepTimerButton(view); // TODO: __INJECT_CODE
-        Controller.setupPlayerSleepTimerButton(context, timerSleepButton); // TODO: __INJECT_CODE
+        timerSleepButton = (ImageView) HookController.getSleepTimerButton(view); // TODO: __INJECT_CODE
+        HookController.setupPlayerSleepTimerButton(context, timerSleepButton); // TODO: __INJECT_CODE
     }
 
     public final OverlayLayoutController getOverlayLayoutController() {

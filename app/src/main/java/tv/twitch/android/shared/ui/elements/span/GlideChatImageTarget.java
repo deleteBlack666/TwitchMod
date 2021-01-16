@@ -14,7 +14,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.lang.ref.WeakReference;
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.mod.util.Logger;
 
 
@@ -58,6 +58,6 @@ public class GlideChatImageTarget extends SimpleTarget<Drawable> {
     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
         /* ... */
 
-        General.maybeInvalidateChatItem(mContainerView, mUrlDrawable); // TODO: __INJECT_CODE
+        Hook.maybeInvalidateChatItem(mContainerView, mUrlDrawable); // TODO: __INJECT_CODE
     }
 }

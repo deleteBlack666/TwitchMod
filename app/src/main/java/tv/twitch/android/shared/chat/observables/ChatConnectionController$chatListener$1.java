@@ -1,7 +1,7 @@
 package tv.twitch.android.shared.chat.observables;
 
 
-import tv.twitch.android.mod.hooks.General;
+import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.chat.ChatLiveMessage;
 
 
@@ -11,7 +11,7 @@ public class ChatConnectionController$chatListener$1 {
     /* ... */
 
     public void onChannelMessageReceived(int channelId, ChatLiveMessage[] chatLiveMessageArr) {
-        chatLiveMessageArr = General.hookReceivedMessages(this$0, chatLiveMessageArr);  // TODO: __HOOK_PARAM
+        chatLiveMessageArr = Hook.hookReceivedMessages(this$0, chatLiveMessageArr);  // TODO: __HOOK_PARAM
 
         /* ... */
     }

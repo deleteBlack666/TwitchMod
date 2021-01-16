@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 
 import tv.twitch.android.mod.bridge.interfaces.ICommunityPointsButtonViewDelegate;
-import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.HookController;
 import tv.twitch.android.shared.chat.communitypoints.models.CommunityPointsModel;
 
 
@@ -23,7 +23,7 @@ public class CommunityPointsButtonViewDelegate implements ICommunityPointsButton
     private final void showClaimAvailable(CommunityPointsModel communityPointsModel) {
         /* ... */
 
-        Controller.setupPointClicker(this); // TODO: __INJECT_CODE
+        HookController.setupPointClicker(this); // TODO: __INJECT_CODE
     }
 
     private void handleClaimError() {

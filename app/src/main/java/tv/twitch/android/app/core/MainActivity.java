@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import tv.twitch.android.core.user.TwitchAccountManager;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
-import tv.twitch.android.mod.hooks.Controller;
+import tv.twitch.android.mod.hooks.HookController;
 
 
 public class MainActivity extends AppCompatActivity implements SleepTimerFragment.SleepTimerListener { // TODO: __IMPLEMENT
@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity implements SleepTimerFragmen
     private FragmentManager.OnBackStackChangedListener mBackStackListener = new FragmentManager.OnBackStackChangedListener() { // TODO: __REPLACE_FIELD
         @Override
         public void onBackStackChanged() {
-            Controller.maybeShowModInfoBanner(MainActivity.this, mAccountManager);
+            HookController.maybeShowModInfoBanner(MainActivity.this, mAccountManager);
         }
     };
 
     @Override
     public void onTimeChanged(int hour, int minute) { // TODO: __INJECT_METHOD
-        Controller.onSleepTimeChanged(hour, minute);
+        HookController.onSleepTimeChanged(hour, minute);
     }
 
     /* ... */

@@ -1,8 +1,8 @@
 package tv.twitch.android.shared.chat;
 
 
-import tv.twitch.android.mod.hooks.General;
-import tv.twitch.android.mod.hooks.Jump;
+import tv.twitch.android.mod.hooks.HookController;
+import tv.twitch.android.mod.hooks.HookJump;
 import tv.twitch.android.models.channel.ChannelInfo;
 import tv.twitch.android.models.streams.StreamType;
 import tv.twitch.android.shared.chat.events.ChatConnectionEvents;
@@ -23,7 +23,7 @@ public class ChatViewPresenter {
     /* ... */
 
     public final void onUserBanStateUpdated(boolean z) {
-        if (z && Jump.isBypassChatBanEnabled()) { // TODO: __INJECT_CODE
+        if (z && HookJump.isBypassChatBanEnabled()) { // TODO: __INJECT_CODE
             z = false;
             anonConnect();
         }
@@ -45,7 +45,7 @@ public class ChatViewPresenter {
     public final void setChannel(ChannelInfo channelInfo2, String str, StreamType streamType2) {/* ... */}
 
     public final void onChannelStateChanged(ChatConnectionEvents chatConnectionEvent) {
-        General.injectRecentMessages(chatConnectionEvent, liveChatSource, channel);
+        HookController.injectRecentMessages(chatConnectionEvent, liveChatSource, channel);
 
         /* ... */
     }
