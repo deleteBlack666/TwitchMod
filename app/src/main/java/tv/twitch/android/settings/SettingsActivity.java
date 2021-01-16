@@ -2,8 +2,8 @@ package tv.twitch.android.settings;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import tv.twitch.android.mod.bridge.preference.Preference;
-import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.libs.preference.Preference;
+import tv.twitch.android.mod.libs.preference.PreferenceFragmentCompat;
 
 import tv.twitch.android.mod.hooks.HookController;
 

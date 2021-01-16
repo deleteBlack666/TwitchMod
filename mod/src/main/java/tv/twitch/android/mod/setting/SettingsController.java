@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import tv.twitch.android.app.core.ActivityUtil;
 import tv.twitch.android.mod.bridge.ResourcesManager;
-import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.libs.preference.Preference;
 import tv.twitch.android.mod.models.Preferences;
 import tv.twitch.android.mod.util.Helper;
 import tv.twitch.android.mod.util.Logger;

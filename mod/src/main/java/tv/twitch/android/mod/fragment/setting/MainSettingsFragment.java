@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import tv.twitch.android.mod.bridge.preference.Preference;
+import tv.twitch.android.mod.libs.preference.Preference;
 
 import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.setting.SettingsController;

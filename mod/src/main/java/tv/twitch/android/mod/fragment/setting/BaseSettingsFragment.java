@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
-import tv.twitch.android.mod.bridge.preference.Preference;
-import tv.twitch.android.mod.bridge.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.libs.preference.Preference;
+import tv.twitch.android.mod.libs.preference.PreferenceFragmentCompat;
 import tv.twitch.android.mod.setting.SettingsController;
 
 

@@ -4,14 +4,14 @@ package tv.twitch.android.mod.util;
 import android.Manifest;
 import android.content.Context;
 
-import tv.twitch.android.mod.bridge.dexter.Dexter;
-import tv.twitch.android.mod.bridge.dexter.PermissionToken;
-import tv.twitch.android.mod.bridge.dexter.listener.DexterError;
-import tv.twitch.android.mod.bridge.dexter.listener.PermissionDeniedResponse;
-import tv.twitch.android.mod.bridge.dexter.listener.PermissionGrantedResponse;
-import tv.twitch.android.mod.bridge.dexter.listener.PermissionRequest;
-import tv.twitch.android.mod.bridge.dexter.listener.PermissionRequestErrorListener;
-import tv.twitch.android.mod.bridge.dexter.listener.single.PermissionListener;
+import tv.twitch.android.mod.libs.dexter.Dexter;
+import tv.twitch.android.mod.libs.dexter.PermissionToken;
+import tv.twitch.android.mod.libs.dexter.listener.DexterError;
+import tv.twitch.android.mod.libs.dexter.listener.PermissionDeniedResponse;
+import tv.twitch.android.mod.libs.dexter.listener.PermissionGrantedResponse;
+import tv.twitch.android.mod.libs.dexter.listener.PermissionRequest;
+import tv.twitch.android.mod.libs.dexter.listener.PermissionRequestErrorListener;
+import tv.twitch.android.mod.libs.dexter.listener.single.PermissionListener;
 
 
 public class PermissionUtil {

@@ -36,4 +36,5 @@ dependencies {
     implementation "com.google.android.material:material:1.2.1"
 
     implementation project(path: ':models')
+    implementation project(path: ':libs')
 }
