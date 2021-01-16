@@ -33,10 +33,6 @@
 
     <tv.twitch.android.mod.bridge.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_chat">
-        <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_old_emote_picker"
-            android:summary="@string/mod_settings_old_emote_picker_desc"
-            android:key="mod_emote_picker_view"/>
 
         <tv.twitch.android.mod.bridge.preference.SwitchPreferenceCompat
             android:title="@string/mod_settings_hide_chat_restriction"

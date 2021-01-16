@@ -40,8 +40,6 @@
     <string name="mod_settings_filtering_ignore_system">Ignore subs</string>
     <string name="mod_settings_filtering_ignore_system_desc">Disable chat sub and gift notifications</string>
     <string name="mod_category_view">View</string>
-    <string name="mod_settings_old_emote_picker">Force old emote picker</string>
-    <string name="mod_settings_old_emote_picker_desc" />
     <string name="mod_settings_disable_recommendations">Hide «Recommended Streams»</string>
     <string name="mod_settings_disable_recommendations_desc" />
     <string name="mod_settings_disable_resume_watching">Hide «Recent Watching»</string>

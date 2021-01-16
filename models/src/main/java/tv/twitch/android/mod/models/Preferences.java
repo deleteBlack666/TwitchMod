@@ -23,7 +23,6 @@ public enum Preferences {
     DISABLE_THEATRE_AUTOPLAY("mod_disable_theatre_autoplay", "mod_settings_disable_autoplay", "mod_settings_disable_autoplay_desc", Type.BOOLEAN),
     GIFS_RENDER_TYPE("mod_gifs_render_type", "mod_settings_gifs", "mod_settings_gifs_desc", Type.STRING),
     EMOTE_SIZE("mod_emote_size_type", "mod_settings_emote_size", "mod_settings_emote_size_desc", Type.INTEGER),
-    OLD_EMOTE_PICKER("mod_emote_picker_view", "mod_settings_old_emote_picker", "mod_settings_old_emote_picker_desc", Type.BOOLEAN),
     MINIPLAYER_SCALE("mod_miniplayer_scale_value", "mod_settings_miniplayer_size", "mod_settings_miniplayer_size_desc", Type.INTEGER),
     PLAYER_IMPELEMTATION("mod_player_impl_type", "mod_settings_player_implementation", "mod_settings_player_implementation_desc", Type.STRING),
     CHAT_MESSAGE_FILTER_LEVEL("mod_chat_message_filter_level_type", "mod_settings_filtering_level", "mod_settings_filtering_level_desc", Type.STRING),

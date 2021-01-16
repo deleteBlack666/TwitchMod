@@ -49,7 +49,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private boolean hideRecentSearch;
     private boolean isDevModeOn;
     private boolean disableTheatreAutoplay;
-    private boolean forceOldEmotePicker;
     private boolean hideSystemMessagesInChat;
     private boolean isInterceptorEnabled;
     private boolean showChatForBannedUser;
@@ -132,7 +131,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         hideEsportsTab = getBoolean(Preferences.HIDE_ESPORTS_TAB, false);
         hideRecentSearch = getBoolean(Preferences.HIDE_RECENT_SEARCH_RESULTS, false);
         disableTheatreAutoplay = getBoolean(Preferences.DISABLE_THEATRE_AUTOPLAY, false);
-        forceOldEmotePicker = getBoolean(Preferences.OLD_EMOTE_PICKER, false);
         hideSystemMessagesInChat = getBoolean(Preferences.CHAT_MESSAGE_FILTER_SYSTEM, false);
         isInterceptorEnabled = getBoolean(Preferences.DEV_INTERCEPTOR, false);
         showChatForBannedUser = getBoolean(Preferences.SHOW_CHAT_FOR_BANNED_USER, false);
@@ -307,10 +305,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     public boolean isBrightnessSwiperEnabled() {
         return isBrightnessSwiperEnabled;
-    }
-
-    public boolean forceOldEmotePickerView() {
-        return forceOldEmotePicker;
     }
 
     public boolean isDevModeOn() {
@@ -609,9 +603,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 break;
             case BRIGHTNESS_SWIPER:
                 isBrightnessSwiperEnabled = sharedPreferences.getBoolean(key, isBrightnessSwiperEnabled);
-                break;
-            case OLD_EMOTE_PICKER:
-                forceOldEmotePicker = sharedPreferences.getBoolean(key, forceOldEmotePicker);
                 break;
             case HIDE_DISCOVER_TAB:
                 hideDiscoverTab = sharedPreferences.getBoolean(key, hideDiscoverTab);
