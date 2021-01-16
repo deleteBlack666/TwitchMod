@@ -1,18 +1,16 @@
 package tv.twitch.android.shared.chat.adapter;
 
 
+import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
+import tv.twitch.android.shared.chat.tracking.CensoredMessageTrackingInfo;
 
-public class ChatAdapter {
+
+public interface ChatAdapter {
     /* ... */
 
-    public static final class DefaultImpls {
-        /* ... */
-        public static /* synthetic */ void addMessage$default(ChatAdapter chatAdapter, ChatAdapterItem chatAdapterItem, Function2 function2, int i, Object obj) {
-            /* ... */
-        }
-    }
+    void addMessage(ChatAdapterItem chatAdapterItem, Function2<? super String, ? super CensoredMessageTrackingInfo, Unit> function2);
 
     /* ... */
 }

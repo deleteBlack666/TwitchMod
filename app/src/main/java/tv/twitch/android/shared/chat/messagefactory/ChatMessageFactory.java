@@ -19,7 +19,6 @@ import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
 import tv.twitch.android.shared.chat.chatsource.IClickableUsernameSpanListener;
 import tv.twitch.android.shared.chat.messagefactory.adapteritem.UserNoticeRecyclerItem;
-import tv.twitch.android.shared.chat.messageinput.emotes.RecentEmotesManager;
 import tv.twitch.android.shared.chat.tracking.ChatFiltersSettings;
 import tv.twitch.android.shared.chat.util.ChatItemClickEvent;
 import tv.twitch.android.shared.ui.elements.span.CenteredImageSpan;
@@ -35,7 +34,6 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     private ContextWrapper context;
 
     private TwitchAccountManager accountManager;
-    private RecentEmotesManager recentEmotesManager;
 
     /* ... */
 

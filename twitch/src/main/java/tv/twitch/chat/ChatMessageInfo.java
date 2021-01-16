@@ -7,6 +7,5 @@ public class ChatMessageInfo {
     public String userName;
     public int userId;
 
-
     /* ... */
 }

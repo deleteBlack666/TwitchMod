@@ -15,7 +15,7 @@ import tv.twitch.android.shared.player.presenters.PlayerPresenter;
 import tv.twitch.android.shared.ui.elements.bottomsheet.InteractiveRowView;
 
 
-public class SharePanelWidget extends FrameLayout implements ISharedPanelWidget { // TODO: __IMPLEMENT
+public class SharePanelWidget extends FrameLayout implements ISharedPanelWidget { // TODO: __IMPLEMENT // FIXME: REWRITE
     private ClipModel mClipModel;
     private VodModel mVodModel;
     private PlayerPresenter mPlayerPresenter;

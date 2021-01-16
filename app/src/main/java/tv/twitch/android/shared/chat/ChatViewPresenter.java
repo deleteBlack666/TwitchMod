@@ -44,17 +44,10 @@ public class ChatViewPresenter {
 
     public final void setChannel(ChannelInfo channelInfo2, String str, StreamType streamType2) {/* ... */}
 
-    public final void onChannelStateChanged(ChatConnectionEvents chatConnectionEvents) {
-        maybeInjectRecentMessages(chatConnectionEvents); // TODO: __INJECT_CODE
+    public final void onChannelStateChanged(ChatConnectionEvents chatConnectionEvent) {
+        General.injectRecentMessages(chatConnectionEvent, liveChatSource, channel);
 
         /* ... */
-    }
-
-    private void maybeInjectRecentMessages(ChatConnectionEvents chatConnectionEvent) { // TODO: __INJECT_METHOD
-        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectingEvent) {
-            if (channel != null && channel.getId() == chatConnectionEvent.getChannelId())
-                General.injectRecentMessages(liveChatSource, channel);
-        }
     }
 
     /* ... */

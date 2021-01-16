@@ -10,11 +10,12 @@ public class PlayerCoordinatorPresenter$subscribeToOverlayEvents$1 {
     /* ... */
 
     public final void invoke(PlayerOverlayEvents playerOverlayEvents) {
-        /* ... */
-
         if (playerOverlayEvents instanceof PlayerOverlayEvents.Refresh) { // TODO: __INJECT_CODE
             this$0.refreshStream();
+            return;
         }
+
+        /* ... */
     }
 
     /* ... */

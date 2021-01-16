@@ -3,6 +3,7 @@ package tv.twitch.android.shared.chat.floating;
 
 import tv.twitch.android.mod.hooks.General;
 
+
 public class FloatingChatViewDelegate {
     /* ... */
 

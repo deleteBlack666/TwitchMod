@@ -5,6 +5,5 @@ public class ChatBitsToken {
     public int numBits;
     public String prefix;
 
-
     /* ... */
 }

@@ -3,6 +3,7 @@ package tv.twitch.android.shared.experiments;
 
 import tv.twitch.android.mod.hooks.General;
 
+
 public class ExperimentHelper {
     /* ... */
 

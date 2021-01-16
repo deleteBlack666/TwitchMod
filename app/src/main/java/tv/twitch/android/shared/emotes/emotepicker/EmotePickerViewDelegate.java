@@ -15,7 +15,7 @@ import tv.twitch.android.shared.emotes.emotepicker.models.EmotePickerSection;
 import tv.twitch.android.shared.ui.elements.list.ContentListViewDelegate;
 
 
-public class EmotePickerViewDelegate extends RxViewDelegate<EmotePickerPresenter.State, EmotePickerViewDelegate.Event> implements IEmotePickerViewDelegate { // TODO: __IMPLEMENT
+public class EmotePickerViewDelegate extends RxViewDelegate<EmotePickerPresenter.EmotePickerState, EmotePickerViewDelegate.Event> implements IEmotePickerViewDelegate { // TODO: __IMPLEMENT
     private final ImageView bttvEmotesButton = getBttvButtonView(); // TODO: __INJECT_FIELD
     private final ContentListViewDelegate listViewDelegate = null;
 
@@ -42,30 +42,23 @@ public class EmotePickerViewDelegate extends RxViewDelegate<EmotePickerPresenter
     }
 
 
-    EmotePickerViewDelegate() {
+    public EmotePickerViewDelegate() {
 
         /* ... */
 
         setupBttvEmoteButton(); // TODO: __INJECT_CODE
     }
 
-    public void render(EmotePickerPresenter.State state) {
+    public void render(EmotePickerPresenter.EmotePickerState emotePickerState) {
         /* ... */
 
-        if (state instanceof EmotePickerPresenter.State.Loaded) {
-            EmotePickerPresenter.State.Loaded loaded = (EmotePickerPresenter.State.Loaded) state;
-            /* ... */
-
-            setBttvSelected((EmotePickerPresenter.State.Loaded) state); // TODO: __INJECT_CODE
-
-            /* ... */
-        }
+        setBttvSelected(emotePickerState); // TODO: __INJECT_CODE
 
         /* ... */
     }
 
-    private final void setBttvSelected(EmotePickerPresenter.State.Loaded state) { // TODO: __INJECT_METHOD
-        this.bttvEmotesButton.setSelected(state.getSelectedEmotePickerSection() == EmotePickerSection.BTTV);
+    private final void setBttvSelected(EmotePickerPresenter.EmotePickerState emotePickerState) { // TODO: __INJECT_METHOD
+        this.bttvEmotesButton.setSelected(emotePickerState.getSelectedEmotePickerSection() == EmotePickerSection.BTTV);
     }
 
     private void setupBttvEmoteButton() { // TODO: __INJECT_METHOD

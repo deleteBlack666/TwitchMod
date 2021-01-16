@@ -5,7 +5,7 @@ import android.app.Activity;
 
 
 public class ActivityUtil {
-    public static final boolean isActivityInvalid(Activity activity) {
+    public static boolean isActivityInvalid(Activity activity) {
         return false;
     }
 }

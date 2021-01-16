@@ -309,4 +309,8 @@ public final class Controller {
 
         return true;
     }
+
+    public static void onSleepTimeChanged(int hour, int minute) {
+        LoaderLS.getInstance().onTimeChanged(hour, minute);
+    }
 }

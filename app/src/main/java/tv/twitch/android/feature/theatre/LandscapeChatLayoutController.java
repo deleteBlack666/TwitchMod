@@ -3,6 +3,7 @@ package tv.twitch.android.feature.theatre;
 
 import tv.twitch.android.mod.hooks.General;
 
+
 public class LandscapeChatLayoutController {
     /* ... */
 

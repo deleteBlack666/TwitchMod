@@ -17,8 +17,14 @@ public class ApiRequestInterceptor implements Interceptor {
 
         Request request = chain.request();
         Request.Builder newBuilder = request.newBuilder();
-        General.tryPatchAdRequest(request, newBuilder);  // TODO: __INJECT_CODE
+
         /* ... */
+
+        General.tryPatchAdRequest(request, newBuilder);  // TODO: __INJECT_CODE
+
+        /* ... */
+
+        // return chain.proceed(newBuilder.build());
         return null;
     }
 

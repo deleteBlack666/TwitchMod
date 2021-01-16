@@ -3,6 +3,7 @@ package tv.twitch.android.feature.theatre.common;
 
 import tv.twitch.android.mod.hooks.General;
 
+
 public class MiniPlayerSize {
     /* ... */
 

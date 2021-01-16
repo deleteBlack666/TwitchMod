@@ -16,6 +16,4 @@ public class Media {
     public ArrayList<StreamInfo> StreamInfos;
     public String Type;
     public String Uri;
-
-    /* ... */
 }

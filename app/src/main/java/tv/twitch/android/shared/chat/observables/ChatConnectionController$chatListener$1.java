@@ -10,7 +10,7 @@ public class ChatConnectionController$chatListener$1 {
 
     /* ... */
 
-    public void onChannelMessageReceived(int i, ChatLiveMessage[] chatLiveMessageArr) {
+    public void onChannelMessageReceived(int channelId, ChatLiveMessage[] chatLiveMessageArr) {
         chatLiveMessageArr = General.hookReceivedMessages(this$0, chatLiveMessageArr);  // TODO: __HOOK_PARAM
 
         /* ... */

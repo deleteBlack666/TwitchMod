@@ -3,6 +3,7 @@ package tv.twitch.android.player.ads;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class VideoAdManager {
     /* ... */
 

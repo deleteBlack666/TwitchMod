@@ -28,9 +28,4 @@ public final class ExtendedPlayerMetadataViewDelegate extends BaseViewDelegate {
     private void showSubscribeButton() {
         // this.followOrSubButtonContainer.addView(this.subButtonViewDelegate.getContentView()); // TODO: __REMOVE_CODE
     }
-
-    public void show() { // TODO: __REMOVE
-        new Exception().printStackTrace();
-        super.show();
-    }
 }

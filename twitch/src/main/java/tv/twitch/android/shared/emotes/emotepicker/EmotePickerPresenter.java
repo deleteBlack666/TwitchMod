@@ -16,17 +16,11 @@ public final class EmotePickerPresenter {
 
     /* ... */
 
-    public static abstract class State implements ViewDelegateState {
+    public static abstract class EmotePickerState implements ViewDelegateState {
         /* ... */
 
-        public static final class Loaded extends State {
-            /* ... */
-
-            public final EmotePickerSection getSelectedEmotePickerSection() {
-                return null;
-            }
-
-            /* ... */
+        public final EmotePickerSection getSelectedEmotePickerSection() {
+            return null;
         }
 
         /* ... */

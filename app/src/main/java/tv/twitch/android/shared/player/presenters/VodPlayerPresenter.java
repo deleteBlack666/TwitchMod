@@ -3,6 +3,7 @@ package tv.twitch.android.shared.player.presenters;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class VodPlayerPresenter {
     /* ... */
 

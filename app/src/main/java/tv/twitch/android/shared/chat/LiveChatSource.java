@@ -37,14 +37,8 @@ public class LiveChatSource implements ILiveChatSource { // TODO: __IMPLEMENT
         /* ... */
     }
 
-    public final void addSystemMessage(String str, boolean z, String str2) {
-        /* ... */
-
-        return;
-    }
-
     @Override
-    public void addRecentMessage(String line) { // TODO: __INJECT_METHOD
-        this.messageListAdapterBinder.addRecentMessage(line);
+    public void addRecentMessage(String msg) { // TODO: __INJECT_METHOD
+        this.messageListAdapterBinder.addRecentMessage(msg);
     }
 }

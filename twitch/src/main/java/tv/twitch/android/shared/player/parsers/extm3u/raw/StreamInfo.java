@@ -14,6 +14,4 @@ public class StreamInfo {
     public String Subtitles;
     public String Uri = "";
     public String Video;
-
-    /* ... */
 }

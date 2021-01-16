@@ -3,6 +3,7 @@ package tv.twitch.android.shared.chat.pinnedchatmessage.giftsub;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class GiftSubPinnedMessagePresenter {
     /* ... */
 

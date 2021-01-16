@@ -11,6 +11,6 @@ public class MessageListAdapterBinder {
     /* ... */
 
     public void addRecentMessage(String line) { // TODO: __INJECT_METHOD
-        ChatAdapter.DefaultImpls.addMessage$default(this.adapter, this.messageFactory.createRecentMessageItem(line), null, 2, null);
+        this.adapter.addMessage(this.messageFactory.createRecentMessageItem(line), null);
     }
 }

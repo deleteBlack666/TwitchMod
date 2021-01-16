@@ -13,18 +13,22 @@ public class TwitchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     /* ... */
 
     protected final List<RecyclerAdapterItem> getItems() {
+        /* ... */
+
         return null;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /* ... */
+
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        /* ... */
     }
 
     @Override

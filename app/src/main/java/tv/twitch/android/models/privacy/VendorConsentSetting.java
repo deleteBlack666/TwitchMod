@@ -3,6 +3,7 @@ package tv.twitch.android.models.privacy;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class VendorConsentSetting {
     /* ... */
 

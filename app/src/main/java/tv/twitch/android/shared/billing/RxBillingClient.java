@@ -3,6 +3,7 @@ package tv.twitch.android.shared.billing;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class RxBillingClient {
     /* ... */
 

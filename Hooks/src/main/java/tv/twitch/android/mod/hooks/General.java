@@ -50,6 +50,7 @@ import tv.twitch.android.models.streams.StreamModel;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.adapter.item.ChatMessageClickedEvents;
 import tv.twitch.android.shared.chat.events.ChannelSetEvent;
+import tv.twitch.android.shared.chat.events.ChatConnectionEvents;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiModel;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiSet;
 import tv.twitch.android.shared.experiments.Experiment;
@@ -337,26 +338,17 @@ public final class General {
             case HYPETRAIN:
                 return PreferenceManager.INSTANCE.shouldShowHypeTrain();
 
-            case CHAT_INPUT_FOLLOWER:
-            case CHAT_INPUT_VERIFIED:
-            case CHAT_INPUT_SUBSCRIBER:
-                return PreferenceManager.INSTANCE.hideChatRestriction() ? false : org;
-
             case VAES_OM:
             case GRANDDADS:
             case SURESTREAM_OM:
             case SURESTREAM_ADS_PBYP:
             case ADS_PBYP:
             case MULTIPLAYER_ADS:
-            case VAES_DEVICE_TARGETING_PARAMETERS:
             case AMAZON_IDENTITY_INTEGRATION:
                 return PreferenceManager.INSTANCE.isPlayerAdblockOn() ? false : org;
 
             case FLOATING_CHAT:
                 return PreferenceManager.INSTANCE.showFloatingChat();
-
-            case NEW_EMOTE_PICKER:
-                return PreferenceManager.INSTANCE.forceOldEmotePickerView() ? false : org;
         }
 
         return org;
@@ -649,5 +641,14 @@ public final class General {
         }
 
         return id;
+    }
+
+    public static void injectRecentMessages(ChatConnectionEvents chatConnectionEvent,
+                                            final ILiveChatSource liveChatSource, ChannelInfo channel) {
+        if (chatConnectionEvent instanceof ChatConnectionEvents.ChatConnectingEvent) {
+            if (channel != null && channel.getId() == chatConnectionEvent.getChannelId()) {
+                General.injectRecentMessages(liveChatSource, channel);
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ package tv.twitch.android.models.chomments;
 
 public class ChommentCommenterModel {
     private String displayName;
-    private String id ;
+    private String id;
     private String username;
 
     /* ... */

@@ -3,6 +3,7 @@ package tv.twitch.android.buildconfig;
 
 import tv.twitch.android.mod.hooks.Jump;
 
+
 public class BuildConfigUtil {
     public static final BuildConfigUtil INSTANCE = new BuildConfigUtil();
 

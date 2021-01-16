@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import tv.twitch.android.core.user.TwitchAccountManager;
-import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
 import tv.twitch.android.mod.hooks.Controller;
 
@@ -24,9 +23,8 @@ public class MainActivity extends AppCompatActivity implements SleepTimerFragmen
 
     @Override
     public void onTimeChanged(int hour, int minute) { // TODO: __INJECT_METHOD
-        LoaderLS.getInstance().onTimeChanged(hour, minute);
+        Controller.onSleepTimeChanged(hour, minute);
     }
-
 
     /* ... */
 }

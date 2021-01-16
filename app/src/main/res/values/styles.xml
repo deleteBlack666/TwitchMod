@@ -2,7 +2,4 @@
 <resources>
     <style name="TwitchTheme" parent="Theme.AppCompat.Light">
     </style>
-    <style name="SplashTheme" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splash</item>
-    </style>
 </resources>

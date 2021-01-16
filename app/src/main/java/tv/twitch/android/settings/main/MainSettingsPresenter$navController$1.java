@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import tv.twitch.android.mod.hooks.Controller;
 import tv.twitch.android.models.settings.SettingsDestination;
 
+
 public class MainSettingsPresenter$navController$1 {
     /* ... */
 
