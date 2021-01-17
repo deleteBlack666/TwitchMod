@@ -17,7 +17,7 @@ TwitchMod is a **free** modified version of Twitch Android Application.
 - And more...
 
 ## Download
-- Latest build (2.8): [mediafire](https://www.mediafire.com/file/zxdm8jirvql5kg4/TwitchMod_2.8.apk/file), [yandex](https://yadi.sk/d/-ksPocBjD9WCrA)
+- Latest build (2.8 Fix): [mediafire](https://www.mediafire.com/file/zxdm8jirvql5kg4/TwitchMod_2.8.apk/file), [yandex](https://yadi.sk/d/-ksPocBjD9WCrA)
 - Latest unstable build: [telegram channel](https://t.me/pubTw)
 
 ## Credits
