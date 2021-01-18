@@ -3,110 +3,38 @@
 
     <tv.twitch.android.mod.libs.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_main" >
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_disable_recommendations"
-            android:summary="@string/mod_settings_disable_recommendations_desc"
-            android:key="mod_hide_follow_recommended"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_disable_resume_watching"
-            android:summary="@string/mod_settings_disable_resume_watching_desc"
-            android:key="mod_hide_follow_resume"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_disable_followed_games"
-            android:summary="@string/mod_settings_disable_followed_games_desc"
-            android:key="mod_hide_follow_games"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_hide_discover"
-            android:summary="@string/mod_settings_hide_discover_desc"
-            android:key="mod_hide_discover_tab"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_hide_esports"
-            android:summary="@string/mod_settings_hide_esports_desc"
-            android:key="mod_hide_esports_tab"/>
-
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_FOLLOW_RECOMMENDATIONS"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_FOLLOW_RESUME"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_FOLLOW_GAMES"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_DISCOVER_TAB"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_ESPORTS_TAB"/>
     </tv.twitch.android.mod.libs.preference.PreferenceCategory>
-
     <tv.twitch.android.mod.libs.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_chat">
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_hide_chat_restriction"
-            android:summary="@string/mod_settings_hide_chat_restriction_desc"
-            android:key="mod_hide_chat_restrictions"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_hide_chat_header_container"
-            android:summary="@string/mod_settings_hide_chat_header_container_desc"
-            android:key="mod_hide_chat_header"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:title="@string/mod_settings_show_hype_train"
-            android:summary="@string/mod_settings_show_hype_train_desc"
-            android:key="mod_show_hype_train"/>
-
-        <tv.twitch.android.mod.libs.preference.SeekBarPreference
-            android:key="mod_chat_width_scale_value"
-            android:title="@string/mod_settings_landscape_chat_width"
-            android:summary="@string/mod_settings_landscape_chat_width_desc"
-            app:seekBarValueSuffix="%"
-            app:min="10"
-            android:max="50"
-            android:defaultValue="25"
-            app:showSeekBarValue="true" />
-        <tv.twitch.android.mod.libs.preference.SeekBarPreference
-            android:key="mod_chat_width_scale_max_value"
-            android:title="@string/mod_settings_landscape_chat_width_max"
-            android:summary="@string/mod_settings_landscape_chat_width_max_desc"
-            app:seekBarValueSuffix="%"
-            app:min="25"
-            android:max="50"
-            android:defaultValue="50"
-            app:showSeekBarValue="true" />
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_CHAT_RESTRICTION"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_CHAT_HEADER"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="SHOW_HYPE_TRAIN"/>
+<!--        <tv.twitch.android.mod.libs.preference.SeekBarPreference app:xPreference="LANDSCAPE_CHAT_SCALE"-->
+<!--            app:seekBarValueSuffix="%"-->
+<!--            app:min="10"-->
+<!--            android:max="50"-->
+<!--            app:showSeekBarValue="true" />-->
+<!--        <tv.twitch.android.mod.libs.preference.SeekBarPreference app:xPreference="LANDSCAPE_CHAT_SCALE_MAX"-->
+<!--            app:seekBarValueSuffix="%"-->
+<!--            app:min="25"-->
+<!--            android:max="50"-->
+<!--            app:showSeekBarValue="true" />-->
     </tv.twitch.android.mod.libs.preference.PreferenceCategory>
-
     <tv.twitch.android.mod.libs.preference.PreferenceCategory
         android:title="@string/mod_category_settings_view_player">
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_compact_follow_view"
-            android:summary="@string/mod_settings_compact_follow_view_desc"
-            android:key="mod_compact_follow_view"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_show_stream_uptime"
-            android:summary="@string/mod_settings_show_stream_uptime_desc"
-            android:defaultValue="true"
-            android:key="mod_player_show_stream_uptime"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_show_stats_button"
-            android:summary="@string/mod_settings_show_stats_button_desc"
-            android:defaultValue="true"
-            android:key="mod_player_show_stats_button"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_show_refresh_button"
-            android:summary="@string/mod_settings_show_refresh_button_desc"
-            android:defaultValue="true"
-            android:key="mod_player_show_refresh_button"/>
-
-        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat
-            android:title="@string/mod_settings_disable_new_clips"
-            android:summary="@string/mod_settings_disable_new_clips_desc"
-            android:key="mod_disable_new_clips_view"/>
-
-        <tv.twitch.android.mod.libs.preference.SeekBarPreference
-            android:title="@string/mod_settings_miniplayer_size"
-            android:summary="@string/mod_settings_miniplayer_size_desc"
-            android:key="mod_miniplayer_scale_value"
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="COMPACT_PLAYER_FOLLOW_VIEW"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="STREAM_UPTIME"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="PLAYER_STAT_BUTTON"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="PLAYER_REFRESH_BUTTON"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="DISABLE_CLIPFINITY"/>
+        <tv.twitch.android.mod.libs.preference.SeekBarPreference app:xPreference="MINIPLAYER_SCALE"
             app:min="100"
             android:max="200"
-            android:defaultValue="100"
             app:showSeekBarValue="true"
             app:seekBarValueSuffix="%"
             />

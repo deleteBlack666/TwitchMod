@@ -89,11 +89,11 @@ public abstract class PreferenceGroup extends Preference {
                 attrs, ResourcesManager.getStyleableArr(context, "PreferenceGroup"), defStyleAttr, defStyleRes);
 
         mOrderingAsAdded =
-                TypedArrayUtils.getBoolean(a, 2, 2, true);
+                TypedArrayUtils.getBoolean(a, 0, true);
 
         if (a.hasValue(1)) {
             setInitialExpandedChildrenCount(TypedArrayUtils.getInt(
-                    a, 1, 1, Integer.MAX_VALUE));
+                    a, 1, Integer.MAX_VALUE));
         }
         a.recycle();
     }

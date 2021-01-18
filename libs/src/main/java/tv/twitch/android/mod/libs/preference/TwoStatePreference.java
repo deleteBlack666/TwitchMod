@@ -24,6 +24,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -195,9 +196,14 @@ public abstract class TwoStatePreference extends Preference {
 
     @Override
     protected void onSetInitialValue(Object defaultValue) {
+        if (defaultValue instanceof String) {
+            defaultValue = Boolean.parseBoolean((String) defaultValue);
+        }
+
         if (defaultValue == null) {
             defaultValue = false;
         }
+
         setChecked(getPersistedBoolean((Boolean) defaultValue));
     }
 

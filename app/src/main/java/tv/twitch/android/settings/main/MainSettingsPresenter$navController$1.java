@@ -19,7 +19,7 @@ public class MainSettingsPresenter$navController$1 {
 
         switch (6) {
             case 6:
-                fragment = HookController.getModSettingsFragment();
+                fragment = HookController.createModSettingsFragment();
                 break;
         }
         /* ... */

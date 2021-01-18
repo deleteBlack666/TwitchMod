@@ -53,11 +53,11 @@ public class ListPreference extends DialogPreference {
         TypedArray a = context.obtainStyledAttributes(
                 attrs, ResourcesManager.getStyleableArr(context, "ListPreference"), defStyleAttr, defStyleRes);
 
-        mEntries = TypedArrayUtils.getTextArray(a, 2, 0);
+        mEntries = TypedArrayUtils.getTextArray(a, 0);
 
-        mEntryValues = TypedArrayUtils.getTextArray(a, 3, 1);
+        mEntryValues = TypedArrayUtils.getTextArray(a, 1);
 
-        if (TypedArrayUtils.getBoolean(a, 4, 4, false)) {
+        if (TypedArrayUtils.getBoolean(a, 2, false)) {
             setSummaryProvider(SimpleSummaryProvider.getInstance());
         }
 
@@ -67,7 +67,7 @@ public class ListPreference extends DialogPreference {
         a = context.obtainStyledAttributes(attrs,
                 ResourcesManager.getStyleableArr(context, "Preference"), defStyleAttr, defStyleRes);
 
-        mSummary = TypedArrayUtils.getString(a, 31, 7);
+        mSummary = TypedArrayUtils.getString(a, 7);
 
         a.recycle();
     }

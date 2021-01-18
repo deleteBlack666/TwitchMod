@@ -19,20 +19,5 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(android.R.id.content, new MainSettingsFragment());
         transaction.commit();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(1000);
-                        Logger.debug(BadgeManager.INSTANCE.getFfzBadges(73227142).toString());
-                    } catch (Throwable throwable) {
-                        ;
-                    }
-                }
-
-            }
-        }).start();
     }
 }

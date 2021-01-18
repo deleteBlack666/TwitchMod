@@ -49,9 +49,13 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import tv.twitch.android.mod.models.Preferences;
 
 
 /**
@@ -195,54 +199,100 @@ public class Preference implements Comparable<Preference> {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, ResourcesManager.getStyleableArr(context, "Preference"), defStyleAttr, defStyleRes);
 
-        mIconResId = TypedArrayUtils.getResourceId(a, 21, 0, 0);
-
-        mKey = TypedArrayUtils.getString(a, 24, 6);
-
-        mTitle = TypedArrayUtils.getText(a, 32, 4);
-
-        mSummary = TypedArrayUtils.getText(a, 31, 7);
-
-        mOrder = TypedArrayUtils.getInt(a, 26, 8, DEFAULT_ORDER);
-
-        mFragment = TypedArrayUtils.getString(a, 20, 0xd);
-
-        mLayoutResId = TypedArrayUtils.getResourceId(a, 25, 0x3, ResourcesManager.getLayoutId(context, "preference"));
-
-        mWidgetLayoutResId = TypedArrayUtils.getResourceId(a, 33, 9, 0);
-
-        mEnabled = TypedArrayUtils.getBoolean(a, 19, 2, true);
-
-        mSelectable = TypedArrayUtils.getBoolean(a, 28, 5, true);
-
-        mPersistent = TypedArrayUtils.getBoolean(a, 27, 1, true);
-
-        mDependencyKey = TypedArrayUtils.getString(a, 17, 0xa);
-
-        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, 14, 0x10, mSelectable);
-
-        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, 15, 0x11, mSelectable);
-
-        if (a.hasValue(16)) {
-            mDefaultValue = onGetDefaultValue(a, 16);
-        } else if (a.hasValue(0xb)) {
-            mDefaultValue = onGetDefaultValue(a, 0xb);
+        String xPrefName = TypedArrayUtils.getString(a, 20);
+        if (!TextUtils.isEmpty(xPrefName)) {
+            loadXPref(xPrefName);
         }
 
-        mShouldDisableView = TypedArrayUtils.getBoolean(a, 29, 0xc, true);
+        if (mKey == null) {
+            mKey = TypedArrayUtils.getString(a, 6);
+        }
 
-        mHasSingleLineTitleAttr = a.hasValue(30);
+        if (mTitle == null) {
+            mTitle = TypedArrayUtils.getText(a, 4);
+        }
+
+        if (mSummary == null) {
+            mSummary = TypedArrayUtils.getText(a, 7);
+        }
+
+        if (mDefaultValue == null) {
+            if (a.hasValue(11)) {
+                mDefaultValue = onGetDefaultValue(a, 11);
+            }
+        }
+
+        mIconResId = TypedArrayUtils.getResourceId(a,0, 0);
+
+        mOrder = TypedArrayUtils.getInt(a, 8, DEFAULT_ORDER);
+
+        mFragment = TypedArrayUtils.getString(a, 0xd);
+
+        mLayoutResId = TypedArrayUtils.getResourceId(a, 0x3, ResourcesManager.getLayoutId(context, "preference"));
+
+        mWidgetLayoutResId = TypedArrayUtils.getResourceId(a, 9, 0);
+
+        mEnabled = TypedArrayUtils.getBoolean(a, 2, true);
+
+        mSelectable = TypedArrayUtils.getBoolean(a, 5, true);
+
+        mPersistent = TypedArrayUtils.getBoolean(a, 1, true);
+
+        mDependencyKey = TypedArrayUtils.getString(a,  0xa);
+
+        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, 14, mSelectable);
+
+        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, 15, mSelectable);
+
+        mShouldDisableView = TypedArrayUtils.getBoolean(a, 0xc, true);
+
+        mHasSingleLineTitleAttr = a.hasValue(19);
         if (mHasSingleLineTitleAttr) {
-            mSingleLineTitle = TypedArrayUtils.getBoolean(a, 30, 30, false);
+            mSingleLineTitle = TypedArrayUtils.getBoolean(a, 19, false);
         }
 
-        mIconSpaceReserved = TypedArrayUtils.getBoolean(a, 22, 22, false);
+        mIconSpaceReserved = TypedArrayUtils.getBoolean(a, 17, false);
 
-        mVisible = TypedArrayUtils.getBoolean(a, 23, 0x19, true);
+        mVisible = TypedArrayUtils.getBoolean(a, 18, true);
 
-        mCopyingEnabled = TypedArrayUtils.getBoolean(a, 18, 18, false);
+        mCopyingEnabled = TypedArrayUtils.getBoolean(a, 16, false);
 
         a.recycle();
+    }
+
+    private void loadXPref(String name) {
+        Preferences pref = Preferences.lookupByName(name);
+        if (pref == null)
+            return;
+
+        if (pref.getKey() != null) {
+            String key = ResourcesManager.getString(mContext, pref.getKey());
+            if (!TextUtils.isEmpty(key)) {
+                mKey = key;
+            }
+        }
+
+        if (pref.getSummary() != null) {
+            String desc = ResourcesManager.getString(mContext, pref.getSummary());
+            if (!TextUtils.isEmpty(desc)) {
+                mSummary = desc;
+            }
+        }
+
+        if (pref.getTitle() != null) {
+            String title = ResourcesManager.getString(mContext, pref.getTitle());
+            if (!TextUtils.isEmpty(title)) {
+                mTitle = title;
+            }
+        }
+
+        if (pref.getDefaultValue() != null) {
+            Preferences.DefaultValue df = pref.getDefaultValue();
+            Object val = df.getValue();
+            if (val != null) {
+                mDefaultValue = val;
+            }
+        }
     }
 
     /**

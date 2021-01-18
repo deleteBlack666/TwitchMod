@@ -57,10 +57,8 @@ public class PreferenceImageView extends ImageView {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, ResourcesManager.getStyleableArr(context, "PreferenceImageView"), defStyleAttr, 0);
 
-        @StyleableRes int index = 3;
-        setMaxWidth(a.getDimensionPixelSize(index , Integer.MAX_VALUE));
-        index = 2;
-        setMaxHeight(a.getDimensionPixelSize(index, Integer.MAX_VALUE));
+        setMaxWidth(a.getDimensionPixelSize(0 , Integer.MAX_VALUE));
+        setMaxHeight(a.getDimensionPixelSize(1, Integer.MAX_VALUE));
 
         a.recycle();
     }

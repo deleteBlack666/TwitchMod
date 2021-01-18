@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BackgroundStyle">
+        <attr name="android:selectableItemBackground"/>
+    </declare-styleable>
+    <declare-styleable name="CheckBoxPreference">
+        <attr name="android:summaryOn"/>
+        <attr name="android:summaryOff"/>
+        <attr name="android:disableDependentsState"/>
+    </declare-styleable>
+    <declare-styleable name="DialogPreference">
+        <attr name="android:dialogTitle"/>
+        <attr name="android:dialogMessage"/>
+        <attr name="android:dialogIcon"/>
+        <attr name="android:positiveButtonText"/>
+        <attr name="android:negativeButtonText"/>
+        <attr name="android:dialogLayout"/>
+    </declare-styleable>
+    <declare-styleable name="EditTextPreference">
+        <attr format="boolean" name="useSimpleSummaryProvider"/>
+    </declare-styleable>
+    <declare-styleable name="ListPreference">
+        <attr name="android:entries"/>
+        <attr name="android:entryValues"/>
+        <attr name="useSimpleSummaryProvider"/>
+    </declare-styleable>
+    <declare-styleable name="MultiSelectListPreference">
+        <attr name="android:entries"/>
+        <attr name="android:entryValues"/>
+    </declare-styleable>
+    <declare-styleable name="Preference">
+        <attr name="android:icon"/>
+        <attr name="android:key"/>
+        <attr name="android:title"/>
+        <attr name="android:summary"/>
+        <attr name="android:order"/>
+        <attr name="android:fragment"/>
+        <attr name="android:layout"/>
+        <attr name="android:widgetLayout"/>
+        <attr name="android:enabled"/>
+        <attr name="android:selectable"/>
+        <attr name="android:dependency"/>
+        <attr name="android:persistent"/>
+        <attr name="android:defaultValue"/>
+        <attr name="android:shouldDisableView"/>
+
+        <attr format="boolean" name="allowDividerAbove"/>
+        <attr format="boolean" name="allowDividerBelow"/>
+        <attr format="boolean" name="singleLineTitle"/>
+        <attr format="boolean" name="iconSpaceReserved"/>
+        <attr format="boolean" name="isPreferenceVisible"/>
+        <attr format="boolean" name="enableCopying"/>
+        <attr format="string" name="xPreference" />
+    </declare-styleable>
+    <declare-styleable name="PreferenceFragment">
+        <attr name="android:layout"/>
+        <attr name="android:divider"/>
+        <attr name="android:dividerHeight"/>
+
+        <attr name="allowDividerAfterLastItem"/>
+    </declare-styleable>
+    <declare-styleable name="PreferenceFragmentCompat">
+        <attr name="android:layout"/>
+        <attr name="android:divider"/>
+        <attr name="android:dividerHeight"/>
+
+        <attr format="boolean" name="allowDividerAfterLastItem"/>
+    </declare-styleable>
+    <declare-styleable name="PreferenceGroup">
+        <attr name="android:orderingFromXml"/>
+
+        <attr format="integer" name="initialExpandedChildrenCount"/>
+    </declare-styleable>
+    <declare-styleable name="PreferenceImageView">
+        <attr name="android:maxWidth"/>
+        <attr name="android:maxHeight"/>
+    </declare-styleable>
+    <declare-styleable name="PreferenceTheme">
+        <attr format="reference" name="preferenceTheme"/>
+        <attr format="reference" name="preferenceCategoryTitleTextAppearance"/>
+        <attr format="reference" name="preferenceScreenStyle"/>
+        <attr format="reference" name="preferenceFragmentStyle"/>
+        <attr format="reference" name="preferenceFragmentCompatStyle"/>
+        <attr format="reference" name="preferenceCategoryStyle"/>
+        <attr format="reference" name="preferenceStyle"/>
+        <attr format="reference" name="preferenceInformationStyle"/>
+        <attr format="reference" name="checkBoxPreferenceStyle"/>
+        <attr format="reference" name="dialogPreferenceStyle"/>
+        <attr format="reference" name="editTextPreferenceStyle"/>
+        <attr format="reference" name="dropdownPreferenceStyle"/>
+        <attr format="reference" name="preferenceFragmentListStyle"/>
+        <attr format="reference" name="switchPreferenceStyleX"/>
+        <attr format="reference" name="switchPreferenceCompatStyle"/>
+        <attr format="reference" name="seekBarPreferenceStyle"/>
+    </declare-styleable>
+    <declare-styleable name="SeekBarPreference">
+        <attr name="android:max"/>
+        <attr name="android:layout"/>
+
+        <attr format="integer" name="min"/>
+        <attr format="integer" name="seekBarIncrement"/>
+        <attr format="boolean" name="adjustable"/>
+        <attr format="boolean" name="showSeekBarValue"/>
+        <attr format="boolean" name="updatesContinuously"/>
+        <attr format="string" name="seekBarValueSuffix"/>
+    </declare-styleable>
+    <declare-styleable name="SwitchPreference">
+        <attr name="android:summaryOn"/>
+        <attr name="android:summaryOff"/>
+        <attr name="android:switchTextOn"/>
+        <attr name="android:switchTextOff"/>
+        <attr name="android:disableDependentsState"/>
+    </declare-styleable>
+    <declare-styleable name="SwitchPreferenceCompat">
+        <attr name="android:summaryOn"/>
+        <attr name="android:summaryOff"/>
+        <attr name="android:switchTextOn"/>
+        <attr name="android:switchTextOff"/>
+        <attr name="android:disableDependentsState"/>
+    </declare-styleable>
+</resources>

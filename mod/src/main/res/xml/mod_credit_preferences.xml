@@ -7,5 +7,4 @@
         <intent android:action="android.intent.action.VIEW"
             android:data="https://crwd.in/twitchmod" />
     </tv.twitch.android.mod.libs.preference.Preference>
-
 </tv.twitch.android.mod.libs.preference.PreferenceScreen>

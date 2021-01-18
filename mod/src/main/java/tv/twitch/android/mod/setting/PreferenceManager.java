@@ -37,7 +37,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     private boolean showBttvEmoteInChat;
     private boolean isChatTimestampsEnabled;
-    private boolean isChatTimestampsVodEnabled;
     private boolean isPlayerAdblockOn;
     private boolean isVolumeSwiperEnabled;
     private boolean isBrightnessSwiperEnabled;
@@ -118,26 +117,25 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     private void setupPreferences() {
         showBttvEmoteInChat = getBoolean(Preferences.BTTV_EMOTES, true);
-        isChatTimestampsEnabled = getBoolean(Preferences.CHAT_TIMESTAMPS, false);
-        isChatTimestampsVodEnabled = getBoolean(Preferences.CHAT_TIMESTAMPS_VOD, false);
+        isChatTimestampsEnabled = getBoolean(Preferences.CHAT_TIMESTAMP, false);
         isPlayerAdblockOn = getBoolean(Preferences.PLAYER_ADBLOCK, true);
-        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_SWIPER, false);
-        isBrightnessSwiperEnabled = getBoolean(Preferences.BRIGHTNESS_SWIPER, false);
-        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_SWIPER, false);
-        hideFollowRecommendation = getBoolean(Preferences.HIDE_FOLLOW_RECOMMENDED_STREAMS, false);
-        hideFollowResume = getBoolean(Preferences.HIDE_FOLLOW_RESUME_STREAMS, false);
+        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE, false);
+        isBrightnessSwiperEnabled = getBoolean(Preferences.BRIGHTNESS_GESTURE, false);
+        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE, false);
+        hideFollowRecommendation = getBoolean(Preferences.HIDE_FOLLOW_RECOMMENDATIONS, false);
+        hideFollowResume = getBoolean(Preferences.HIDE_FOLLOW_RESUME, false);
         hideFollowGame = getBoolean(Preferences.HIDE_FOLLOW_GAMES, false);
         hideDiscoverTab = getBoolean(Preferences.HIDE_DISCOVER_TAB, false);
         hideEsportsTab = getBoolean(Preferences.HIDE_ESPORTS_TAB, false);
         hideRecentSearch = getBoolean(Preferences.HIDE_RECENT_SEARCH_RESULTS, false);
         disableTheatreAutoplay = getBoolean(Preferences.DISABLE_THEATRE_AUTOPLAY, false);
-        hideSystemMessagesInChat = getBoolean(Preferences.CHAT_MESSAGE_FILTER_SYSTEM, false);
+        hideSystemMessagesInChat = getBoolean(Preferences.FILTER_CHAT_SYSTEM, false);
         isInterceptorEnabled = getBoolean(Preferences.DEV_INTERCEPTOR, false);
         showChatForBannedUser = getBoolean(Preferences.SHOW_CHAT_FOR_BANNED_USER, false);
-        showMentionHighlightsInChat = getBoolean(Preferences.CHAT_MENTION_HIGHLIGHTS, true);
+        showMentionHighlightsInChat = getBoolean(Preferences.CHAT_MENTION_HIGHLIGHT, true);
         disableClipfinity = getBoolean(Preferences.DISABLE_CLIPFINITY, false);
         isDevModeOn = getBoolean(Preferences.DEV_MODE, false);
-        useRobottyService = getBoolean(Preferences.ROBOTTY_SERVICE, false);
+        useRobottyService = getBoolean(Preferences.MESSAGE_HISTORY, false);
         showFloatingChat = getBoolean(Preferences.PLAYER_FLOATING_CHAT, false);
         isCompactPlayerFollowViewEnabled = getBoolean(Preferences.COMPACT_PLAYER_FOLLOW_VIEW, false);
         showPlayerStatButton = getBoolean(Preferences.PLAYER_STAT_BUTTON, true);
@@ -146,7 +144,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         hideChatRestriction = getBoolean(Preferences.HIDE_CHAT_RESTRICTION, false);
         showWideEmotes = getBoolean(Preferences.SHOW_WIDE_EMOTES, false);
         disableGoogleBilling = getBoolean(Preferences.DISABLE_GOOGLE_BILLING, false);
-        showSwipperLockButton = getBoolean(Preferences.SWIPPER_LOCK_BUTTON, false);
+        showSwipperLockButton = getBoolean(Preferences.GESTURES_LOCK_BUTTON, false);
         useAutoclicker = getBoolean(Preferences.AUTOCLICKER, true);
         showHypeTrain = getBoolean(Preferences.SHOW_HYPE_TRAIN, true);
         shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER, false);
@@ -164,11 +162,11 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         isGifsAnimated = gifsRenderType.equals(Gifs.ANIMATED);
         msgDeleteStrategy = getString(Preferences.MSG_DELETE_STRATEGY, MsgDelete.DEFAULT);
         miniPlayerScale = getInt(Preferences.MINIPLAYER_SCALE, DEFAULT_MINIPLAYER_SCALE);
-        playerImplemetation = getString(Preferences.PLAYER_IMPELEMTATION, PlayerImpl.AUTO);
+        playerImplemetation = getString(Preferences.PLAYER_IMPLEMENTATION, PlayerImpl.AUTO);
         sureStreamAdBlockVariant = getString(Preferences.SURESTREAM_ADBLOCK, SureStreamAdBlock.V1);
         filterChatMessageByLevel = getString(Preferences.CHAT_MESSAGE_FILTER_LEVEL, UserMessagesFiltering.DISABLED);
-        floatingChatSize = getInt(Preferences.FLOAT_CHAT_SIZE, DEFAULT_FLOATING_CHAT_QUEUE);
-        robottyLimit = getInt(Preferences.ROBOTTY_LIMIT, DEFAULT_ROBOTTY_LIMIT);
+        floatingChatSize = getInt(Preferences.PLAYER_FLOATING_CHAT_SIZE, DEFAULT_FLOATING_CHAT_QUEUE);
+        robottyLimit = getInt(Preferences.MESSAGE_HISTORY_LIMIT, DEFAULT_ROBOTTY_LIMIT);
         playerForwardSeek = getInt(Preferences.PLAYER_FORWARD_SEEK, DEFAULT_PLAYER_FORWARD_SEEK);
         playerBackwardSeek = getInt(Preferences.PLAYER_BACKWARD_SEEK, DEFAULT_PLAYER_BACKWARD_SEEK);
         chatMessageFontSize = getInt(Preferences.CHAT_MESSAGE_FONT_SIZE, DEFAULT_CHAT_FONT_SIZE);
@@ -276,7 +274,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     }
 
     public boolean isChatTimestampsVodEnabled() {
-        return isChatTimestampsVodEnabled;
+        return isChatTimestampsEnabled();
     }
 
     public boolean disableTheatreAutoplay() {
@@ -519,7 +517,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 return;
         }
 
-        Preferences preference = Preferences.lookupKey(key);
+        Preferences preference = Preferences.lookupByKey(key);
         if (preference == null) {
             Logger.warning("Preference not found. Key: " + key);
             return;
@@ -550,7 +548,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 userFilterText = sharedPreferences.getString(key, userFilterText);
                 ChatMesssageFilteringUtil.INSTANCE.updateBlocklist(userFilterText);
                 break;
-            case PLAYER_IMPELEMTATION:
+            case PLAYER_IMPLEMENTATION:
                 playerImplemetation = sharedPreferences.getString(key, playerImplemetation);
                 break;
             case SURESTREAM_ADBLOCK:
@@ -562,10 +560,10 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case PLAYER_FLOATING_CHAT:
                 showFloatingChat = sharedPreferences.getBoolean(key, showFloatingChat);
                 break;
-            case ROBOTTY_LIMIT:
+            case MESSAGE_HISTORY_LIMIT:
                 robottyLimit = sharedPreferences.getInt(key, robottyLimit);
                 break;
-            case VOLUME_SWIPER:
+            case VOLUME_GESTURE:
                 isVolumeSwiperEnabled = sharedPreferences.getBoolean(key, isVolumeSwiperEnabled);
                 break;
             case PLAYER_REFRESH_BUTTON:
@@ -574,19 +572,16 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case SHOW_CHAT_FOR_BANNED_USER:
                 showChatForBannedUser = sharedPreferences.getBoolean(key, showChatForBannedUser);
                 break;
-            case CHAT_TIMESTAMPS:
+            case CHAT_TIMESTAMP:
                 isChatTimestampsEnabled = sharedPreferences.getBoolean(key, isChatTimestampsEnabled);
                 break;
-            case CHAT_TIMESTAMPS_VOD:
-                isChatTimestampsVodEnabled = sharedPreferences.getBoolean(key, isChatTimestampsVodEnabled);
-                break;
-            case FLOAT_CHAT_SIZE:
+            case PLAYER_FLOATING_CHAT_SIZE:
                 floatingChatSize = sharedPreferences.getInt(key, floatingChatSize);
                 break;
-            case ROBOTTY_SERVICE:
+            case MESSAGE_HISTORY:
                 useRobottyService = sharedPreferences.getBoolean(key, useRobottyService);
                 break;
-            case CHAT_MENTION_HIGHLIGHTS:
+            case CHAT_MENTION_HIGHLIGHT:
                 showMentionHighlightsInChat = sharedPreferences.getBoolean(key, showMentionHighlightsInChat);
                 break;
             case LANDSCAPE_CHAT_SCALE:
@@ -601,7 +596,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case MINIPLAYER_SCALE:
                 miniPlayerScale = sharedPreferences.getInt(key, miniPlayerScale);
                 break;
-            case BRIGHTNESS_SWIPER:
+            case BRIGHTNESS_GESTURE:
                 isBrightnessSwiperEnabled = sharedPreferences.getBoolean(key, isBrightnessSwiperEnabled);
                 break;
             case HIDE_DISCOVER_TAB:
@@ -634,22 +629,22 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
             case CHAT_MESSAGE_FILTER_LEVEL:
                 filterChatMessageByLevel = sharedPreferences.getString(key, filterChatMessageByLevel);
                 break;
-            case CHAT_MESSAGE_FILTER_SYSTEM:
+            case FILTER_CHAT_SYSTEM:
                 hideSystemMessagesInChat = sharedPreferences.getBoolean(key, hideSystemMessagesInChat);
                 break;
-            case HIDE_FOLLOW_RESUME_STREAMS:
+            case HIDE_FOLLOW_RESUME:
                 hideFollowResume = sharedPreferences.getBoolean(key, hideFollowResume);
                 break;
             case HIDE_RECENT_SEARCH_RESULTS:
                 hideRecentSearch = sharedPreferences.getBoolean(key, hideRecentSearch);
                 break;
-            case HIDE_FOLLOW_RECOMMENDED_STREAMS:
+            case HIDE_FOLLOW_RECOMMENDATIONS:
                 hideFollowRecommendation = sharedPreferences.getBoolean(key, hideFollowRecommendation);
                 break;
             case DISABLE_GOOGLE_BILLING:
                 disableGoogleBilling = sharedPreferences.getBoolean(key, disableGoogleBilling);
                 break;
-            case SWIPPER_LOCK_BUTTON:
+            case GESTURES_LOCK_BUTTON:
                 showSwipperLockButton = sharedPreferences.getBoolean(key, showSwipperLockButton);
                 break;
             case PLAYER_FORWARD_SEEK:

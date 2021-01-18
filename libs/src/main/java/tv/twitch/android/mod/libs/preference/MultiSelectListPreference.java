@@ -55,9 +55,9 @@ public class MultiSelectListPreference extends DialogPreference {
                 ResourcesManager.getStyleableArr(context, "MultiSelectListPreference"), defStyleAttr,
                 defStyleRes);
 
-        mEntries = TypedArrayUtils.getTextArray(a, 2, 0);
+        mEntries = TypedArrayUtils.getTextArray(a, 0);
 
-        mEntryValues = TypedArrayUtils.getTextArray(a, 3, 1);
+        mEntryValues = TypedArrayUtils.getTextArray(a, 1);
 
         a.recycle();
     }

@@ -66,17 +66,17 @@ public class SwitchPreferenceCompat extends TwoStatePreference {
                                   int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, ResourcesManager.getStyleableArr(context, "SwitchPreferenceCompatX"), defStyleAttr, defStyleRes);
+        TypedArray a = context.obtainStyledAttributes(attrs, ResourcesManager.getStyleableArr(context, "SwitchPreferenceCompat"), defStyleAttr, defStyleRes);
 
-        setSummaryOn(TypedArrayUtils.getString(a, 7, 0));
+        setSummaryOn(TypedArrayUtils.getString(a,0));
 
-        setSummaryOff(TypedArrayUtils.getString(a, 6, 1));
+        setSummaryOff(TypedArrayUtils.getString(a, 1));
 
-        setSwitchTextOn(TypedArrayUtils.getString(a, 9, 3));
+        setSwitchTextOn(TypedArrayUtils.getString(a,  3));
 
-        setSwitchTextOff(TypedArrayUtils.getString(a, 8, 4));
+        setSwitchTextOff(TypedArrayUtils.getString(a, 4));
 
-        setDisableDependentsState(TypedArrayUtils.getBoolean(a, 5, 2, false));
+        setDisableDependentsState(TypedArrayUtils.getBoolean(a, 2, false));
 
         a.recycle();
     }

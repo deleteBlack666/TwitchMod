@@ -40,7 +40,7 @@ public class SettingsController {
             return false;
         }
 
-        Preferences pref = Preferences.lookupKey(key);
+        Preferences pref = Preferences.lookupByKey(key);
         if (pref == null)
             return false;
 

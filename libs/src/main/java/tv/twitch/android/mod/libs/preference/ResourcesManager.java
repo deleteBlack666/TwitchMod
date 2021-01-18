@@ -24,21 +24,15 @@ public class ResourcesManager {
 
     private static void fillStyleables(Context context) {
         STYLEABLES.put("CheckBoxPreference", new int[] {android.R.attr.summaryOn,
-                android.R.attr.summaryOff, android.R.attr.disableDependentsState,
-                getAttrId(context, "disableDependentsState"), getAttrId(context, "summaryOff"),
-                getAttrId(context, "summaryOn")});
+                android.R.attr.summaryOff, android.R.attr.disableDependentsState});
         STYLEABLES.put("DialogPreference", new int[] {android.R.attr.dialogTitle,
                 android.R.attr.dialogMessage, android.R.attr.dialogIcon,
                 android.R.attr.positiveButtonText, android.R.attr.negativeButtonText,
-                android.R.attr.dialogLayout, getAttrId(context, "dialogIcon"),
-                getAttrId(context, "dialogLayout"), getAttrId(context, "dialogMessage"),
-                getAttrId(context, "dialogTitle"), getAttrId(context, "negativeButtonText"),
-                getAttrId(context, "positiveButtonText")});
+                android.R.attr.dialogLayout});
         STYLEABLES.put("EditTextPreference", new int[] {getAttrId(context, "useSimpleSummaryProvider")});
         STYLEABLES.put("PreferenceImageView", new int[] {android.R.attr.maxWidth,
-                android.R.attr.maxHeight, getAttrId(context, "maxHeight"), getAttrId(context, "maxWidth")});
+                android.R.attr.maxHeight});
         STYLEABLES.put("ListPreference", new int[] {android.R.attr.entries, android.R.attr.entryValues,
-                getAttrId(context, "entries"), getAttrId(context, "entryValues"),
                 getAttrId(context, "useSimpleSummaryProvider")});
         STYLEABLES.put("Preference", new int[] {android.R.attr.icon, android.R.attr.persistent,
                 android.R.attr.enabled, android.R.attr.layout,
@@ -47,38 +41,27 @@ public class ResourcesManager {
                 android.R.attr.dependency, android.R.attr.defaultValue,
                 android.R.attr.shouldDisableView, android.R.attr.fragment,
                 getAttrId(context, "allowDividerAbove"), getAttrId(context, "allowDividerBelow"),
-                getAttrId(context, "defaultValue"), getAttrId(context, "dependency"),
-                getAttrId(context, "enableCopying"), getAttrId(context, "enabled"),
-                getAttrId(context, "fragment"), getAttrId(context, "icon"), getAttrId(context, "iconSpaceReserved"),
-                getAttrId(context, "isPreferenceVisible"), getAttrId(context, "key"), getAttrId(context, "layout"),
-                getAttrId(context, "order"), getAttrId(context, "persistent"), getAttrId(context, "selectable"),
-                getAttrId(context, "shouldDisableView"), getAttrId(context, "singleLineTitle"),
-                getAttrId(context, "summary"), getAttrId(context, "title"), getAttrId(context, "widgetLayout")});
-        STYLEABLES.put("MultiSelectListPreference", new int[] {android.R.attr.entries,
-                android.R.attr.entryValues, getAttrId(context, "entries"), getAttrId(context, "entryValues")});
+                getAttrId(context, "enableCopying"), getAttrId(context, "iconSpaceReserved"),
+                getAttrId(context, "isPreferenceVisible"), getAttrId(context, "singleLineTitle"),
+                getAttrId(context, "xPreference")});
+        STYLEABLES.put("MultiSelectListPreference", new int[] {android.R.attr.entries, android.R.attr.entryValues});
         STYLEABLES.put("PreferenceFragment", new int[] {android.R.attr.layout, android.R.attr.divider,
                 android.R.attr.dividerHeight, getAttrId(context, "allowDividerAfterLastItem")});
         STYLEABLES.put("PreferenceFragmentCompat", new int[] {android.R.attr.layout, android.R.attr.divider,
                 android.R.attr.dividerHeight, getAttrId(context, "allowDividerAfterLastItem")});
         STYLEABLES.put("PreferenceGroup", new int[] {android.R.attr.orderingFromXml,
-                getAttrId(context, "initialExpandedChildrenCount"), getAttrId(context, "orderingFromXml")});
-        STYLEABLES.put("BackgroundStyle", new int[] {android.R.attr.selectableItemBackground,
-                getAttrId(context, "selectableItemBackground")});
+                getAttrId(context, "initialExpandedChildrenCount")});
+        STYLEABLES.put("BackgroundStyle", new int[] {android.R.attr.selectableItemBackground});
         STYLEABLES.put("SeekBarPreference", new int[] {android.R.attr.layout, android.R.attr.max,
                 getAttrId(context, "adjustable"), getAttrId(context, "min"),
                 getAttrId(context, "seekBarIncrement"), getAttrId(context, "seekBarValueSuffix"),
                 getAttrId(context, "showSeekBarValue"), getAttrId(context, "updatesContinuously")});
-        STYLEABLES.put("SwitchPreferenceX", new int[] {android.R.attr.summaryOn, android.R.attr.summaryOff,
+        STYLEABLES.put("SwitchPreference", new int[] {android.R.attr.summaryOn, android.R.attr.summaryOff,
                 android.R.attr.disableDependentsState, android.R.attr.switchTextOn,
-                android.R.attr.switchTextOff, getAttrId(context, "disableDependentsState"),
-                getAttrId(context, "summaryOff"), getAttrId(context, "summaryOn"), getAttrId(context, "switchTextOff"),
-                getAttrId(context, "switchTextOn")});
-        STYLEABLES.put("SwitchPreferenceCompatX", new int[] {android.R.attr.summaryOn,
+                android.R.attr.switchTextOff});
+        STYLEABLES.put("SwitchPreferenceCompat", new int[] {android.R.attr.summaryOn,
                 android.R.attr.summaryOff, android.R.attr.disableDependentsState,  android.R.attr.switchTextOn,
-                android.R.attr.switchTextOff, getAttrId(context, "disableDependentsState"),
-                getAttrId(context, "summaryOff"), getAttrId(context, "summaryOn"),
-                getAttrId(context, "switchTextOff"), getAttrId(context, "switchTextOn")
-        });
+                android.R.attr.switchTextOff});
     }
 
     public static int[] getStyleableArr(Context context, String name) {
@@ -91,7 +74,12 @@ public class ResourcesManager {
 
     public static Integer getAttrId(Context context, String name) {
         Resources resources = context.getResources();
-        return resources.getIdentifier(name, "attr", context.getPackageName());
+        int id = resources.getIdentifier(name, "attr", context.getPackageName());
+        if (id == 0) {
+            Log.w("RM", "attr " + name + " not found!");
+        }
+
+        return id;
     }
 
     public static Integer getId(Context context, String name) {

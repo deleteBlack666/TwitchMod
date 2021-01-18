@@ -51,11 +51,11 @@ public class CheckBoxPreference extends TwoStatePreference {
                 ResourcesManager.getStyleableArr(context, "CheckBoxPreference"), defStyleAttr, defStyleRes);
 
 
-        setSummaryOn(TypedArrayUtils.getString(a, 5, 0));
+        setSummaryOn(TypedArrayUtils.getString(a, 0));
 
-        setSummaryOff(TypedArrayUtils.getString(a, 4, 1));
+        setSummaryOff(TypedArrayUtils.getString(a, 1));
 
-        setDisableDependentsState(TypedArrayUtils.getBoolean(a, 3, 2, false));
+        setDisableDependentsState(TypedArrayUtils.getBoolean(a, 2, false));
 
         a.recycle();
     }

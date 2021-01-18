@@ -203,9 +203,14 @@ public class SeekBarPreference extends Preference {
 
     @Override
     protected void onSetInitialValue(Object defaultValue) {
+        if (defaultValue instanceof String) {
+            defaultValue = Integer.parseInt((String) defaultValue);
+        }
+
         if (defaultValue == null) {
             defaultValue = 0;
         }
+
         setValue(getPersistedInt((Integer) defaultValue));
     }
 

@@ -51,25 +51,25 @@ public abstract class DialogPreference extends Preference {
         final TypedArray a = context.obtainStyledAttributes(attrs,
                 ResourcesManager.getStyleableArr(context, "DialogPreference"), defStyleAttr, defStyleRes);
 
-        mDialogTitle = TypedArrayUtils.getString(a, 9, 0);
+        mDialogTitle = TypedArrayUtils.getString(a, 0);
         if (mDialogTitle == null) {
             // Fall back on the regular title of the preference
             // (the one that is seen in the list)
             mDialogTitle = getTitle();
         }
 
-        mDialogMessage = TypedArrayUtils.getString(a, 8, 1);
+        mDialogMessage = TypedArrayUtils.getString(a, 1);
 
-        mDialogIcon = TypedArrayUtils.getDrawable(a, 6, 2);
+        mDialogIcon = TypedArrayUtils.getDrawable(a, 2);
 
-        mPositiveButtonText = TypedArrayUtils.getString(a, 11, 3);
+        mPositiveButtonText = TypedArrayUtils.getString(a, 3);
         if (TextUtils.isEmpty(mPositiveButtonText)) {
             mPositiveButtonText = context.getString(android.R.string.ok);
         }
 
-        mNegativeButtonText = TypedArrayUtils.getString(a, 10, 4);
+        mNegativeButtonText = TypedArrayUtils.getString(a, 4);
 
-        mDialogLayoutResId = TypedArrayUtils.getResourceId(a, 7, 5, 0);
+        mDialogLayoutResId = TypedArrayUtils.getResourceId(a, 5, 0);
 
         a.recycle();
     }

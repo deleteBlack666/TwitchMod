@@ -46,7 +46,7 @@ public class EditTextPreference extends DialogPreference {
         TypedArray a = context.obtainStyledAttributes(
                 attrs, ResourcesManager.getStyleableArr(context, "EditTextPreference"), defStyleAttr, defStyleRes);
 
-        if (TypedArrayUtils.getBoolean(a, 0, 0, false)) {
+        if (TypedArrayUtils.getBoolean(a, 0, false)) {
             setSummaryProvider(SimpleSummaryProvider.getInstance());
         }
 

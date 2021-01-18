@@ -252,7 +252,7 @@ public final class HookController {
                 View.GONE);
     }
 
-    public static Fragment getModSettingsFragment() {
+    public static Fragment createModSettingsFragment() {
         return new MainSettingsFragment();
     }
 
