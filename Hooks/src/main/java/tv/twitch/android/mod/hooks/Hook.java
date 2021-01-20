@@ -312,6 +312,8 @@ public final class Hook {
                     case PlayerImpl.EXO:
                         return PLAYER_EXO2;
                 }
+            case NON_FATAL_REPORTING_STRATEGY:
+                return "disabled";
         }
 
         return org;
