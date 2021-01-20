@@ -61,7 +61,7 @@
     </tv.twitch.android.mod.libs.preference.Preference>
 
     <tv.twitch.android.mod.libs.preference.Preference
-        android:icon="@drawable/ic_github"
+        android:icon="@drawable/ic_github2"
         android:title="@string/mod_info_open_github"
         android:summary="@string/mod_info_open_github_desc" >
         <intent android:action="android.intent.action.VIEW"
