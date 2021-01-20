@@ -266,7 +266,7 @@ public class Preference implements Comparable<Preference> {
             return;
 
         if (pref.getKey() != null) {
-            String key = ResourcesManager.getString(mContext, pref.getKey());
+            String key = pref.getKey();
             if (!TextUtils.isEmpty(key)) {
                 mKey = key;
             }
