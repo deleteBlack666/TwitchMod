@@ -15,15 +15,15 @@ public class FfzUrlProvider implements UrlProvider {
     private final String mLargeEmoteUrl;
 
     public FfzUrlProvider(HashMap<String, String> urls) {
-        this.mSmallEmoteUrl = urls.get("1x");
-        this.mMediumEmoteUrl = urls.get("2x");
-        this.mLargeEmoteUrl = urls.get("4x");
+        this.mSmallEmoteUrl = formatUrl(urls.get("1x"));
+        this.mMediumEmoteUrl = formatUrl(urls.get("2x"));
+        this.mLargeEmoteUrl = formatUrl(urls.get("4x"));
     }
 
     public FfzUrlProvider(FfzUrls ffzUrls) {
-        this.mSmallEmoteUrl = ffzUrls.getSmall();
-        this.mMediumEmoteUrl = ffzUrls.getMedium();
-        this.mLargeEmoteUrl = ffzUrls.getLarge();
+        this.mSmallEmoteUrl = formatUrl(ffzUrls.getSmall());
+        this.mMediumEmoteUrl = formatUrl(ffzUrls.getMedium());
+        this.mLargeEmoteUrl = formatUrl(ffzUrls.getLarge());
     }
 
     @Override
@@ -42,5 +42,15 @@ public class FfzUrlProvider implements UrlProvider {
         }
 
         return null;
+    }
+
+    private static String formatUrl(String url) {
+        if (url == null)
+            return null;
+
+        if (url.startsWith("//"))
+            return "https:" + url;
+
+        return url;
     }
 }
