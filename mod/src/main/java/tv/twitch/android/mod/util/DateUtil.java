@@ -19,7 +19,6 @@ public class DateUtil {
         try {
             return simpleDateFormat.parse(str);
         } catch (ParseException e) {
-            e.printStackTrace();
             SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(API_DATE_SUBSECOND_FORMAT, Locale.getDefault());
             simpleDateFormat2.setTimeZone(timeZone);
 
