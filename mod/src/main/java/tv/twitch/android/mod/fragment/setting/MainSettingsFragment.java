@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.libs.preference.Preference;
 
 import tv.twitch.android.mod.bridge.LoaderLS;
@@ -37,5 +39,10 @@ public class MainSettingsFragment extends BaseSettingsFragment {
     @Override
     public String getXmlFilename() {
         return "mod_main_preferences";
+    }
+
+    @Override
+    public String getTitle() {
+        return ResourcesManager.getString("system");
     }
 }

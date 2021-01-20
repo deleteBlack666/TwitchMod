@@ -5,4 +5,6 @@ public interface IPreferenceFragment {
     String getFragmentTag();
 
     String getXmlFilename();
+
+    String getTitle();
 }
