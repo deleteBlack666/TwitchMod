@@ -14,6 +14,9 @@ public class FfzBadge {
     @SerializedName("name")
     private String name;
     @Nullable
+    @SerializedName("color")
+    private String color;
+    @Nullable
     @SerializedName("replaces")
     private String replaces;
     @SerializedName("urls")
@@ -34,5 +37,10 @@ public class FfzBadge {
     @Nullable
     public String getReplaces() {
         return replaces;
+    }
+
+    @Nullable
+    public String getColor() {
+        return color;
     }
 }

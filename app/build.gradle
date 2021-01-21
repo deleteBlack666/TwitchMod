@@ -43,5 +43,6 @@ dependencies {
     implementation project(path: ':hooks')
     implementation project(path: ':mod')
     implementation project(path: ':libs')
+    implementation project(path: ':models')
 
 }

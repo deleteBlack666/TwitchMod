@@ -14,6 +14,7 @@ import tv.twitch.android.core.mvp.viewdelegate.EventDispatcher;
 import tv.twitch.android.core.user.TwitchAccountManager;
 import tv.twitch.android.mod.hooks.Hook;
 import tv.twitch.android.mod.hooks.HookJump;
+import tv.twitch.android.mod.models.UrlDrawableCallback;
 import tv.twitch.android.models.webview.WebViewSource;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.adapter.item.ChatAdapterItem;
@@ -77,8 +78,9 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     /* ... */
 
     @Override
-    public CharSequence getSpannedEmote(String url, String emoteText) { // TODO: __INJECT_METHOD
+    public CharSequence getSpannedEmote(String url, String emoteText, UrlDrawableCallback urlDrawableCallback) { // TODO: __INJECT_METHOD
         UrlDrawable urlDrawable = new UrlDrawable(url, MediaSpan$Type.Emote);
+        urlDrawable.setCallback(urlDrawableCallback);
         urlDrawable.setTwitchEmote(false);
         urlDrawable.setShouldWide(HookJump.isWideEmotesEnabled());
 
@@ -89,10 +91,11 @@ public class ChatMessageFactory implements IChatMessageFactory { // TODO: __IMPL
     }
 
     @Override
-    public CharSequence getSpannedBadge(String url, String badgeName) { // TODO: __INJECT_METHOD
+    public CharSequence getSpannedBadge(String url, String badgeName, UrlDrawableCallback urlDrawableCallback) { // TODO: __INJECT_METHOD
         UrlDrawable urlDrawable = new UrlDrawable(url, MediaSpan$Type.Badge);
+        urlDrawable.setCallback(urlDrawableCallback);
 
-        SpannableString spannableString = new SpannableString(badgeName + " ");
+        SpannableString spannableString = new SpannableString(badgeName);
         spannableString.setSpan(new CenteredImageSpan(urlDrawable, null), 0, badgeName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;

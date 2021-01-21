@@ -9,12 +9,15 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 
 import tv.twitch.android.mod.bridge.interfaces.IUrlDrawable;
 import tv.twitch.android.mod.hooks.HookJump;
+import tv.twitch.android.mod.models.UrlDrawableCallback;
 
 
 public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TODO: __IMPLEMENT
     private Drawable drawable;
     private MediaSpan$Type type;
     private String url;
+
+    private UrlDrawableCallback mCallback; // TODO: __INJECT_FIELD
 
     private boolean isTwitchEmote = true; // TODO: __INJECT_FIELD
     private boolean shouldWide = false; // TODO: __INJECT_FIELD
@@ -24,7 +27,15 @@ public class UrlDrawable extends BitmapDrawable implements IUrlDrawable { // TOD
         /* ... */
     }
 
-    public final void setDrawable(Drawable drawable) {
+    public void setCallback(UrlDrawableCallback callback) { // TODO: __INJECT_METHOD
+        this.mCallback = callback;
+    }
+
+    public final void setDrawable(Drawable drawable) { // TODO: __REPLACE_METHOD
+        if (mCallback != null) {
+            drawable = mCallback.onDrawableSet(drawable);
+        }
+
         this.drawable = drawable;
     }
 

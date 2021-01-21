@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 
+import tv.twitch.android.mod.badge.FfzBadgeEnhancement;
 import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IChatMessageFactory;
 import tv.twitch.android.mod.bridge.interfaces.ILiveChatSource;
@@ -30,6 +31,7 @@ import tv.twitch.android.mod.chat.fetcher.RobottyFetcher;
 import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.Emote;
+import tv.twitch.android.mod.models.chat.FfzBadge;
 import tv.twitch.android.mod.models.preferences.ImageSize;
 import tv.twitch.android.models.channel.ChannelInfo;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
@@ -233,14 +235,28 @@ public class ChatUtil {
                 continue;
 
             String url = badge.getUrlProvider().getUrl(ImageSize.LARGE);
-            CharSequence newBadgeSpan = factory.getSpannedBadge(url, badge.getName());
-            if (TextUtils.isEmpty(newBadgeSpan))
-                continue;
 
-            if (badge.getReplaces().length != 0) {
-                Logger.debug("FIX!"); // FIXME: rewrite
+            if (badge instanceof FfzBadge) {
+                FfzBadge ffzBadge = (FfzBadge) badge;
+                FfzBadgeEnhancement ffzBadgeEnhancement = null;
+                if (ffzBadge.getColor() != Color.TRANSPARENT) {
+                    ffzBadgeEnhancement = new FfzBadgeEnhancement(ffzBadge.getColor());
+                }
+                CharSequence newBadgeSpan = factory.getSpannedBadge(url, badge.getName(), ffzBadgeEnhancement);
+
+                String replaces = ffzBadge.getReplaces();
+                if (!TextUtils.isEmpty(replaces)) {
+                    int pos = TextUtils.indexOf(ssb, replaces);
+                    if (pos != -1) {
+                        ssb.replace(pos, replaces.length(), newBadgeSpan);
+                        continue;
+                    }
+                }
+
+                ssb.append(newBadgeSpan).append(" ");
             } else {
-                ssb.append(newBadgeSpan);
+                CharSequence newBadgeSpan = factory.getSpannedBadge(url, badge.getName(), null);
+                ssb.append(newBadgeSpan).append(" ");
             }
         }
 
@@ -275,7 +291,7 @@ public class ChatUtil {
             if (url == null)
                 continue;
 
-            SpannableString emoteSpan = (SpannableString) factory.getSpannedEmote(url, emoteCode);
+            SpannableString emoteSpan = (SpannableString) factory.getSpannedEmote(url, emoteCode, null);
             if (emoteSpan != null) {
                 ssb.replace(startPos, startPos + emoteCode.length(), emoteSpan);
             }

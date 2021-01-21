@@ -70,7 +70,9 @@ public class FfzBadgesFetcher extends ApiCallback<FfzBadgesResponse> {
                     continue;
 
                 set.addBadge(new tv.twitch.android.mod.models.chat.FfzBadge(badge.getName(),
-                        UrlProviderFactory.getFfzUrlProvider(badge.getUrls()), badge.getReplaces()), id);
+                        String.valueOf(badge.getId()),
+                        UrlProviderFactory.getFfzUrlProvider(badge.getUrls()), badge.getReplaces(),
+                        badge.getColor()), id);
             }
         }
 

@@ -1,9 +1,10 @@
 package tv.twitch.android.mod.models.chat;
 
 
-import androidx.annotation.Nullable;
+import android.graphics.Color;
+import android.text.TextUtils;
 
-import java.util.Arrays;
+import androidx.annotation.Nullable;
 
 import tv.twitch.android.mod.emote.UrlProvider;
 
@@ -11,13 +12,22 @@ import tv.twitch.android.mod.emote.UrlProvider;
 public final class FfzBadge implements Badge {
     private final String mName;
     private final UrlProvider mUrlProvider;
-    private final String[] mReplaces;
+    private final String mReplaces;
+    private final String mId;
+    private final int mColor;
 
 
-    public FfzBadge(String name, UrlProvider provider, @Nullable String replaces) {
+    public FfzBadge(String name, String id, UrlProvider provider, @Nullable String replaces, String color) {
         mName = name;
+        mId = id;
         mUrlProvider = provider;
-        mReplaces = replaces == null ? new String[0] : replaces.split(", ");
+        mReplaces = replaces;
+        mColor = TextUtils.isEmpty(color) ? Color.TRANSPARENT : Color.parseColor(color);
+    }
+
+    @Override
+    public String getId() {
+        return mId;
     }
 
     @Override
@@ -30,9 +40,12 @@ public final class FfzBadge implements Badge {
         return mUrlProvider;
     }
 
-    @Override
-    public String[] getReplaces() {
+    public String getReplaces() {
         return mReplaces;
+    }
+
+    public int getColor() {
+        return mColor;
     }
 
     @Override
@@ -40,7 +53,9 @@ public final class FfzBadge implements Badge {
         return "FfzBadge{" +
                 "mName='" + mName + '\'' +
                 ", mUrlProvider=" + mUrlProvider +
-                ", mReplaces=" + Arrays.toString(mReplaces) +
+                ", mReplaces='" + mReplaces + '\'' +
+                ", mId='" + mId + '\'' +
+                ", mColor=" + mColor +
                 '}';
     }
 }

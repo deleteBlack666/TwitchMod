@@ -205,52 +205,60 @@ public final class Hook {
     public static SpannedString hookChatMessage(IChatMessageFactory factory,
                                                 ChatMessageInterface chatMessageInterface,
                                                 SpannedString orgMessage, int channelId) {
-        PreferenceManager manager = PreferenceManager.INSTANCE;
+        try {
+            PreferenceManager manager = PreferenceManager.INSTANCE;
 
-        if (TextUtils.isEmpty(orgMessage)) {
+            if (TextUtils.isEmpty(orgMessage)) {
+                return orgMessage;
+            }
+
+            if (chatMessageInterface.isDeleted()) {
+                return orgMessage;
+            }
+
+            SpannedString hooked = new SpannedString(orgMessage);
+
+            if (manager.showBttvEmotesInChat()) {
+                hooked = ChatUtil.tryAddEmotes(factory, chatMessageInterface, hooked, channelId,
+                        manager.getGifsStrategy().equals(Gifs.DISABLED), manager.getImageSize());
+            }
+
+            return hooked;
+        } catch (Throwable throwable) {
             return orgMessage;
         }
-
-        if (chatMessageInterface.isDeleted()) {
-            return orgMessage;
-        }
-
-        SpannedString hooked = new SpannedString(orgMessage);
-
-        if (manager.showBttvEmotesInChat()) {
-            hooked = ChatUtil.tryAddEmotes(factory, chatMessageInterface, hooked, channelId,
-                    manager.getGifsStrategy().equals(Gifs.DISABLED), manager.getImageSize());
-        }
-
-        return hooked;
     }
 
     public static SpannedString hookChatMessageBadges(IChatMessageFactory factory,
                                                       ChatMessageInterface chatMessageInterface,
                                                       SpannedString badgesSpan) {
-        if (factory == null) {
-            Logger.error("factory is null");
+        try {
+            if (factory == null) {
+                Logger.error("factory is null");
+                return badgesSpan;
+            }
+
+            if (chatMessageInterface == null) {
+                Logger.error("chatMessageInterface is null");
+                return badgesSpan;
+            }
+
+            if (badgesSpan == null) {
+                Logger.error("badgesSpan is null");
+                return badgesSpan;
+            }
+
+            if (PreferenceManager.INSTANCE.isFfzBadgesEnabled()) {
+                Collection<Badge> badges = BadgeManager.INSTANCE.getFfzBadges(chatMessageInterface.getUserId());
+                badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
+            }
+
+            // FIXME: inject donators badges
+
+            return badgesSpan;
+        } catch (Throwable throwable) {
             return badgesSpan;
         }
-
-        if (chatMessageInterface == null) {
-            Logger.error("chatMessageInterface is null");
-            return badgesSpan;
-        }
-
-        if (badgesSpan == null) {
-            Logger.error("badgesSpan is null");
-            return badgesSpan;
-        }
-
-        if (PreferenceManager.INSTANCE.isFfzBadgesEnabled()) {
-            Collection<Badge> badges = BadgeManager.INSTANCE.getFfzBadges(chatMessageInterface.getUserId());
-            badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
-        }
-
-        // FIXME: inject donators badges
-
-        return badgesSpan;
     }
 
     public static Spanned hookMarkAsDeleted(tv.twitch.android.shared.chat.util.ChatUtil.Companion companion,
