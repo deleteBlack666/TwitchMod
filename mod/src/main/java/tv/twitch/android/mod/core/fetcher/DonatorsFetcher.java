@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import retrofit2.Call;
 import tv.twitch.android.mod.badge.BadgeSetImpl;
-import tv.twitch.android.mod.badge.DonatorBadge;
+import tv.twitch.android.mod.models.chat.DonatorBadge;
 import tv.twitch.android.mod.bridge.ApiCallback;
 import tv.twitch.android.mod.emote.SimpleUrlProvider;
 import tv.twitch.android.mod.emote.UrlProvider;

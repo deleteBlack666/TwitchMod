@@ -1,8 +1,7 @@
-package tv.twitch.android.mod.badge;
+package tv.twitch.android.mod.models.chat;
 
 
 import tv.twitch.android.mod.emote.UrlProvider;
-import tv.twitch.android.mod.models.chat.Badge;
 
 
 public class DonatorBadge implements Badge {
