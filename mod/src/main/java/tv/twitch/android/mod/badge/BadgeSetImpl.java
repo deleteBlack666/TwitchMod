@@ -14,7 +14,7 @@ import tv.twitch.android.mod.models.chat.Badge;
 import tv.twitch.android.mod.models.chat.BadgeSet;
 
 
-public class FfzBadgeSet implements BadgeSet {
+public class BadgeSetImpl implements BadgeSet {
     private final Map<Integer, HashSet<Badge>> mMap = new HashMap<>();
 
     @NonNull

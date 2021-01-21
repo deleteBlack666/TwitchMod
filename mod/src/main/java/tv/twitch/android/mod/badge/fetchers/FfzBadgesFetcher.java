@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
-import tv.twitch.android.mod.badge.FfzBadgeSet;
+import tv.twitch.android.mod.badge.BadgeSetImpl;
 import tv.twitch.android.mod.bridge.ApiCallback;
 import tv.twitch.android.mod.emote.UrlProviderFactory;
 import tv.twitch.android.mod.models.api.FailReason;
@@ -21,7 +21,7 @@ public class FfzBadgesFetcher extends ApiCallback<FfzBadgesResponse> {
     private final Callback mCallback;
 
     public interface Callback {
-        void onFfzBadgesParsed(FfzBadgeSet set);
+        void onFfzBadgesParsed(BadgeSetImpl set);
     }
 
     public FfzBadgesFetcher(Callback callback) {
@@ -47,7 +47,7 @@ public class FfzBadgesFetcher extends ApiCallback<FfzBadgesResponse> {
             return;
         }
 
-        FfzBadgeSet set = new FfzBadgeSet();
+        BadgeSetImpl set = new BadgeSetImpl();
         for (FfzBadge badge : badges) {
             if (badge == null)
                 continue;
