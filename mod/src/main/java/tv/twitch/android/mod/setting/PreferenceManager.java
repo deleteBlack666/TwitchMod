@@ -68,6 +68,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     private boolean shouldHideChatHeaderContainer;
     private boolean showStreamUptime;
     private boolean ffzBadges;
+    private boolean hideBitsButton;
 
     private boolean shouldShowBanner;
     private boolean isBannerShown;
@@ -150,6 +151,7 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER, false);
         showStreamUptime = getBoolean(Preferences.STREAM_UPTIME, true);
         ffzBadges = getBoolean(Preferences.FFZ_BADGES, false);
+        hideBitsButton = getBoolean(Preferences.HIDE_BITS_BUTTON, false);
 
         lastBuildNum = getInt(Preferences.LAST_BUILD_NUMBER, -1);
 
@@ -502,6 +504,10 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         return ffzBadges;
     }
 
+    public boolean hideBitsButton() {
+        return hideBitsButton;
+    }
+
     public void updateBuildNumber() {
         updateInt(Preferences.LAST_BUILD_NUMBER.getKey(), LoaderLS.getBuildNumber());
     }
@@ -676,6 +682,9 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
                 break;
             case FFZ_BADGES:
                 ffzBadges = sharedPreferences.getBoolean(key, ffzBadges);
+                break;
+            case HIDE_BITS_BUTTON:
+                hideBitsButton = sharedPreferences.getBoolean(key, hideBitsButton);
                 break;
             default:
                 Logger.warning("Check key: " + key);

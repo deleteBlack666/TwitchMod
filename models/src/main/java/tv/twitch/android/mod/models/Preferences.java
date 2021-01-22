@@ -42,6 +42,7 @@ public enum Preferences {
     DISABLE_GOOGLE_BILLING("mod_disable_google_billing", "mod_settings_force_disable_google_billing", "mod_settings_force_disable_google_billing_desc", new DefValueImpl(Boolean.FALSE)),
     GESTURES_LOCK_BUTTON("mod_show_gestures_lock_button", "mod_settings_gestures_lock_button", "mod_settings_gestures_lock_button_desc", new DefValueImpl(Boolean.FALSE)),
     FFZ_BADGES("mod_ffz_badges", "mod_settings_ffz_badges", "mod_settings_ffz_badges_desc", new DefValueImpl(Boolean.FALSE)),
+    HIDE_BITS_BUTTON("mod_hide_bits_button", "mod_settings_hide_bits_button", "mod_settings_hide_bits_button_desc", new DefValueImpl(Boolean.FALSE)),
 
     // TEXT
     USER_FILTER_TEXT("mod_filter_text", "mod_settings_blocklist", "mod_settings_blocklist_desc", new DefValueImpl("")),

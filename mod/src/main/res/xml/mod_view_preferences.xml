@@ -13,6 +13,7 @@
         android:title="@string/mod_category_settings_view_chat">
         <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_CHAT_RESTRICTION"/>
         <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_CHAT_HEADER"/>
+        <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="HIDE_BITS_BUTTON"/>
         <tv.twitch.android.mod.libs.preference.SwitchPreferenceCompat app:xPreference="SHOW_HYPE_TRAIN"/>
 <!--        <tv.twitch.android.mod.libs.preference.SeekBarPreference app:xPreference="LANDSCAPE_CHAT_SCALE"-->
 <!--            app:seekBarValueSuffix="%"-->

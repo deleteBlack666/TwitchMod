@@ -141,4 +141,6 @@
     <string name="mod_robotty_fetching">Fetching recent messages…</string>
     <string name="mod_robotty_no_messages">No message available</string>
     <string name="mod_robotty_error">Error:</string>
+    <string name="mod_settings_hide_bits_button">Hide bits button</string>
+    <string name="mod_settings_hide_bits_button_desc"></string>
 </resources>

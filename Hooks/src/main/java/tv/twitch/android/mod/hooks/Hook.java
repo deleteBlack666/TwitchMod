@@ -49,8 +49,6 @@ import tv.twitch.android.models.chomments.ChommentModel;
 import tv.twitch.android.models.streams.StreamModel;
 import tv.twitch.android.shared.chat.ChatMessageInterface;
 import tv.twitch.android.shared.chat.adapter.item.ChatMessageClickedEvents;
-import tv.twitch.android.shared.chat.events.ChannelSetEvent;
-import tv.twitch.android.shared.chat.events.ChatConnectionEvents;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiModel;
 import tv.twitch.android.shared.emotes.emotepicker.models.EmoteUiSet;
 import tv.twitch.android.shared.experiments.Experiment;
@@ -637,5 +635,12 @@ public final class Hook {
         }
 
         return id;
+    }
+
+    public static boolean hookBitsPickerButtonVisible(boolean org) {
+        if (PreferenceManager.INSTANCE.hideBitsButton())
+            return false;
+
+        return org;
     }
 }
