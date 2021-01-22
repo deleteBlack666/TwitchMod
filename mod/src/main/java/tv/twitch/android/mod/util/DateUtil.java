@@ -2,6 +2,7 @@ package tv.twitch.android.mod.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -30,5 +31,23 @@ public class DateUtil {
         }
 
         return null;
+    }
+
+    /**
+     * Source: https://commons.apache.org/proper/commons-lang/apidocs/src-html/org/apache/commons/lang3/time/DateUtils.html#line.190
+     */
+    public static boolean isSameDay(final Date date1, final Date date2) {
+        if (date1 == null || date2 == null) {
+            return false;
+        }
+
+        Calendar calDate1 = Calendar.getInstance();
+        Calendar calDate2 = Calendar.getInstance();
+        calDate1.setTime(date1);
+        calDate2.setTime(date2);
+
+        return calDate1.get(Calendar.ERA) == calDate2.get(Calendar.ERA) &&
+                calDate1.get(Calendar.YEAR) == calDate2.get(Calendar.YEAR) &&
+                calDate1.get(Calendar.DAY_OF_YEAR) == calDate2.get(Calendar.DAY_OF_YEAR);
     }
 }

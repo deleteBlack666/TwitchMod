@@ -134,8 +134,13 @@ public class IrcUtil {
             return null;
 
         long time = Long.parseLong(receivedTime);
-
-        return new SimpleDateFormat("HH:mm", Locale.UK).format(new Date(time));
+        Date sendDate = new Date(time);
+        Date currentDate = new Date();
+        if (!DateUtil.isSameDay(sendDate, currentDate)) {
+            return new SimpleDateFormat("E, HH:mm", Locale.UK).format(sendDate);
+        } else {
+            return new SimpleDateFormat("HH:mm", Locale.UK).format(sendDate);
+        }
     }
 
     private static int getBanDuration(HashMap<String, String> tags) {
