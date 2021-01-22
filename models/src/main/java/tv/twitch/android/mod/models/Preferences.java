@@ -84,6 +84,8 @@ public enum Preferences {
         }
     }
 
+
+
     private static final Map<String, Preferences> s_Map = new HashMap<>();
 
     static {

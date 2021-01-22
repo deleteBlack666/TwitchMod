@@ -115,6 +115,19 @@ public class ResourcesManager {
         return context.getResources().getString(id, formatArgs);
     }
 
+    public static String getString(Context context, String name) {
+        int resId = getStringId(context, name);
+        if (resId == 0) {
+            return "STRING RESOURCE NOT FOUND: '" + name + "'";
+        } else {
+            return getStringById(context, resId);
+        }
+    }
+
+    public static String getStringById(Context context, Integer id) {
+        return context.getResources().getString(id);
+    }
+
     public static Integer getDrawableId(Context context, String name) {
         Resources resources = context.getResources();
         return resources.getIdentifier(name, "drawable", context.getPackageName());

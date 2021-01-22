@@ -25,16 +25,6 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
 
     public static final PreferenceManager INSTANCE = new PreferenceManager();
 
-    private static final int DEFAULT_LANDSCAPE_CHAT_SCALE = 25;
-    private static final int DEFAULT_LANDSCAPE_CHAT_SCALE_MAX = 50;
-    private static final int DEFAULT_MINIPLAYER_SCALE = 100;
-    private static final int DEFAULT_FLOATING_CHAT_QUEUE = 3;
-    private static final int DEFAULT_ROBOTTY_LIMIT = 20;
-    private static final int DEFAULT_PLAYER_FORWARD_SEEK = 30;
-    private static final int DEFAULT_PLAYER_BACKWARD_SEEK = 10;
-    private static final int DEFAULT_CHAT_FONT_SIZE = 13;
-    private static final int DEFAULT_EXOPLAYER_SPEED = 100;
-
     private boolean showBttvEmoteInChat;
     private boolean isChatTimestampsEnabled;
     private boolean isPlayerAdblockOn;
@@ -117,66 +107,71 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
     }
 
     private void setupPreferences() {
-        showBttvEmoteInChat = getBoolean(Preferences.BTTV_EMOTES, true);
-        isChatTimestampsEnabled = getBoolean(Preferences.CHAT_TIMESTAMP, false);
-        isPlayerAdblockOn = getBoolean(Preferences.PLAYER_ADBLOCK, true);
-        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE, false);
-        isBrightnessSwiperEnabled = getBoolean(Preferences.BRIGHTNESS_GESTURE, false);
-        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE, false);
-        hideFollowRecommendation = getBoolean(Preferences.HIDE_FOLLOW_RECOMMENDATIONS, false);
-        hideFollowResume = getBoolean(Preferences.HIDE_FOLLOW_RESUME, false);
-        hideFollowGame = getBoolean(Preferences.HIDE_FOLLOW_GAMES, false);
-        hideDiscoverTab = getBoolean(Preferences.HIDE_DISCOVER_TAB, false);
-        hideEsportsTab = getBoolean(Preferences.HIDE_ESPORTS_TAB, false);
-        hideRecentSearch = getBoolean(Preferences.HIDE_RECENT_SEARCH_RESULTS, false);
-        disableTheatreAutoplay = getBoolean(Preferences.DISABLE_THEATRE_AUTOPLAY, false);
-        hideSystemMessagesInChat = getBoolean(Preferences.FILTER_CHAT_SYSTEM, false);
-        isInterceptorEnabled = getBoolean(Preferences.DEV_INTERCEPTOR, false);
-        showChatForBannedUser = getBoolean(Preferences.SHOW_CHAT_FOR_BANNED_USER, false);
-        showMentionHighlightsInChat = getBoolean(Preferences.CHAT_MENTION_HIGHLIGHT, true);
-        disableClipfinity = getBoolean(Preferences.DISABLE_CLIPFINITY, false);
-        isDevModeOn = getBoolean(Preferences.DEV_MODE, false);
-        useRobottyService = getBoolean(Preferences.MESSAGE_HISTORY, false);
-        showFloatingChat = getBoolean(Preferences.PLAYER_FLOATING_CHAT, false);
-        isCompactPlayerFollowViewEnabled = getBoolean(Preferences.COMPACT_PLAYER_FOLLOW_VIEW, false);
-        showPlayerStatButton = getBoolean(Preferences.PLAYER_STAT_BUTTON, true);
-        showPlayerRefreshButton = getBoolean(Preferences.PLAYER_REFRESH_BUTTON, true);
-        shouldShowBanner = getBoolean(MOD_BANNER_KEY, true);
-        hideChatRestriction = getBoolean(Preferences.HIDE_CHAT_RESTRICTION, false);
-        showWideEmotes = getBoolean(Preferences.SHOW_WIDE_EMOTES, false);
-        disableGoogleBilling = getBoolean(Preferences.DISABLE_GOOGLE_BILLING, false);
-        showSwipperLockButton = getBoolean(Preferences.GESTURES_LOCK_BUTTON, false);
-        useAutoclicker = getBoolean(Preferences.AUTOCLICKER, true);
-        showHypeTrain = getBoolean(Preferences.SHOW_HYPE_TRAIN, true);
-        shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER, false);
-        showStreamUptime = getBoolean(Preferences.STREAM_UPTIME, true);
-        ffzBadges = getBoolean(Preferences.FFZ_BADGES, false);
-        hideBitsButton = getBoolean(Preferences.HIDE_BITS_BUTTON, false);
+        showBttvEmoteInChat = getBoolean(Preferences.BTTV_EMOTES);
+        isChatTimestampsEnabled = getBoolean(Preferences.CHAT_TIMESTAMP);
+        isPlayerAdblockOn = getBoolean(Preferences.PLAYER_ADBLOCK);
+        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE);
+        isBrightnessSwiperEnabled = getBoolean(Preferences.BRIGHTNESS_GESTURE);
+        isVolumeSwiperEnabled = getBoolean(Preferences.VOLUME_GESTURE);
+        hideFollowRecommendation = getBoolean(Preferences.HIDE_FOLLOW_RECOMMENDATIONS);
+        hideFollowResume = getBoolean(Preferences.HIDE_FOLLOW_RESUME);
+        hideFollowGame = getBoolean(Preferences.HIDE_FOLLOW_GAMES);
+        hideDiscoverTab = getBoolean(Preferences.HIDE_DISCOVER_TAB);
+        hideEsportsTab = getBoolean(Preferences.HIDE_ESPORTS_TAB);
+        hideRecentSearch = getBoolean(Preferences.HIDE_RECENT_SEARCH_RESULTS);
+        disableTheatreAutoplay = getBoolean(Preferences.DISABLE_THEATRE_AUTOPLAY);
+        hideSystemMessagesInChat = getBoolean(Preferences.FILTER_CHAT_SYSTEM);
+        isInterceptorEnabled = getBoolean(Preferences.DEV_INTERCEPTOR);
+        showChatForBannedUser = getBoolean(Preferences.SHOW_CHAT_FOR_BANNED_USER);
+        showMentionHighlightsInChat = getBoolean(Preferences.CHAT_MENTION_HIGHLIGHT);
+        disableClipfinity = getBoolean(Preferences.DISABLE_CLIPFINITY);
+        isDevModeOn = getBoolean(Preferences.DEV_MODE);
+        useRobottyService = getBoolean(Preferences.MESSAGE_HISTORY);
+        showFloatingChat = getBoolean(Preferences.PLAYER_FLOATING_CHAT);
+        isCompactPlayerFollowViewEnabled = getBoolean(Preferences.COMPACT_PLAYER_FOLLOW_VIEW);
+        showPlayerStatButton = getBoolean(Preferences.PLAYER_STAT_BUTTON);
+        showPlayerRefreshButton = getBoolean(Preferences.PLAYER_REFRESH_BUTTON);
+        hideChatRestriction = getBoolean(Preferences.HIDE_CHAT_RESTRICTION);
+        showWideEmotes = getBoolean(Preferences.SHOW_WIDE_EMOTES);
+        disableGoogleBilling = getBoolean(Preferences.DISABLE_GOOGLE_BILLING);
+        showSwipperLockButton = getBoolean(Preferences.GESTURES_LOCK_BUTTON);
+        useAutoclicker = getBoolean(Preferences.AUTOCLICKER);
+        showHypeTrain = getBoolean(Preferences.SHOW_HYPE_TRAIN);
+        shouldHideChatHeaderContainer = getBoolean(Preferences.HIDE_CHAT_HEADER);
+        showStreamUptime = getBoolean(Preferences.STREAM_UPTIME);
+        ffzBadges = getBoolean(Preferences.FFZ_BADGES);
+        hideBitsButton = getBoolean(Preferences.HIDE_BITS_BUTTON);
 
-        lastBuildNum = getInt(Preferences.LAST_BUILD_NUMBER, -1);
+        lastBuildNum = getInt(Preferences.LAST_BUILD_NUMBER);
 
-        userFilterText = getString(Preferences.USER_FILTER_TEXT, null);
+        userFilterText = getString(Preferences.USER_FILTER_TEXT);
 
-        imageSize = getString(Preferences.EMOTE_SIZE, Helper.isHiDensityDevice() ? ImageSize.LARGE : ImageSize.MEDIUM);
-        landscapeChatScale = getInt(Preferences.LANDSCAPE_CHAT_SCALE, DEFAULT_LANDSCAPE_CHAT_SCALE);
-        landscapeChatScaleMax = getInt(Preferences.LANDSCAPE_CHAT_SCALE_MAX, DEFAULT_LANDSCAPE_CHAT_SCALE_MAX);
-        gifsRenderType = getString(Preferences.GIFS_RENDER_TYPE, Gifs.STATIC);
+        imageSize = getImageSizePref();
+        landscapeChatScale = getInt(Preferences.LANDSCAPE_CHAT_SCALE);
+        landscapeChatScaleMax = getInt(Preferences.LANDSCAPE_CHAT_SCALE_MAX);
+        gifsRenderType = getString(Preferences.GIFS_RENDER_TYPE);
         isGifsAnimated = gifsRenderType.equals(Gifs.ANIMATED);
-        msgDeleteStrategy = getString(Preferences.MSG_DELETE_STRATEGY, MsgDelete.DEFAULT);
-        miniPlayerScale = getInt(Preferences.MINIPLAYER_SCALE, DEFAULT_MINIPLAYER_SCALE);
-        playerImplemetation = getString(Preferences.PLAYER_IMPLEMENTATION, PlayerImpl.AUTO);
-        sureStreamAdBlockVariant = getString(Preferences.SURESTREAM_ADBLOCK, SureStreamAdBlock.V1);
-        filterChatMessageByLevel = getString(Preferences.CHAT_MESSAGE_FILTER_LEVEL, UserMessagesFiltering.DISABLED);
-        floatingChatSize = getInt(Preferences.PLAYER_FLOATING_CHAT_SIZE, DEFAULT_FLOATING_CHAT_QUEUE);
-        robottyLimit = getInt(Preferences.MESSAGE_HISTORY_LIMIT, DEFAULT_ROBOTTY_LIMIT);
-        playerForwardSeek = getInt(Preferences.PLAYER_FORWARD_SEEK, DEFAULT_PLAYER_FORWARD_SEEK);
-        playerBackwardSeek = getInt(Preferences.PLAYER_BACKWARD_SEEK, DEFAULT_PLAYER_BACKWARD_SEEK);
-        chatMessageFontSize = getInt(Preferences.CHAT_MESSAGE_FONT_SIZE, DEFAULT_CHAT_FONT_SIZE);
-        exoplayerSpeed = getInt(Preferences.EXOPLAYER_SPEED, DEFAULT_EXOPLAYER_SPEED);
+        msgDeleteStrategy = getString(Preferences.MSG_DELETE_STRATEGY);
+        miniPlayerScale = getInt(Preferences.MINIPLAYER_SCALE);
+        playerImplemetation = getString(Preferences.PLAYER_IMPLEMENTATION);
+        sureStreamAdBlockVariant = getString(Preferences.SURESTREAM_ADBLOCK);
+        filterChatMessageByLevel = getString(Preferences.CHAT_MESSAGE_FILTER_LEVEL);
+        floatingChatSize = getInt(Preferences.PLAYER_FLOATING_CHAT_SIZE);
+        robottyLimit = getInt(Preferences.MESSAGE_HISTORY_LIMIT);
+        playerForwardSeek = getInt(Preferences.PLAYER_FORWARD_SEEK);
+        playerBackwardSeek = getInt(Preferences.PLAYER_BACKWARD_SEEK);
+        chatMessageFontSize = getInt(Preferences.CHAT_MESSAGE_FONT_SIZE);
+        exoplayerSpeed = getInt(Preferences.EXOPLAYER_SPEED);
 
         isDarkThemeEnabled = getBoolean(TWITCH_DARK_THEME_KEY, false);
+        shouldShowBanner = getBoolean(MOD_BANNER_KEY, true);
 
         lockSwiper = false;
+    }
+
+    private @ImageSize String getImageSizePref() {
+        String defVal = Helper.isHiDensityDevice() ? ImageSize.LARGE : ImageSize.MEDIUM;
+        return mWrapper.getString(Preferences.EMOTE_SIZE.getKey(), defVal);
     }
 
     public void updateBoolean(String key, boolean val) {
@@ -206,43 +201,88 @@ public class PreferenceManager implements PreferenceWrapper.PreferenceListener {
         mWrapper.updateInt(key, val);
     }
 
-    private int getInt(Preferences preference, int def) {
+    private int getInt(Preferences preference) {
         if (preference == null) {
             throw new IllegalArgumentException("preference is null");
         }
 
-        if (TextUtils.isEmpty(preference.getKey())) {
-            Logger.error("empty key");
-            return def;
-        }
-
-        return mWrapper.getInt(preference.getKey(), def);
+        return mWrapper.getInt(preference.getKey(), getIntegerFromDefaultValue(preference.getDefaultValue()));
     }
 
-    private boolean getBoolean(Preferences preference, boolean def) {
+    private int getIntegerFromDefaultValue(Preferences.DefaultValue df) {
+        if (df == null) {
+            Logger.error("df is null");
+            return 0;
+        }
+
+        Object val = df.getValue();
+        if (val == null) {
+            Logger.error("val is null");
+            return 0;
+        }
+
+        if (val instanceof Integer) {
+            return (Integer) val;
+        } else if (val instanceof String) {
+            return Integer.parseInt((String) val);
+        } else {
+            return Integer.parseInt(val.toString());
+        }
+    }
+    private boolean getBoolean(Preferences preference) {
         if (preference == null) {
             throw new IllegalArgumentException("preference is null");
         }
 
-        if (TextUtils.isEmpty(preference.getKey())) {
-            Logger.error("empty key");
-            return def;
-        }
-
-        return mWrapper.getBoolean(preference.getKey(), def);
+        return mWrapper.getBoolean(preference.getKey(), getBooleanFromDefaultValue(preference.getDefaultValue()));
     }
 
-    private String getString(Preferences preference, String def) {
+    private boolean getBooleanFromDefaultValue(Preferences.DefaultValue df) {
+        if (df == null) {
+            Logger.error("df is null");
+            return false;
+        }
+
+        Object val = df.getValue();
+        if (val == null) {
+            Logger.error("val is null");
+            return false;
+        }
+
+        if (val instanceof Boolean)
+            return (Boolean) val;
+        if (val instanceof String) {
+            return Boolean.parseBoolean((String) val);
+        } else {
+            return Boolean.parseBoolean(val.toString());
+        }
+    }
+
+    private String getStringFromDefaultValue(Preferences.DefaultValue df) {
+        if (df == null) {
+            Logger.error("df is null");
+            return null;
+        }
+
+        Object val = df.getValue();
+        if (val == null) {
+            Logger.error("val is null");
+            return null;
+        }
+
+        if (val instanceof String) {
+            return (String) val;
+        } else {
+            return val.toString();
+        }
+    }
+
+    private String getString(Preferences preference) {
         if (preference == null) {
             throw new IllegalArgumentException("preference is null");
         }
 
-        if (TextUtils.isEmpty(preference.getKey())) {
-            Logger.error("empty key");
-            return def;
-        }
-
-        return mWrapper.getString(preference.getKey(), def);
+        return mWrapper.getString(preference.getKey(), getStringFromDefaultValue(preference.getDefaultValue()));
     }
 
     private boolean getBoolean(String key, boolean def) {
