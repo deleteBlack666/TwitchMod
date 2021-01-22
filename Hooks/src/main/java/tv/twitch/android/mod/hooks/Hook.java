@@ -253,7 +253,8 @@ public final class Hook {
                 badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
             }
 
-            // FIXME: inject donators badges
+            Collection<Badge> badges = BadgeManager.INSTANCE.getDonatorsBadges(chatMessageInterface.getUserId());
+            badgesSpan = ChatUtil.tryAddBadges(badgesSpan, factory, badges);
 
             return badgesSpan;
         } catch (Throwable throwable) {
