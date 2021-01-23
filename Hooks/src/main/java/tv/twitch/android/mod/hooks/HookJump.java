@@ -1,7 +1,7 @@
 package tv.twitch.android.mod.hooks;
 
 
-import tv.twitch.android.mod.setting.PreferenceManager;
+import tv.twitch.android.mod.preference.PreferenceManager;
 
 
 public final class HookJump {

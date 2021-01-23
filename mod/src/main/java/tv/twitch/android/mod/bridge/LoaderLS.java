@@ -2,6 +2,8 @@ package tv.twitch.android.mod.bridge;
 
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Process;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,7 @@ import tv.twitch.android.mod.BuildConfig;
 import tv.twitch.android.mod.badge.BadgeManager;
 import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
-import tv.twitch.android.mod.setting.PreferenceManager;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
 import tv.twitch.android.mod.util.Helper;
 
@@ -50,7 +52,15 @@ public class LoaderLS extends TwitchApplication implements SleepTimerFragment.Sl
     }
 
     public static String getVersionName() {
-        return BuildConfig.VERSION_NAME;
+        try {
+            return LoaderLS.getInstance()
+                    .getPackageManager()
+                    .getPackageInfo(LoaderLS.getInstance().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return "UNKNOWN";
     }
 
     @NonNull

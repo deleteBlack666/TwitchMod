@@ -26,7 +26,7 @@ import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.fragment.ModInfoBannerFragment;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
 import tv.twitch.android.mod.fragment.setting.MainSettingsFragment;
-import tv.twitch.android.mod.setting.PreferenceManager;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.ClipDownloader;
 import tv.twitch.android.mod.util.FragmentUtil;
 import tv.twitch.android.mod.util.Logger;
@@ -58,7 +58,7 @@ public final class HookController {
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceManager.INSTANCE.setLockSwiper(!PreferenceManager.INSTANCE.shouldLockSwiper());
+                PreferenceManager.INSTANCE.setLockGestures(!PreferenceManager.INSTANCE.shouldLockSwiper());
                 delegate.updateLockButtonState();
             }
         });
@@ -127,6 +127,10 @@ public final class HookController {
                 delegate.clickRefresh();
             }
         });
+
+        if (!PreferenceManager.INSTANCE.shouldShowPlayerRefreshButton()) {
+            refreshButton.setVisibility(View.GONE);
+        }
 
         return refreshButton;
     }

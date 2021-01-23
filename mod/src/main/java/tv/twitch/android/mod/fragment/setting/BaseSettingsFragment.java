@@ -10,12 +10,14 @@ import tv.twitch.android.mod.bridge.ResourcesManager;
 import tv.twitch.android.mod.bridge.interfaces.IPreferenceFragment;
 import tv.twitch.android.mod.libs.preference.Preference;
 import tv.twitch.android.mod.libs.preference.PreferenceFragmentCompat;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.setting.SettingsController;
 
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IPreferenceFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        this.getPreferenceManager().setPreferenceDataStore(PreferenceManager.INSTANCE.getBinaryPreferencesAdapter());
         setPreferencesFromResource(ResourcesManager.getXmlId(getXmlFilename()), rootKey);
     }
 

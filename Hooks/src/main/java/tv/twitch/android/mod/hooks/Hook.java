@@ -36,7 +36,7 @@ import tv.twitch.android.mod.models.chat.Emote;
 import tv.twitch.android.mod.models.preferences.Gifs;
 import tv.twitch.android.mod.models.preferences.MsgDelete;
 import tv.twitch.android.mod.models.preferences.PlayerImpl;
-import tv.twitch.android.mod.setting.PreferenceManager;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
 import tv.twitch.android.mod.util.ChatUtil;
 import tv.twitch.android.mod.util.DateUtil;
@@ -366,7 +366,7 @@ public final class Hook {
     public static PlaybackParameters hookVodPlayerStandaloneMediaClockInit() {
         if (Helper.isOnStackTrace(VOD_PLAYER_PRESENTER_CLASS)) {
             PreferenceManager preferenceManager = PreferenceManager.INSTANCE;
-            return new PlaybackParameters(preferenceManager.getExoplayerSpeed());
+            return new PlaybackParameters(preferenceManager.getExoplayerSpeed() / 100F);
         }
 
         return PlaybackParameters.DEFAULT;

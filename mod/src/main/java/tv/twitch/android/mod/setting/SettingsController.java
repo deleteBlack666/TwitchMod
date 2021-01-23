@@ -7,16 +7,16 @@ import android.text.TextUtils;
 
 import tv.twitch.android.app.core.ActivityUtil;
 import tv.twitch.android.mod.bridge.ResourcesManager;
-import tv.twitch.android.mod.libs.preference.Preference;
-import tv.twitch.android.mod.models.Preferences;
+import tv.twitch.android.mod.models.Preference;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.Helper;
 import tv.twitch.android.mod.util.Logger;
 
 
 public class SettingsController {
-    private static Preferences[] RESTART_LIST = {Preferences.PLAYER_ADBLOCK, Preferences.FFZ_BADGES,
-    Preferences.DISABLE_GOOGLE_BILLING, Preferences.HIDE_DISCOVER_TAB, Preferences.HIDE_ESPORTS_TAB,
-    Preferences.BTTV_EMOTES};
+    private static final Preference[] RESTART_LIST = {Preference.PLAYER_ADBLOCK, Preference.FFZ_BADGES,
+    Preference.DISABLE_GOOGLE_BILLING, Preference.HIDE_DISCOVER_TAB, Preference.HIDE_ESPORTS_TAB,
+    Preference.BTTV_EMOTES};
 
     public static void maybeShowRestartDialog(Activity activity, String key) {
         if (TextUtils.isEmpty(key)) {
@@ -40,11 +40,11 @@ public class SettingsController {
             return false;
         }
 
-        Preferences pref = Preferences.lookupByKey(key);
+        Preference pref = Preference.lookupByKey(key);
         if (pref == null)
             return false;
 
-        for (Preferences p : RESTART_LIST) {
+        for (Preference p : RESTART_LIST) {
             if (p == pref) {
                 return true;
             }
@@ -53,23 +53,23 @@ public class SettingsController {
         return false;
     }
 
-    public static class OnBuildClickListener implements Preference.OnPreferenceClickListener {
+    public static class OnBuildClickListener implements tv.twitch.android.mod.libs.preference.Preference.OnPreferenceClickListener {
         private static final int CLICKS = 15;
 
         private int clicked = 0;
 
         private void disableDevMod() {
-            PreferenceManager.INSTANCE.updateBoolean("mod_dev_mode", false);
+            PreferenceManager.INSTANCE.writeBoolean(Preference.DEV_MODE.getKey(), false);
             Helper.showToast(ResourcesManager.getString("mod_dev_mode_disabled"));
         }
 
         private void enableDevMod() {
-            PreferenceManager.INSTANCE.updateBoolean("mod_dev_mode", true);
+            PreferenceManager.INSTANCE.writeBoolean(Preference.DEV_MODE.getKey(), true);
             Helper.showToast(ResourcesManager.getString("mod_dev_mode_enabled"));
         }
 
         @Override
-        public boolean onPreferenceClick(Preference preference) {
+        public boolean onPreferenceClick(tv.twitch.android.mod.libs.preference.Preference preference) {
             clicked++;
             handleClickEvent();
 

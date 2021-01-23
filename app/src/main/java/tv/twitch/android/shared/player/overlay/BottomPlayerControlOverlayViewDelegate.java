@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import tv.twitch.android.mod.bridge.interfaces.IBottomPlayerControlOverlayViewDelegate;
 import tv.twitch.android.mod.hooks.HookController;
 import tv.twitch.android.mod.hooks.HookJump;
-import tv.twitch.android.mod.setting.PreferenceManager;
 import tv.twitch.android.mod.view.StreamUptimeView;
 
 
@@ -60,9 +59,6 @@ public class BottomPlayerControlOverlayViewDelegate implements IBottomPlayerCont
 
     private void setupRefreshButton(View view) { // TODO: __INJECT_METHOD
         this.refreshButton = (ImageView) HookController.setupPlayerRefreshButton(view, this);
-        if (!PreferenceManager.INSTANCE.shouldShowPlayerRefreshButton() && this.refreshButton != null) {
-            this.refreshButton.setVisibility(View.GONE);
-        }
     }
 
     private void setupUptime(View view) { // TODO: __INJECT_METHOD

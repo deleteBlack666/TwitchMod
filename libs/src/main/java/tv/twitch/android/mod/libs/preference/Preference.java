@@ -49,13 +49,9 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import tv.twitch.android.mod.models.Preferences;
 
 
 /**
@@ -261,15 +257,13 @@ public class Preference implements Comparable<Preference> {
     }
 
     private void loadXPref(String name) {
-        Preferences pref = Preferences.lookupByName(name);
+        tv.twitch.android.mod.models.Preference pref = tv.twitch.android.mod.models.Preference.lookupByName(name);
         if (pref == null)
             return;
 
-        if (pref.getKey() != null) {
-            String key = pref.getKey();
-            if (!TextUtils.isEmpty(key)) {
-                mKey = key;
-            }
+        String key = pref.getKey();
+        if (!TextUtils.isEmpty(key)) {
+            mKey = key;
         }
 
         if (pref.getSummary() != null) {
@@ -286,12 +280,10 @@ public class Preference implements Comparable<Preference> {
             }
         }
 
-        if (pref.getDefaultValue() != null) {
-            Preferences.DefaultValue df = pref.getDefaultValue();
-            Object val = df.getValue();
-            if (val != null) {
-                mDefaultValue = val;
-            }
+        tv.twitch.android.mod.models.Preference.ValueHolder df = pref.getDefaultValue();
+        Object val = df.getValue();
+        if (val != null) {
+            mDefaultValue = val;
         }
     }
 

@@ -22,7 +22,7 @@ import androidx.fragment.app.DialogFragment;
 
 import tv.twitch.android.mod.bridge.LoaderLS;
 import tv.twitch.android.mod.bridge.ResourcesManager;
-import tv.twitch.android.mod.setting.PreferenceManager;
+import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.Helper;
 
 
@@ -69,7 +69,7 @@ public class ModInfoBannerFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
-                PreferenceManager.INSTANCE.updateBuildNumber();
+                PreferenceManager.INSTANCE.updateLastBuildNum(LoaderLS.getBuildNumber());
             }
         });
 

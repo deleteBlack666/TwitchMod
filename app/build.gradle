@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "tv.twitch.android.app"
         minSdkVersion 21
@@ -25,7 +25,11 @@ android {
         }
     }
 
-    buildToolsVersion = '29.0.3'
+    buildToolsVersion = '30.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -44,5 +48,6 @@ dependencies {
     implementation project(path: ':mod')
     implementation project(path: ':libs')
     implementation project(path: ':models')
+    implementation project(path: ':preference')
 
 }

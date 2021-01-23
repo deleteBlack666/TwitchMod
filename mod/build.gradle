@@ -18,7 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion = '29.0.3'
+    buildToolsVersion = '30.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -37,4 +41,5 @@ dependencies {
 
     implementation project(path: ':models')
     implementation project(path: ':libs')
+    implementation project(path: ':preference')
 }
