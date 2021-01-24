@@ -25,8 +25,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
         Preference preference = findPreference(BUILD_INFO_KEY);
         if (preference != null) {
-            preference.setTitle("TwitchMod v" + LoaderLS.getVersionName());
-            preference.setSummary(LoaderLS.getBuildInfo());
+            preference.setTitle("TwitchMod v" + LoaderLS.getInstance().getBuildVersion());
+            preference.setSummary(LoaderLS.getInstance().getBuildInfo());
             preference.setOnPreferenceClickListener(buildClickListener);
         }
     }

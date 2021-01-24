@@ -2,8 +2,6 @@ package tv.twitch.android.mod.bridge;
 
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Process;
 
 import androidx.annotation.NonNull;
@@ -13,10 +11,10 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import tv.twitch.android.app.consumer.TwitchApplication;
-import tv.twitch.android.mod.BuildConfig;
 import tv.twitch.android.mod.badge.BadgeManager;
 import tv.twitch.android.mod.emote.EmoteManager;
 import tv.twitch.android.mod.fragment.SleepTimerFragment;
+import tv.twitch.android.mod.models.BuildInfo;
 import tv.twitch.android.mod.preference.PreferenceManager;
 import tv.twitch.android.mod.util.ChatMesssageFilteringUtil;
 import tv.twitch.android.mod.util.Helper;
@@ -27,40 +25,53 @@ public class LoaderLS extends TwitchApplication implements SleepTimerFragment.Sl
 
     private static final String AUTHORIZATION = Helper.decodeBase64("T0F1dGggMm9uMHFjaHExcmU4Mml5Y3ZieG02MWxhaGVpYTZh");
 
-    private static String sBuildInfo = "TEST BUILD";
-    private static int sBuildNumber = -1;
+    private BuildInfo buildInfo;
 
     private static LoaderLS sInstance = null;
 
     private ISleepTimer mTimer;
 
+    public static class BuildInfoImpl implements BuildInfo {
+        private final String buildInfo;
+        private final int buildNumber;
+        private final String buildVersion;
+
+        public BuildInfoImpl(String bi, int bn, String bv) {
+            buildInfo = bi;
+            buildNumber = bn;
+            buildVersion = bv;
+        }
+
+        @Override
+        public String getBuildInfo() {
+            return buildInfo;
+        }
+
+        @Override
+        public int getBuildNumber() {
+            return buildNumber;
+        }
+
+        @Override
+        public String getBuildVersion() {
+            return buildVersion;
+        }
+    }
+
     public String getChangelog() {
         return Helper.readTextFromAssets(this, "changelog.txt");
     }
 
-    public static String getBuildInfo() {
-        StringBuilder builder = new StringBuilder(sBuildInfo);
-        if (sBuildNumber != -1) {
-            builder.append(" b").append(sBuildNumber);
-        }
-
-        return builder.toString();
+    public String getBuildInfo() {
+        return buildInfo.getBuildInfo() + " b" + buildInfo.getBuildNumber();
     }
 
-    public static int getBuildNumber() {
-        return sBuildNumber;
+    public int getBuildNumber() {
+        return buildInfo.getBuildNumber();
     }
 
-    public static String getVersionName() {
-        try {
-            return LoaderLS.getInstance()
-                    .getPackageManager()
-                    .getPackageInfo(LoaderLS.getInstance().getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return "UNKNOWN";
+    public String getBuildVersion() {
+        return buildInfo.getBuildVersion();
     }
 
     @NonNull
@@ -124,19 +135,15 @@ public class LoaderLS extends TwitchApplication implements SleepTimerFragment.Sl
     private void setBuildInfo() {
         HashMap<String, String> configMap = getConfigMap();
 
-        String buildNum = configMap.get("build_num");
-        if (buildNum != null)
-            sBuildNumber = Integer.parseInt(buildNum);
-
-        String buildInfo = configMap.get("build_info");
-        if (buildInfo != null)
-            sBuildInfo = buildInfo;
+        buildInfo = new BuildInfoImpl(configMap.get("build_info"),
+                Integer.parseInt(configMap.get("build_num")),
+                configMap.get("build_ver"));
     }
 
     private void initLoader() {
         sInstance = this;
-        PreferenceManager.INSTANCE.initialize(this);
         setBuildInfo();
+        PreferenceManager.INSTANCE.initialize(this);
         mTimer = new SleepTimer(this);
     }
 

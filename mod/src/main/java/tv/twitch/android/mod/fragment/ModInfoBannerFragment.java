@@ -33,7 +33,7 @@ public class ModInfoBannerFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        SpannableString title = new SpannableString("TwitchMod v" + LoaderLS.getVersionName());
+        SpannableString title = new SpannableString("TwitchMod v" + LoaderLS.getInstance().getBuildVersion());
         title.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0,
                 title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -69,7 +69,7 @@ public class ModInfoBannerFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
-                PreferenceManager.INSTANCE.updateLastBuildNum(LoaderLS.getBuildNumber());
+                PreferenceManager.INSTANCE.updateLastBuildNum(LoaderLS.getInstance().getBuildNumber());
             }
         });
 

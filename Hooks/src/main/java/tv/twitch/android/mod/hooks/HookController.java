@@ -275,7 +275,7 @@ public final class HookController {
 
     public static void maybeShowModInfoBanner(final FragmentActivity fragmentActivity,
                                               final TwitchAccountManager accountManager) {
-        if (PreferenceManager.INSTANCE.getLastBuildNumber() == LoaderLS.getBuildNumber())
+        if (PreferenceManager.INSTANCE.getLastBuildNumber() == LoaderLS.getInstance().getBuildNumber())
             return;
 
         if (PreferenceManager.INSTANCE.isBannerShown())
