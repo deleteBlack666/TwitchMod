@@ -3,12 +3,19 @@ package tv.twitch.android.mod.hooks;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tv.twitch.android.app.core.ViewExtensionsKt;
 import tv.twitch.android.core.user.TwitchAccountManager;
@@ -31,9 +38,11 @@ import tv.twitch.android.mod.util.ClipDownloader;
 import tv.twitch.android.mod.util.FragmentUtil;
 import tv.twitch.android.mod.util.Logger;
 import tv.twitch.android.models.channel.ChannelInfo;
+import tv.twitch.android.models.chat.Chatters;
 import tv.twitch.android.models.clips.ClipModel;
 import tv.twitch.android.shared.chat.events.ChannelSetEvent;
 import tv.twitch.android.shared.chat.events.ChatConnectionEvents;
+import tv.twitch.android.shared.ui.elements.list.ListViewState;
 
 
 public final class HookController {
@@ -345,5 +354,52 @@ public final class HookController {
         }
 
         EmoteManager.INSTANCE.setCurrentChannel(channelInfo.getId());
+    }
+
+    public static SearchView setupSearchView(View view) {
+        if (view == null) {
+            Logger.error("view is null");
+            return null;
+        }
+
+        int searchViewId = ResourcesManager.getId("viewer_list_dialog__search_view");
+        if (searchViewId == 0) {
+            Logger.error("viewer_list_dialog__search_view id == 0");
+            return null;
+        }
+
+        SearchView searchView = view.findViewById(searchViewId);
+        if (searchView == null) {
+            Logger.debug("searchView is null");
+            return null;
+        }
+
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setIconifiedByDefault(false);
+
+        return searchView;
+    }
+
+    public static List<String> filterListOfUsers(List<String> users, String text) {
+        if (users == null) {
+            return users;
+        }
+
+        if (users.size() == 0) {
+            return users;
+        }
+
+        if (TextUtils.isEmpty(text)) {
+            return users;
+        }
+
+        List<String> newList = new ArrayList<>();
+        for (String name : users) {
+            if (name.toLowerCase().contains(text)) {
+                newList.add(name);
+            }
+        }
+
+        return newList;
     }
 }
